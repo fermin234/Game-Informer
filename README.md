@@ -171,7 +171,7 @@ Se debe desarrollar un servidor en Node/Express con las siguientes rutas:
 
 **IMPORTANTE**: No está permitido utilizar los filtrados, ordenamientos y paginados brindados por la API externa, todas estas funcionalidades tienen que implementarlas ustedes.
 
-- [ ] **GET /videogames**:
+- [✅] **GET /videogames**:
   - Obtener un listado de los videojuegos
   - Debe devolver solo los datos necesarios para la ruta principal
 - [ ] **GET /videogames?name="..."**:
@@ -184,7 +184,7 @@ Se debe desarrollar un servidor en Node/Express con las siguientes rutas:
 - [ ] **POST /videogames**:
   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de videojuego por body
   - Crea un videojuego en la base de datos, relacionado a sus géneros.
-- [ ] **GET /genres**:
+- [✅] **GET /genres**:
   - Obtener todos los tipos de géneros de videojuegos posibles
   - En una primera instancia deberán traerlos desde rawg y guardarlos en su propia base de datos y luego ya utilizarlos desde allí
 
