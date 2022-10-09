@@ -1,30 +1,48 @@
-const axios = require('axios');
 require('dotenv').config();
+const axios = require('axios');
 const { API_KEY } = process.env;
 const { Videogame, Genre } = require('../db.js');
+const { Op } = require('sequelize');
 
 async function getAllVideoGames() {
   try {
-    //creacion de un video juego en la db
-    await Videogame.create({ name: 'nose', description: 'nose2' });
-    let ApiInfo = await axios.get(
-      `https://api.rawg.io/api/games?key=${API_KEY}`
+    //peticion a la api
+    let NumPage = 5;
+    let ApiInfo = [];
+
+    for (let i = 1; i <= NumPage; i++) {
+      ApiInfo = [
+        ...ApiInfo,
+        `https://api.rawg.io/api/games?key=${API_KEY}&page=${i}`,
+      ];
+    }
+
+    ApiInfo = ApiInfo.map((e) => axios.get(e));
+    ApiInfo = await axios.all(ApiInfo);
+    ApiInfo = ApiInfo.map((e) => e.data.results).flat(1);
+
+    //mapeo datos de la api
+    ApiInfo = ApiInfo?.map((e) => ({
+      id: e.id,
+      name: e.name,
+      // description: null,
+      released: e.released,
+      rating: e.rating,
+      platforms: e.platforms.map((e) => e.platform.name),
+      genres: e.genres.map((e) => e.name),
+      background_image: e.background_image,
+    }));
+
+    //uno datos de la api y DB
+    return ApiInfo.concat(
+      await Videogame.findAll({
+        include: {
+          model: Genre,
+          attributes: ['name'],
+          through: { attributes: [] },
+        },
+      })
     );
-    ApiInfo = ApiInfo.data.results?.map((e) => {
-      return {
-        id: e.id,
-        name: e.name,
-        description: null,
-        released: e.released,
-        rating: e.rating,
-        platforms: e.platforms.map((e) => e.platform.name),
-        background_image: e.background_image,
-      };
-    });
-
-    ApiInfo = ApiInfo.concat(await Videogame.findAll({ include: [Genre] }));
-
-    return ApiInfo;
   } catch (error) {
     return error;
   }
@@ -33,25 +51,38 @@ async function getAllVideoGames() {
 async function getVideoGameName(name) {
   try {
     //busco en la db
-    let ApiInfo = await Videogame.findOne({
-      where: { name },
+    let DBInfo = await Videogame.findAll({
+      where: {
+        name: { [Op.iLike]: `%${name}%` },
+      },
+      include: {
+        model: Genre,
+        attributes: ['name'],
+        through: { attributes: [] },
+      },
     });
-    if (ApiInfo) return ApiInfo;
 
     //busco en la api
-    ApiInfo = await axios.get(
+    let ApiInfo = await axios.get(
       `https://api.rawg.io/api/games?key=${API_KEY}&&search=${name}`
     );
-    ApiInfo = ApiInfo.data.results.slice(0, 15).map((e) => {
-      return {
-        name: e.name,
-        description: null,
-        released: e.released,
-        rating: e.rating,
-        platforms: e.platforms.map((e) => e.platform.name),
-        background_image: e.background_image,
-      };
-    });
+
+    //mapeo los datos de la api, si tengo algun dato en la db, recorto el array de la api segun el length de la DB y concateno la DBinfo a la ApiInfo
+    ApiInfo = ApiInfo.data.results
+      .slice(0, 15 - DBInfo.length)
+      .map((e) => {
+        return {
+          name: e.name,
+          // description: e.description,
+          released: e.released,
+          rating: e.rating,
+          platforms: e.platforms.map((e) => e.platform.name),
+          genres: e.genres.map((e) => e.name),
+          background_image: e.background_image,
+        };
+      })
+      .concat(DBInfo);
+
     return ApiInfo.length ? ApiInfo : `${name} no existe.`;
   } catch (error) {
     return error;
@@ -65,6 +96,11 @@ async function getVideoGameId(id) {
       let DBinfo = await Videogame.findOne({
         //falta hacer el join con genre
         where: { id },
+        include: {
+          model: Genre,
+          attributes: ['name'],
+          through: { attributes: [] },
+        },
       });
       if (DBinfo) return DBinfo;
       return 'ID invalido.';
@@ -73,7 +109,15 @@ async function getVideoGameId(id) {
       let ApiInfo = await axios.get(
         `https://api.rawg.io/api/games/${id}?key=${API_KEY}`
       );
-      return ApiInfo.data;
+      ApiInfo = ApiInfo.data;
+      return {
+        name: ApiInfo.name,
+        description: ApiInfo.description,
+        released: ApiInfo.released,
+        rating: ApiInfo.rating,
+        platforms: ApiInfo.platforms.map((e) => e.platform.name),
+        background_image: ApiInfo.background_image,
+      };
     }
   } catch (error) {
     // console.log(error);
@@ -89,16 +133,22 @@ async function createVideoGame(
   platforms,
   genres
 ) {
+  if (!name) return `Debe ingresar un nombre.`;
   try {
-    let Game = await Videogame.create({
+    let game = await Videogame.create({
       name,
       description,
       released,
       rating,
       platforms,
     });
+
     // Falta setear el genero
-    // Game.setGenre(genres);
+    let listGenres = await Promise.all(
+      genres.map((e) => Genre.findOne({ where: { name: e } }))
+    );
+    game.addGenre(listGenres);
+
     return `${name} creado con exito.`;
   } catch (error) {
     return error;
