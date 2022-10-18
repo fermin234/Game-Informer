@@ -31,18 +31,33 @@ async function getAllVideoGames() {
       platforms: e.platforms.map((e) => e.platform.name),
       genres: e.genres.map((e) => e.name),
       background_image: e.background_image,
+      created: false,
+    }));
+
+    //busco la info en la DB
+    let DBInfo = await Videogame.findAll({
+      include: {
+        model: Genre,
+        attributes: ['name'],
+        through: { attributes: [] },
+      },
+    });
+
+    //mapeo la indo de la DB
+    DBInfo = DBInfo.map((e) => ({
+      id: e.id,
+      name: e.name,
+      description: e.description,
+      released: e.released,
+      rating: e.rating,
+      platforms: e.platforms,
+      // platforms: e.platforms ? e.platforms.map((e) => e.platform.name) : null,
+      genres: e.genres?.map((e) => e.name),
+      background_image: e.image,
     }));
 
     //uno datos de la api y DB
-    return ApiInfo.concat(
-      await Videogame.findAll({
-        include: {
-          model: Genre,
-          attributes: ['name'],
-          through: { attributes: [] },
-        },
-      })
-    );
+    return ApiInfo.concat(DBInfo);
   } catch (error) {
     return error;
   }
@@ -62,6 +77,19 @@ async function getVideoGameName(name) {
       },
     });
 
+    //mapeo la indo de la DB
+    DBInfo = DBInfo.map((e) => ({
+      id: e.id,
+      name: e.name,
+      description: e.description,
+      released: e.released,
+      rating: e.rating,
+      platforms: e.platforms,
+      // platforms: e.platforms ? e.platforms.map((e) => e.platform.name) : null,
+      genres: e.genres?.map((e) => e.name),
+      background_image: e.image,
+    }));
+
     //busco en la api
     let ApiInfo = await axios.get(
       `https://api.rawg.io/api/games?key=${API_KEY}&&search=${name}`
@@ -72,6 +100,7 @@ async function getVideoGameName(name) {
       .slice(0, 15 - DBInfo.length)
       .map((e) => {
         return {
+          id: e.id,
           name: e.name,
           // description: e.description,
           released: e.released,
@@ -79,6 +108,7 @@ async function getVideoGameName(name) {
           platforms: e.platforms.map((e) => e.platform.name),
           genres: e.genres.map((e) => e.name),
           background_image: e.background_image,
+          created: false,
         };
       })
       .concat(DBInfo);
@@ -93,7 +123,7 @@ async function getVideoGameId(id) {
   try {
     //busco en la db primero
     if (id.length > 15) {
-      let DBinfo = await Videogame.findOne({
+      let DBInfo = await Videogame.findOne({
         //falta hacer el join con genre
         where: { id },
         include: {
@@ -102,7 +132,18 @@ async function getVideoGameId(id) {
           through: { attributes: [] },
         },
       });
-      if (DBinfo) return DBinfo;
+
+      if (DBInfo)
+        return (DBInfo = {
+          id: DBInfo.id,
+          name: DBInfo.name,
+          description: DBInfo.description,
+          released: DBInfo.released,
+          rating: DBInfo.rating,
+          platforms: DBInfo.platforms,
+          genres: DBInfo.genres?.map((e) => e.name),
+          background_image: DBInfo.image,
+        });
       return 'ID invalido.';
     } else {
       //busco en la api
@@ -117,6 +158,7 @@ async function getVideoGameId(id) {
         rating: ApiInfo.rating,
         platforms: ApiInfo.platforms.map((e) => e.platform.name),
         background_image: ApiInfo.background_image,
+        created: false,
       };
     }
   } catch (error) {
@@ -131,7 +173,8 @@ async function createVideoGame(
   released,
   rating,
   platforms,
-  genres
+  genres,
+  image
 ) {
   if (!name) return `Debe ingresar un nombre.`;
   try {
@@ -141,16 +184,24 @@ async function createVideoGame(
       released,
       rating,
       platforms,
+      genres,
+      image: image
+        ? image
+        : `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s`,
     });
 
-    // Falta setear el genero
-    let listGenres = await Promise.all(
-      genres.map((e) => Genre.findOne({ where: { name: e } }))
-    );
-    game.addGenre(listGenres);
+    // let listGenres = await Promise.all(
+    //   genres.map((e) => Genre.findOne({ where: { name: e } }))
+    // );
+    // game.addGenre(listGenres);
 
+    //preguntar esto
+    //Genre con s al final?
+    // let listGenres = await Genre.findAll({ where: { name: genres } });
+    // game.addGenre(listGenres);
     return `${name} creado con exito.`;
   } catch (error) {
+    console.log(error);
     return error;
   }
 }
@@ -163,7 +214,7 @@ async function getGenres() {
     //Si no hay nada, traigo de la api
     else {
       let ApiInfo = await axios.get(
-        `https://api.rawg.io/api/genres?key=34940aeb3fbe409ea1247fe06de602b0`
+        `https://api.rawg.io/api/genres?key=${API_KEY}`
       );
       ApiInfo = ApiInfo.data.results
         .map((e) => {

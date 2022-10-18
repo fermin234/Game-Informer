@@ -1,0 +1,14 @@
+.img {
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  height: 80%;
+}
+
+.div {
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  border-radius: 30px;
+}

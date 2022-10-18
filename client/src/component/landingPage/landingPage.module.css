@@ -1,0 +1,14 @@
+.div {
+  display: flex;
+  justify-content: center;
+  background-image: url('./img/10.jpg');
+  width: 100vw;
+  height: 100vh;
+}
+
+.button {
+  width: 10vh;
+  height: 4vh;
+  position: relative;
+  top: 80vh;
+}

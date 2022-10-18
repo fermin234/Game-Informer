@@ -1,0 +1,11 @@
+.div {
+  display: flex;
+  height: 40px;
+  justify-content: space-around;
+  align-content: center;
+  background-color: red;
+}
+
+.slect {
+  height: 80%;
+}

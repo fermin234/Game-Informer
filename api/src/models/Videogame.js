@@ -16,19 +16,30 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      description: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      released: {
-        type: DataTypes.STRING,
-      },
-      rating: {
-        type: DataTypes.FLOAT,
-      },
-      platforms: {
-        type: DataTypes.STRING,
-      },
+      // description: {
+      //   type: DataTypes.TEXT,
+      //   allowNull: false,
+      // },
+      // released: {
+      //   type: DataTypes.STRING,
+      // },
+      // rating: {
+      //   type: DataTypes.FLOAT,
+      //   defaultValue: 0,
+      // },
+      // platforms: {
+      //   //agregar en la funcion de que si llega null, sea un arreglo
+      //   type: DataTypes.ARRAY(DataTypes.STRING),
+      //   defaultValue: [],
+      // },
+      // image: {
+      //   type: DataTypes.TEXT,
+      //   defaultValue: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s`,
+      // },
+      // created: {
+      //   type: DataTypes.BOOLEAN,
+      //   defaultValue: true,
+      // },
     },
     { timestamps: false }
   );
