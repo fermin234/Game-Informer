@@ -33,13 +33,13 @@ export default function Filtered() {
       <select className={s.slect} name="FiltradoPorGenero" onChange={e => handlerFilterByGenres(e)}>
         <option value="All Genres">All Genres</option>
         {generos?.map(e => <option key={e.id} value={`${e.name}`}>{e.name}</option>)}
-        <option value="Creado">Creado</option>
       </select>
       <select className={s.slect} name="FiltradoAlfabeticamente/Rating">
         <option value="A-Z">A-Z</option>
         <option value="Z-A">Z-A</option>
         <option value="Rating🡱">Rating 🡱</option>
         <option value="Rating🡳">Rating 🡳</option>
+        <option value="Creado">Creado</option>
       </select>
     </div>
   )

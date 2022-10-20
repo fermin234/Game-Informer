@@ -197,8 +197,8 @@ async function createVideoGame(
 
     //preguntar esto
     //Genre con s al final?
-    // let listGenres = await Genre.findAll({ where: { name: genres } });
-    // game.addGenre(listGenres);
+    let listGenres = await Genre.findAll({ where: { name: genres } });
+    game.addGenre(listGenres);
     return `${name} creado con exito.`;
   } catch (error) {
     console.log(error);

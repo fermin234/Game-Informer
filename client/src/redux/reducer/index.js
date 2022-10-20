@@ -43,7 +43,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_VIDEOGAME_BY_NAME:
       return {
         ...state,
-        videoGames: action.payload,
+        filtred: action.payload,
       };
     case GET_VIDEOGAME_BY_ID:
       return {

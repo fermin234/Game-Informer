@@ -41,6 +41,7 @@ export function filterViodeGamesByGenres(payload) {
 }
 
 export function VideoGameByName(name) {
+  console.log('se despacha: ', name);
   return (dispatch) => {
     fetch(`http://localhost:3001/videogames?name=${name}`)
       .then((response) => response.json())
@@ -83,16 +84,27 @@ export function VideoGameById(id) {
 //   };
 // }
 
+// export function createVideoGame(videoGameInfo) {
+//   console.log('se despacho create');
+//   return async (dispatch) => {
+//     let videoGame = await axios.post(
+//       `http://localhost:3001/videogames`,
+//       videoGameInfo
+//     );
+//     return dispatch({
+//       type: CREATE_VIDEO_GAME,
+//       payload: videoGame,
+//     });
+//   };
+// }
+
 export function createVideoGame(videoGameInfo) {
-  console.log('se despacho create');
+  console.log('se despacho create: ', videoGameInfo);
   return async (dispatch) => {
     let videoGame = await axios.post(
       `http://localhost:3001/videogames`,
       videoGameInfo
     );
-    return dispatch({
-      type: CREATE_VIDEO_GAME,
-      payload: videoGame,
-    });
+    return videoGame;
   };
 }
