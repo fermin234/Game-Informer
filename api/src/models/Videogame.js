@@ -28,7 +28,6 @@ module.exports = (sequelize) => {
         defaultValue: 0,
       },
       platforms: {
-        //agregar en la funcion de que si llega null, sea un arreglo
         type: DataTypes.ARRAY(DataTypes.STRING),
         defaultValue: [],
       },

@@ -8,7 +8,7 @@ import Pagination from "../pagination/pagination.jsx";
 import { allVideoGames } from "../../redux/actions";
 import Filtered from "../filtered/filtered";
 
-export default function Home() {
+export default function Home({ match }) {
   const dispatch = useDispatch()
   const listVideoGames = useSelector(s => s.filtred)
   const [currentPage, setCurrentPage] = useState(1)
@@ -30,8 +30,8 @@ export default function Home() {
 
   return (
     <>
-      <NavBar />
-      <Filtered />
+      <NavBar match={match} />
+      <Filtered setCurrentPage={setCurrentPage} />
       <div className={s.div}>
         {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} />)}
       </div>

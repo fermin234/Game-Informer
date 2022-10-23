@@ -8,9 +8,9 @@ import Detail from './component/detail/detail';
 function App() {
   return (
     <div className="App">
-      <Route exact path="/" render={() => <LandingPage />} />
-      <Route exact path="/home" render={(match) => <Home match={match} />} />
-      <Route exact path="/create" render={() => <Form />} />
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/home" component={Home} />
+      <Route exact path="/create" component={Form} />
       <Route exact path="/detail/:id" component={Detail} />
     </div>
   );

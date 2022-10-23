@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { VideoGameById } from "../../redux/actions";
+import NavBar from "../navBar/navBar";
+import s from './detail.module.css'
 
 export default function Detail({ match }) {
   const dispatch = useDispatch()
@@ -14,13 +16,30 @@ export default function Detail({ match }) {
 
 
   return (
-    <div>
-      <h1>Detail</h1>
-      name:<h1>{videoGame.name}</h1>
-      description:<h1>{videoGame.description}</h1>
-      released:<h1>{videoGame.released}</h1>
-      rating:<h1>{videoGame.rating}</h1>
-      platforms:<h1>{videoGame.platforms}</h1>
-      background_image:<h1>{videoGame.background_image}</h1>
-    </div>)
+    <>
+      <NavBar match={match} />
+      <div className={s.container}>
+        <div className={s.item}>
+          <h1>{videoGame.name}</h1>
+        </div>
+        <div className={s.item}>
+          <img src={videoGame.background_image} alt="asdasd" />
+        </div>
+        <div className={s.item}>
+          <span>{videoGame.description?.replace(/<[^>]*>/g, '')}</span>
+        </div>
+        <div className={s.item}>
+          <h3>Released: </h3>
+          <h4>{videoGame.released}</h4>
+        </div>
+        <div className={s.item}>
+          <h3>Rating: </h3>
+          <h4>{videoGame.rating}</h4>
+        </div>
+        <div className={s.item}>
+          <h3>Platforms: </h3>
+          <ul>{videoGame.platforms?.map(e => <li>{e}</li>)}</ul>
+        </div>
+      </div>
+    </>)
 }

@@ -6,6 +6,7 @@
   background-color: red;
 }
 
-.slect {
+.slect,
+button {
   height: 80%;
 }

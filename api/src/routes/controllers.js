@@ -51,7 +51,6 @@ async function getAllVideoGames() {
       released: e.released,
       rating: e.rating,
       platforms: e.platforms,
-      // platforms: e.platforms ? e.platforms.map((e) => e.platform.name) : null,
       genres: e.genres?.map((e) => e.name),
       background_image: e.image,
     }));
@@ -134,7 +133,7 @@ async function getVideoGameId(id) {
       });
 
       if (DBInfo)
-        return (DBInfo = {
+        return {
           id: DBInfo.id,
           name: DBInfo.name,
           description: DBInfo.description,
@@ -143,7 +142,7 @@ async function getVideoGameId(id) {
           platforms: DBInfo.platforms,
           genres: DBInfo.genres?.map((e) => e.name),
           background_image: DBInfo.image,
-        });
+        };
       return 'ID invalido.';
     } else {
       //busco en la api

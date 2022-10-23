@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { VideoGameByName } from "../../redux/actions";
 
-export default function NavBar() {
+export default function NavBar({ match }) {
 
   const dispatch = useDispatch()
   const form = document.getElementById("form")
@@ -19,19 +19,24 @@ export default function NavBar() {
     e.preventDefault()
     form.reset()
   }
-
   return (
     <>
       <div className={s.div}>
         <Link to='/home'>
           <h2>Home</h2>
         </Link>
-        <form id="form" className={s.form} onSubmit={onHandelSubmit}>
-          <input onChange={onHandleChange} name='input' className={s.input} type="search" placeholder="    🔎    Buscar Video Game" />
-        </form>
-        <Link to='/create'>
-          <h2>Create</h2>
-        </Link>
+
+        {match.url === "/home" ?
+          <form id="form" className={s.form} onSubmit={onHandelSubmit}>
+            <input className={s.input} name='input' type="search" placeholder="    🔎    Buscar Video Game" autoComplete="off" onChange={onHandleChange} />
+          </form>
+          : null}
+
+        {match.url === "/home" ?
+          <Link to='/create'>
+            <button>Create</button>
+          </Link>
+          : null}
       </div>
     </>
   )
