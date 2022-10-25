@@ -10,6 +10,7 @@ import Filtered from "../filtered/filtered";
 
 export default function Home({ match }) {
   const dispatch = useDispatch()
+  const [oreden, setOrden] = useState("")
   const listVideoGames = useSelector(s => s.filtred)
   const [currentPage, setCurrentPage] = useState(1)
   const [videoGamePerPage, setVideoGamePerPage] = useState(15)
@@ -26,16 +27,21 @@ export default function Home({ match }) {
 
   useEffect(() => {
     dispatch(allVideoGames())
-  }, [dispatch], listVideoGames)
+  }, [dispatch])
 
   return (
     <>
-      <NavBar match={match} />
-      <Filtered setCurrentPage={setCurrentPage} />
-      <div className={s.div}>
-        {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} />)}
+      <NavBar match={match} setCurrentPage={setCurrentPage} />
+      <Filtered setCurrentPage={setCurrentPage} setOrden={setOrden} />
+      <div className={s.container}>
+        {listVideoGames.length
+          ? <div className={s.div}>
+            {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} />)}
+          </div>
+          :
+          <div className={s.loader}></div>}
+        <Pagination videoGamePerPage={videoGamePerPage} listVideoGames={listVideoGames.length} paginado={paginado} />
       </div>
-      <Pagination videoGamePerPage={videoGamePerPage} listVideoGames={listVideoGames.length} paginado={paginado} />
     </>
   )
 }

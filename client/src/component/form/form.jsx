@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createVideoGame } from "../../redux/actions";
 import NavBar from "../navBar/navBar";
 import s from './form.module.css'
@@ -8,7 +8,7 @@ import Validate from "./validate.js";
 export default function Form(props) {
 
   const dispatch = useDispatch()
-  const create = useSelector(s => s.createVideoGame)
+  // const create = useSelector(s => s.createVideoGame)
 
   const [input, setInput] = useState({
     name: "",
@@ -115,7 +115,7 @@ export default function Form(props) {
 
             {Object.entries(errors).length
               ? <button type="submit" disabled> Create </button>
-              : <button type="submit"> Create </button>}
+              : <button type="submit" onClick={() => alert(`${input.name} creado exitosamente.`)}> Create </button>}
 
           </form>
         </div>

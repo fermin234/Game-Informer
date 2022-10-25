@@ -3,10 +3,20 @@
   height: 40px;
   justify-content: space-around;
   align-content: center;
-  background-color: red;
+  background-color: #0b5fb2d0;
+  /* background-color: #303030; */
 }
 
 .slect,
 button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
   height: 80%;
+  text-align: center;
+}
+
+.slect,
+button:hover {
+  cursor: pointer;
 }

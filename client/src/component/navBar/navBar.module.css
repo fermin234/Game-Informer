@@ -1,9 +1,20 @@
 .div {
-  background-color: red;
+  background-color: #0b5fb2d0;
+  /* background-color: #303030; */
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   height: 60px;
+}
+
+.div img {
+  width: 100%;
+}
+
+.nav {
+  width: 5%;
+  height: 80%;
+  border-radius: 50%;
 }
 
 .input {

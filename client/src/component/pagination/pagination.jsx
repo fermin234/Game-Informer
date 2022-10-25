@@ -11,7 +11,7 @@ export default function Pagination({ videoGamePerPage, listVideoGames, paginado 
 
   return (
     <div className={s.nav} >
-      {pageNumber.length != 1 &&
+      {pageNumber.length !== 1 &&
         pageNumber.map(e => (
           <button key={e} onClick={() => {
             window.scrollTo({ top: 0 });

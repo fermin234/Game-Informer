@@ -6,6 +6,8 @@ export const GET_VIDEOGAME_BY_ID = 'GET_VIDEOGAME_BY_ID';
 export const GET_VIDEOGAME_BY_NAME = 'GET_VIDEOGAME_BY_NAME';
 export const SORTING_BY_AZ = 'SORTING_BY_AZ';
 export const SORTING_BY_RATING = 'SORTING_BY_RATING';
+export const RESET_CREATE = 'RESET_CREATE';
+export const RESET_FILTRES = 'RESET_FILTRES';
 const axios = require('axios');
 
 export function allVideoGames() {
@@ -121,5 +123,19 @@ export function SortByRating(payload) {
     dispatch({
       type: SORTING_BY_RATING,
       payload,
+    });
+}
+
+export function ResetCreate() {
+  return (dispatch) =>
+    dispatch({
+      type: RESET_CREATE,
+    });
+}
+
+export function ResetFilter() {
+  return (dispatch) =>
+    dispatch({
+      type: RESET_FILTRES,
     });
 }

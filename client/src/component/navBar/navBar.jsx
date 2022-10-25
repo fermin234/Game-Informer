@@ -3,16 +3,19 @@ import s from './navBar.module.css'
 import { Link } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { VideoGameByName } from "../../redux/actions";
+import img from './img/4.png'
 
-export default function NavBar({ match }) {
+export default function NavBar({ match, setCurrentPage }) {
 
   const dispatch = useDispatch()
   const form = document.getElementById("form")
 
   function onHandleChange(e) {
     e.preventDefault()
+
     if (e.target.value.length > 1)
-      dispatch(VideoGameByName(e.target.value))
+      setCurrentPage(1)
+    dispatch(VideoGameByName(e.target.value))
   }
 
   function onHandelSubmit(e) {
@@ -22,8 +25,8 @@ export default function NavBar({ match }) {
   return (
     <>
       <div className={s.div}>
-        <Link to='/home'>
-          <h2>Home</h2>
+        <Link className={s.nav} to='/home'>
+          <img src={img} alt="logo" />
         </Link>
 
         {match.url === "/home" ?

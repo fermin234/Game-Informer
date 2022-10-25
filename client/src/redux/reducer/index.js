@@ -6,6 +6,8 @@ import {
   GET_ALL_VIDEOGAMES,
   GET_VIDEOGAME_BY_ID,
   GET_VIDEOGAME_BY_NAME,
+  RESET_CREATE,
+  RESET_FILTRES,
 } from '../actions/index.js';
 
 const initialState = {
@@ -59,26 +61,80 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case SORTING_BY_AZ:
-      const a = state.filtred.sort((a, b) => {
-        if (a.name > b.name) {
-          return 1;
-        }
-        if (a.name < b.name) {
-          return -1;
-        }
-        return 0;
-      });
-      console.log('asdasd ', state.filtred);
+      let sortArr = state.videoGames;
+      if (action.payload === 'A-Z') {
+        sortArr = state.filtred.sort((a, b) => {
+          if (a.name > b.name) {
+            return 1;
+          }
+          if (a.name < b.name) {
+            return -1;
+          }
+          return 0;
+        });
+      }
+      if (action.payload === 'Z-A') {
+        sortArr = state.filtred.sort((a, b) => {
+          if (a.name > b.name) {
+            return -1;
+          }
+          if (a.name < b.name) {
+            return 1;
+          }
+          return 0;
+        });
+      }
 
       return {
         ...state,
-        filtred: a,
+        filtred: sortArr,
+      };
+
+    case SORTING_BY_RATING:
+      let ratingSort;
+
+      if (action.payload === 'RatingDES') {
+        ratingSort = state.filtred.sort((a, b) => {
+          if (a.rating > b.rating) {
+            return 1;
+          }
+          if (a.rating < b.rating) {
+            return -1;
+          }
+          return 0;
+        });
+      }
+
+      if (action.payload === 'RatingASC') {
+        ratingSort = state.filtred.sort((a, b) => {
+          if (a.rating > b.rating) {
+            return -1;
+          }
+          if (a.rating < b.rating) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+
+      return {
+        ...state,
+        filtred: ratingSort,
+      };
+
+    case RESET_CREATE:
+      return {
+        ...state,
+        detail: {},
+      };
+
+    case RESET_FILTRES:
+      return {
+        ...state,
+        filtred: state.videoGames,
       };
 
     default:
       return { ...state };
   }
 }
-// A-Z
-// Z-A
-// Creado
