@@ -25,13 +25,13 @@ export default function Filtered({ setCurrentPage, setOrden }) {
   }, [dispatch])
 
   function handlerFilterByGenres(e) {
-    setCurrentPage(1)
     dispatch(filterViodeGamesByGenres(e.target.value))
+    setCurrentPage(1)
+    setOrden(`Ordenado ${e.target.value}`)
   }
 
   function handleOnClick(e) {
     dispatch(allVideoGames())
-    // dispatch(filterViodeGamesByGenres("All Genres"))
     dispatch(ResetFilter())
     setCurrentPage(1)
     setOrden(`Ordenado ${e.target.value}`)
@@ -72,6 +72,7 @@ export default function Filtered({ setCurrentPage, setOrden }) {
         <option value="RatingDES">Rating 🡳</option>
       </select>
 
+      <button type="active"> Creado </button>
 
       <button onClick={(e) => handleOnClick(e)}> Quitar filtros </button>
     </div>

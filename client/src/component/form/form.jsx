@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { createVideoGame } from "../../redux/actions";
+import { allVideoGames, createVideoGame } from "../../redux/actions";
 import NavBar from "../navBar/navBar";
 import s from './form.module.css'
 import Validate from "./validate.js";
@@ -8,7 +8,6 @@ import Validate from "./validate.js";
 export default function Form(props) {
 
   const dispatch = useDispatch()
-  // const create = useSelector(s => s.createVideoGame)
 
   const [input, setInput] = useState({
     name: "",
