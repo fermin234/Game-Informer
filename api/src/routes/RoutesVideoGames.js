@@ -30,9 +30,27 @@ router.get('/:idVideogame', async (req, res) => {
 
 //falta relacionar los generos
 router.post('/', async (req, res) => {
-  const { name, description, released, rating, platforms, genres, image } =
-    req.body;
+  const {
+    name,
+    description,
+    released,
+    rating,
+    platforms,
+    genres,
+    image,
+    created,
+  } = req.body;
   try {
+    console.log('el input que llega: ', {
+      name,
+      description,
+      released,
+      rating,
+      platforms,
+      genres,
+      image,
+      created,
+    });
     if (!name) throw new Error('Debe ingresar un nombre.');
     if (!description) throw new Error('Debe ingresar una descripcion.');
     res.json(
@@ -43,7 +61,8 @@ router.post('/', async (req, res) => {
         rating,
         platforms,
         genres,
-        image
+        image,
+        created
       )
     );
   } catch (error) {

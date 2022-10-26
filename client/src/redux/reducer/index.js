@@ -1,13 +1,14 @@
 import {
   ALL_GENRES,
   SORTING_BY_AZ,
-  FRILTERED_GENRES,
+  FILTERED_GENRES,
   SORTING_BY_RATING,
   GET_ALL_VIDEOGAMES,
   GET_VIDEOGAME_BY_ID,
   GET_VIDEOGAME_BY_NAME,
   RESET_CREATE,
   RESET_FILTRES,
+  FILTERED_CREATE,
 } from '../actions/index.js';
 
 const initialState = {
@@ -25,7 +26,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         videoGames: action.payload,
-        filtred: filtrando,
+        filtred: [...filtrando],
       };
 
     case ALL_GENRES:
@@ -34,7 +35,7 @@ export default function rootReducer(state = initialState, action) {
         genres: action.payload,
       };
 
-    case FRILTERED_GENRES:
+    case FILTERED_GENRES:
       const allVideoGames = state.videoGames;
       const filtrado =
         action.payload === 'All Genres'
@@ -132,6 +133,14 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         filtred: state.videoGames,
+      };
+
+    case FILTERED_CREATE:
+      const creados = state.filtred.filter((e) => e.created === true);
+
+      return {
+        ...state,
+        filtred: creados,
       };
 
     default:

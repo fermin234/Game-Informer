@@ -1,13 +1,14 @@
 export const ALL_GENRES = 'ALL_GENRES';
-export const FRILTERED_GENRES = 'FRILTERED_GENRES';
+export const RESET_CREATE = 'RESET_CREATE';
+export const SORTING_BY_AZ = 'SORTING_BY_AZ';
+export const RESET_FILTRES = 'RESET_FILTRES';
+export const FILTERED_GENRES = 'FRILTERED_GENRES';
+export const FILTERED_CREATE = 'FRILTERED_CREATE';
 export const CREATE_VIDEO_GAME = 'CREATE_VIDEO_GAME';
+export const SORTING_BY_RATING = 'SORTING_BY_RATING';
 export const GET_ALL_VIDEOGAMES = 'GET_ALL_VIDEOGAMES';
 export const GET_VIDEOGAME_BY_ID = 'GET_VIDEOGAME_BY_ID';
 export const GET_VIDEOGAME_BY_NAME = 'GET_VIDEOGAME_BY_NAME';
-export const SORTING_BY_AZ = 'SORTING_BY_AZ';
-export const SORTING_BY_RATING = 'SORTING_BY_RATING';
-export const RESET_CREATE = 'RESET_CREATE';
-export const RESET_FILTRES = 'RESET_FILTRES';
 const axios = require('axios');
 
 export function allVideoGames() {
@@ -41,7 +42,7 @@ export function todosLosGeneros() {
 export function filterViodeGamesByGenres(payload) {
   return (dispatch) =>
     dispatch({
-      type: FRILTERED_GENRES,
+      type: FILTERED_GENRES,
       payload,
     });
 }
@@ -137,5 +138,12 @@ export function ResetFilter() {
   return (dispatch) =>
     dispatch({
       type: RESET_FILTRES,
+    });
+}
+
+export function filterByCreate() {
+  return (dispatch) =>
+    dispatch({
+      type: FILTERED_CREATE,
     });
 }

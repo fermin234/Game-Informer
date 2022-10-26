@@ -53,6 +53,7 @@ async function getAllVideoGames() {
       platforms: e.platforms,
       genres: e.genres?.map((e) => e.name),
       background_image: e.image,
+      created: e.created,
     }));
 
     //uno datos de la api y DB
@@ -173,9 +174,9 @@ async function createVideoGame(
   rating,
   platforms,
   genres,
-  image
+  image,
+  created
 ) {
-  if (!name) return `Debe ingresar un nombre.`;
   try {
     let game = await Videogame.create({
       name,
@@ -187,6 +188,7 @@ async function createVideoGame(
       image: image
         ? image
         : `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s`,
+      created,
     });
 
     // let listGenres = await Promise.all(

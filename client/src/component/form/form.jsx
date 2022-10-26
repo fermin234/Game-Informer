@@ -17,6 +17,7 @@ export default function Form(props) {
     platforms: [],
     genres: [],
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s.png",
+    created: true
   })
 
   const [errors, setErrors] = useState({})
@@ -34,6 +35,7 @@ export default function Form(props) {
       platforms: [],
       genres: [],
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s.png",
+      created: true
     })
   }
 
