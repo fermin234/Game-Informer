@@ -12,8 +12,9 @@ export default function Home({ match }) {
   const dispatch = useDispatch()
   const [oreden, setOrden] = useState("")
   const listVideoGames = useSelector(s => s.filtred)
+  // const a = useSelector(s => s.videoGames)
   const [currentPage, setCurrentPage] = useState(1)
-  const [videoGamePerPage, setVideoGamePerPage] = useState(15)
+  const videoGamePerPage = 15
   const indexOfLastVideoGame = currentPage * videoGamePerPage
   const indexOfFirstVideoGame = indexOfLastVideoGame - videoGamePerPage
   const currentVideoGame = Array.isArray(listVideoGames)

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { allVideoGames, createVideoGame } from "../../redux/actions";
+import { createVideoGame, ResetFilter } from "../../redux/actions";
 import NavBar from "../navBar/navBar";
 import s from './form.module.css'
 import Validate from "./validate.js";
@@ -24,6 +24,7 @@ export default function Form(props) {
 
   function handleSubmit(e) {
     e.preventDefault()
+    dispatch(ResetFilter())
     dispatch(createVideoGame(input))
     resetForm(e)
 
@@ -99,7 +100,7 @@ export default function Form(props) {
             <p className={s.danger}>{errors && errors.released}</p>
 
             <label htmlFor="">*Rating:</label>
-            <input type="number" min={0} max={5} name="rating" autoComplete="off" placeholder="0-5" onChange={onHandleChange} />
+            <input type="input" name="rating" autoComplete="off" placeholder="0-5" onChange={onHandleChange} />
             <p className={errors.rating ? s.danger : s.succes}>El rating debe estar entre 0 y 5.</p>
 
             <label htmlFor="">Platforms:</label>
@@ -114,9 +115,7 @@ export default function Form(props) {
             <input type="text" name="image" autoComplete="off" placeholder="URL" onChange={onHandleChange} />
             <p className={s.danger}>{errors && errors.image}</p>
 
-            {Object.entries(errors).length
-              ? <button type="submit" disabled> Create </button>
-              : <button type="submit" onClick={() => alert(`${input.name} creado exitosamente.`)}> Create </button>}
+            <button type="submit" disabled={Object.entries(errors).length ? true : false}> Create </button>
 
           </form>
         </div>

@@ -21,7 +21,7 @@ const initialState = {
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_VIDEOGAMES:
-      const filtrando = state.filtred.length ? state.filtred : action.payload;
+      let filtrando = state.filtred.length ? state.filtred : action.payload;
 
       return {
         ...state,
@@ -32,11 +32,11 @@ export default function rootReducer(state = initialState, action) {
     case ALL_GENRES:
       return {
         ...state,
-        genres: action.payload,
+        genres: [...action.payload],
       };
 
     case FILTERED_GENRES:
-      const allVideoGames = state.videoGames;
+      const allVideoGames = [...state.videoGames];
       const filtrado =
         action.payload === 'All Genres'
           ? allVideoGames
@@ -46,7 +46,7 @@ export default function rootReducer(state = initialState, action) {
 
       return {
         ...state,
-        filtred: filtrado,
+        filtred: [...filtrado],
       };
 
     case GET_VIDEOGAME_BY_NAME:
@@ -62,9 +62,10 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case SORTING_BY_AZ:
-      let sortArr = state.videoGames;
+      let sortArr = [...state.filtred];
+
       if (action.payload === 'A-Z') {
-        sortArr = state.filtred.sort((a, b) => {
+        sortArr = sortArr.sort((a, b) => {
           if (a.name > b.name) {
             return 1;
           }
@@ -75,7 +76,7 @@ export default function rootReducer(state = initialState, action) {
         });
       }
       if (action.payload === 'Z-A') {
-        sortArr = state.filtred.sort((a, b) => {
+        sortArr = sortArr.sort((a, b) => {
           if (a.name > b.name) {
             return -1;
           }
@@ -85,17 +86,20 @@ export default function rootReducer(state = initialState, action) {
           return 0;
         });
       }
+      if (action.payload === 'Ordenamiento') {
+        sortArr = [...state.videoGames];
+      }
 
       return {
         ...state,
-        filtred: sortArr,
+        filtred: [...sortArr],
       };
 
     case SORTING_BY_RATING:
-      let ratingSort;
+      let ratingSort = [...state.filtred];
 
       if (action.payload === 'RatingDES') {
-        ratingSort = state.filtred.sort((a, b) => {
+        ratingSort.sort((a, b) => {
           if (a.rating > b.rating) {
             return 1;
           }
@@ -107,7 +111,7 @@ export default function rootReducer(state = initialState, action) {
       }
 
       if (action.payload === 'RatingASC') {
-        ratingSort = state.filtred.sort((a, b) => {
+        ratingSort.sort((a, b) => {
           if (a.rating > b.rating) {
             return -1;
           }
@@ -118,9 +122,13 @@ export default function rootReducer(state = initialState, action) {
         });
       }
 
+      if (action.payload === 'Rating') {
+        ratingSort = [...state.videoGames];
+      }
+
       return {
         ...state,
-        filtred: ratingSort,
+        filtred: [...ratingSort],
       };
 
     case RESET_CREATE:
@@ -132,7 +140,7 @@ export default function rootReducer(state = initialState, action) {
     case RESET_FILTRES:
       return {
         ...state,
-        filtred: state.videoGames,
+        filtred: [...state.videoGames],
       };
 
     case FILTERED_CREATE:
@@ -140,7 +148,7 @@ export default function rootReducer(state = initialState, action) {
 
       return {
         ...state,
-        filtred: creados,
+        filtred: [...creados],
       };
 
     default:
