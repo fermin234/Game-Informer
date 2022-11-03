@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import s from './filtered.module.css'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { todosLosGeneros, filterViodeGamesByGenres, SortByAz, ResetFilter, allVideoGames, SortByRating, filterByCreate } from "../../redux/actions";
 
-export default function Filtered({ setCurrentPage, setOrden }) {
+export default function Filtered({ setCurrentPage, setOrden, setInitial, setFinal }) {
 
   const dispatch = useDispatch()
-  const filtredByGenre = document.getElementById("filtradoPorGenero")
-  const filtredByA_Z = document.getElementById("filtradoAlfabeticamente")
-  const filtredByRating = document.getElementById("filtradoRating")
+  let filtredByGenre = document.getElementById("filtradoPorGenero")
+  let filtredByA_Z = document.getElementById("filtradoAlfabeticamente")
+  let filtredByRating = document.getElementById("filtradoRating")
+
+  let todosLosVideoGames = useSelector(s => s.videoGames)
   let generos = useSelector(s => s.genres).sort((a, b) => {
     if (a.name > b.name) {
       return 1;
@@ -21,16 +23,22 @@ export default function Filtered({ setCurrentPage, setOrden }) {
   });
 
   useEffect(() => {
-    dispatch(todosLosGeneros())
-  }, [dispatch])
+    if (!generos.length)
+      dispatch(todosLosGeneros())
+    filtredByGenre = document.getElementById("filtradoPorGenero")
+    filtredByA_Z = document.getElementById("filtradoAlfabeticamente")
+    filtredByRating = document.getElementById("filtradoRating")
+  }, [dispatch, filtredByGenre, filtredByA_Z, filtredByRating])
 
   function handlerFilterByGenres(e) {
+    resetPagination()
     dispatch(filterViodeGamesByGenres(e.target.value))
     setCurrentPage(1)
     setOrden(`Ordenado por ${e.target.value}`)
   }
 
-  function handleOnClick(e) {
+  function handlerOnClick(e) {
+    resetPagination()
     dispatch(allVideoGames())
     dispatch(ResetFilter())
     setCurrentPage(1)
@@ -41,12 +49,14 @@ export default function Filtered({ setCurrentPage, setOrden }) {
   }
 
   function handlerFilterByA_Z(e) {
+    resetPagination()
     dispatch(SortByAz(e.target.value))
     setCurrentPage(1)
     setOrden(`Ordenado por ${e.target.value}`)
   }
 
   function handlerFilterByRating(e) {
+    resetPagination()
     dispatch(SortByRating(e.target.value))
     setCurrentPage(1)
     setOrden(`Ordenado por ${e.target.value}`)
@@ -59,30 +69,40 @@ export default function Filtered({ setCurrentPage, setOrden }) {
     setOrden(`Ordenado por creacion`)
   }
 
+  function resetPagination() {
+    setInitial(1)
+    setFinal(8)
+  }
+
 
   return (
-    <div className={s.div}>
-      <select className={s.slect} id="filtradoPorGenero" onChange={handlerFilterByGenres}>
-        <option value="All Genres">All Genres</option>
-        {generos?.map(e => <option key={e.id} value={`${e.name}`}>{e.name}</option>)}
-      </select>
+    <div className={s.containerAll}>
+      {
+        todosLosVideoGames.length &&
+        <div className={s.div}>
+          <select className={s.slect} id="filtradoPorGenero" onChange={handlerFilterByGenres}>
+            <option value="All Genres">All Genres</option>
+            {generos?.map(e => <option key={e.id} value={`${e.name}`}>{e.name}</option>)}
+          </select>
 
-      <select className={s.slect} id="filtradoAlfabeticamente" onChange={handlerFilterByA_Z}>
-        <option value="Ordenamiento">Ordenamiento</option>
-        <option value="A-Z">A-Z</option>
-        <option value="Z-A">Z-A</option>
-        {/* <option value="Creado">Creado</option> */}
-      </select>
+          <select className={s.slect} id="filtradoAlfabeticamente" onChange={handlerFilterByA_Z}>
+            <option value="Ordenamiento">Sort</option>
+            <option value="A-Z">A-Z</option>
+            <option value="Z-A">Z-A</option>
+          </select>
 
-      <select className={s.slect} id="filtradoRating" onChange={handlerFilterByRating}>
-        <option value="Rating">Rating</option>
-        <option value="RatingASC">Rating 🡱</option>
-        <option value="RatingDES">Rating 🡳</option>
-      </select>
+          <select className={s.slect} id="filtradoRating" onChange={handlerFilterByRating}>
+            <option value="Rating">Rating</option>
+            <option value="RatingASC">Rating 🡱</option>
+            <option value="RatingDES">Rating 🡳</option>
+          </select>
 
-      <button onClick={handlerFilterByCreate}> Creado </button>
+          <button onClick={handlerFilterByCreate}> Created </button>
 
-      <button onClick={handleOnClick}> Quitar filtros </button>
+          <button onClick={handlerOnClick}> Remove filters </button>
+        </div>
+      }
     </div>
+
   )
-}
+} 

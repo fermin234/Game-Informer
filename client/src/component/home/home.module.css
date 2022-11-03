@@ -1,10 +1,11 @@
 .div {
   background-color: #212121;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  gap: 50px;
-  padding-top: 35px;
+  /* background-color: white; */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  padding: 5px 10px 45px 10px;
+  margin-top: 70px;
 }
 
 .container {
@@ -14,11 +15,12 @@
 
 .loader {
   --height-of-loader: 6px;
-  --loader-color: #0071e2;
+  /* --loader-color: #0071e2; */
+  --loader-color: #12508e;
   width: 100%;
   height: var(--height-of-loader);
   border-radius: 30px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #212121;
   position: relative;
 }
 

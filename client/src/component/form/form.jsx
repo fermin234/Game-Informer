@@ -24,8 +24,8 @@ export default function Form(props) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    dispatch(ResetFilter())
     dispatch(createVideoGame(input))
+    dispatch(ResetFilter())
     resetForm(e)
 
     setInput({

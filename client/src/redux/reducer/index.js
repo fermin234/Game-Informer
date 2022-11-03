@@ -16,6 +16,7 @@ const initialState = {
   filtred: [],
   genres: [],
   detail: {},
+  filtredOnOff: false,
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -26,13 +27,13 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         videoGames: action.payload,
-        filtred: [...filtrando],
+        filtred: filtrando,
       };
 
     case ALL_GENRES:
       return {
         ...state,
-        genres: [...action.payload],
+        genres: action.payload,
       };
 
     case FILTERED_GENRES:
@@ -140,7 +141,7 @@ export default function rootReducer(state = initialState, action) {
     case RESET_FILTRES:
       return {
         ...state,
-        filtred: [...state.videoGames],
+        filtred: state.videoGames,
       };
 
     case FILTERED_CREATE:

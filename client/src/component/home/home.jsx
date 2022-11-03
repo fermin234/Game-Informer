@@ -10,14 +10,19 @@ import Filtered from "../filtered/filtered";
 
 export default function Home({ match }) {
   const dispatch = useDispatch()
+
+  const [initial, setInitial] = useState(1)
+  const [final, setFinal] = useState(8)
+
+
   const [oreden, setOrden] = useState("")
   const listVideoGames = useSelector(s => s.filtred)
-  // const a = useSelector(s => s.videoGames)
+  const stateVideoGames = useSelector(s => s.videoGames)
   const [currentPage, setCurrentPage] = useState(1)
   const videoGamePerPage = 15
   const indexOfLastVideoGame = currentPage * videoGamePerPage
   const indexOfFirstVideoGame = indexOfLastVideoGame - videoGamePerPage
-  const currentVideoGame = Array.isArray(listVideoGames)
+  let currentVideoGame = Array.isArray(listVideoGames)
     ? listVideoGames.slice(indexOfFirstVideoGame, indexOfLastVideoGame)
     : []
 
@@ -27,13 +32,20 @@ export default function Home({ match }) {
   }
 
   useEffect(() => {
-    dispatch(allVideoGames())
-  }, [dispatch])
+    if (!stateVideoGames.length)
+      dispatch(allVideoGames())
+  }, [dispatch, listVideoGames])
 
   return (
     <>
+
       <NavBar match={match} setCurrentPage={setCurrentPage} />
-      <Filtered setCurrentPage={setCurrentPage} setOrden={setOrden} />
+      <Filtered setCurrentPage={setCurrentPage}
+        setOrden={setOrden}
+        setInitial={setInitial}
+        setFinal={setFinal}
+      />
+
       <div className={s.container}>
         {listVideoGames.length
           ? <div className={s.div}>
@@ -41,8 +53,19 @@ export default function Home({ match }) {
           </div>
           :
           <div className={s.loader}></div>}
-        <Pagination videoGamePerPage={videoGamePerPage} listVideoGames={listVideoGames.length} paginado={paginado} />
+
+        <Pagination videoGamePerPage={videoGamePerPage}
+          listVideoGames={listVideoGames.length}
+          paginado={paginado}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          initial={initial}
+          setInitial={setInitial}
+          final={final}
+          setFinal={setFinal}
+        />
+
       </div>
     </>
   )
-}
+} 
