@@ -4,7 +4,6 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  /* background-color: #0b5fb2; */
   background-color: #0071e200;
 }
 
@@ -54,11 +53,6 @@
 .nav button:hover {
   background-color: #3489dee6;
 }
-
-/* .nav .button:focus {
-  background-color: rgb(255, 255, 255);
-  color: black;
-} */
 
 .buttonActive {
   background-color: red;

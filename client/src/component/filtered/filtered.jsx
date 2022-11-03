@@ -3,6 +3,7 @@ import s from './filtered.module.css'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { todosLosGeneros, filterViodeGamesByGenres, SortByAz, ResetFilter, allVideoGames, SortByRating, filterByCreate } from "../../redux/actions";
+import { useState } from "react";
 
 export default function Filtered({ setCurrentPage, setOrden, setInitial, setFinal }) {
 
@@ -10,6 +11,8 @@ export default function Filtered({ setCurrentPage, setOrden, setInitial, setFina
   let filtredByGenre = document.getElementById("filtradoPorGenero")
   let filtredByA_Z = document.getElementById("filtradoAlfabeticamente")
   let filtredByRating = document.getElementById("filtradoRating")
+
+  const [boolean, setBoolean] = useState(false)
 
   let todosLosVideoGames = useSelector(s => s.videoGames)
   let generos = useSelector(s => s.genres).sort((a, b) => {
@@ -28,7 +31,7 @@ export default function Filtered({ setCurrentPage, setOrden, setInitial, setFina
     filtredByGenre = document.getElementById("filtradoPorGenero")
     filtredByA_Z = document.getElementById("filtradoAlfabeticamente")
     filtredByRating = document.getElementById("filtradoRating")
-  }, [dispatch, filtredByGenre, filtredByA_Z, filtredByRating])
+  }, [dispatch, filtredByGenre, filtredByA_Z, filtredByRating, boolean])
 
   function handlerFilterByGenres(e) {
     resetPagination()
@@ -75,11 +78,26 @@ export default function Filtered({ setCurrentPage, setOrden, setInitial, setFina
   }
 
 
+
   return (
     <div className={s.containerAll}>
+      <div className={s.containerButtonFiltros}>
+        <button className={s.filtros} onClick={() => setBoolean(!boolean)}>
+          Filtros
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" width="16" height="16" focusable="false">
+            <path d="M5 15l4.61-7L5 1h2.39L12 8l-4.61 7z"></path>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" width="16" height="16" focusable="false">
+            <path d="M5 15l4.61-7L5 1h2.39L12 8l-4.61 7z"></path>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" width="16" height="16" focusable="false">
+            <path d="M5 15l4.61-7L5 1h2.39L12 8l-4.61 7z"></path>
+          </svg>
+        </button>
+      </div>
       {
-        todosLosVideoGames.length &&
-        <div className={s.div}>
+        todosLosVideoGames.length && boolean &&
+        <div className={s.slideInLeft}>
           <select className={s.slect} id="filtradoPorGenero" onChange={handlerFilterByGenres}>
             <option value="All Genres">All Genres</option>
             {generos?.map(e => <option key={e.id} value={`${e.name}`}>{e.name}</option>)}
@@ -102,6 +120,7 @@ export default function Filtered({ setCurrentPage, setOrden, setInitial, setFina
           <button onClick={handlerOnClick}> Remove filters </button>
         </div>
       }
+
     </div>
 
   )

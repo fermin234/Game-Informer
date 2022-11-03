@@ -1,6 +1,5 @@
 .div {
   background-color: #212121;
-  /* background-color: white; */
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 20px;
@@ -15,8 +14,7 @@
 
 .loader {
   --height-of-loader: 6px;
-  /* --loader-color: #0071e2; */
-  --loader-color: #12508e;
+  --loader-color: #0071e2;
   width: 100%;
   height: var(--height-of-loader);
   border-radius: 30px;

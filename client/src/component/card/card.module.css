@@ -1,6 +1,5 @@
 .div {
   background-color: #0071e2;
-  /* background-color: #212121; */
   border-radius: 20px;
   display: grid;
   grid-template-columns: 1fr;
@@ -27,7 +26,6 @@
 
 .img {
   width: 100%;
-  /* border-radius: 15px; */
   border-radius: 15px 15px 0 0;
   height: 100%;
   object-fit: cover;
