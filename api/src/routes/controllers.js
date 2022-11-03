@@ -7,7 +7,7 @@ const { Op } = require('sequelize');
 async function getAllVideoGames() {
   try {
     //peticion a la api
-    let NumPage = 15;
+    let NumPage = 74;
     let ApiInfo = [];
 
     for (let i = 1; i <= NumPage; i++) {

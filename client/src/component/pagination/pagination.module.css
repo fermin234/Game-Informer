@@ -55,11 +55,15 @@
   background-color: #3489dee6;
 }
 
-.nav .button:focus {
+/* .nav .button:focus {
   background-color: rgb(255, 255, 255);
   color: black;
+} */
+
+.buttonActive {
+  background-color: red;
 }
 
-.active {
-  background-color: red;
+.bla {
+  background-color: violet !important;
 }
