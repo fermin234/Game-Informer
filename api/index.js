@@ -25,7 +25,7 @@ const { getGenres } = require('./src/routes/controllers.js');
 // force: false, no fuerza el reseteo de los modelos
 conn.sync({ force: false }).then(() => {
   getGenres();
-  server.listen(3001, () => {
+  server.listen(process.env.PORT, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
