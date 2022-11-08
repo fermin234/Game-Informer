@@ -45,3 +45,8 @@
     left: unset;
   }
 }
+
+.noGames {
+  font-size: 100px;
+  color: red;
+}

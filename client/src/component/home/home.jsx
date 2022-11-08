@@ -50,12 +50,15 @@ export default function Home({ match }) {
       />
 
       <div className={s.container}>
-        {loader
-          ? <div className={s.div}>
-            {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} />)}
-          </div>
-          :
-          <div className={s.loader}></div>}
+        {!loader
+          ? <div className={s.loader}></div>
+          : listVideoGames.length ?
+            <div className={s.div}>
+              {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} />)}
+            </div>
+            :
+            <h1 className={s.noGames}>No hay juegos</h1>
+        }
 
         <Pagination videoGamePerPage={videoGamePerPage}
           listVideoGames={listVideoGames.length}
