@@ -9,7 +9,7 @@ import {
   RESET_CREATE,
   RESET_FILTRES,
   FILTERED_CREATE,
-  SET_LOADER,
+  CREATE_VIDEO_GAME,
 } from '../actions/index.js';
 
 const initialState = {
@@ -18,17 +18,16 @@ const initialState = {
   genres: [],
   detail: {},
   loader: false,
+  switchFiltred: false,
 };
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_VIDEOGAMES:
-      let filtrando = state.filtred.length ? state.filtred : action.payload;
-
       return {
         ...state,
         videoGames: action.payload,
-        filtred: filtrando,
+        filtred: action.payload,
         loader: true,
       };
 
@@ -50,6 +49,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         filtred: [...filtrado],
+        switchFiltred: true,
       };
 
     case GET_VIDEOGAME_BY_NAME:
@@ -96,6 +96,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         filtred: [...sortArr],
+        switchFiltred: true,
       };
 
     case SORTING_BY_RATING:
@@ -132,6 +133,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         filtred: [...ratingSort],
+        switchFiltred: true,
       };
 
     case RESET_CREATE:
@@ -144,6 +146,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         filtred: state.videoGames,
+        switchFiltred: false,
       };
 
     case FILTERED_CREATE:
@@ -152,8 +155,14 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         filtred: [...creados],
+        switchFiltred: true,
       };
 
+    case CREATE_VIDEO_GAME:
+      return {
+        ...state,
+        filtred: state.videoGames,
+      };
     default:
       return { ...state };
   }

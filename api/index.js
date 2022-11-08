@@ -23,7 +23,7 @@ const { getGenres } = require('./src/routes/controllers.js');
 
 // Syncing all the models at once.
 // force: false, no fuerza el reseteo de los modelos
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   getGenres();
   server.listen(process.env.PORT, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { createVideoGame, ResetFilter } from "../../redux/actions";
+import { createVideoGame, ResetFilter, allVideoGames } from "../../redux/actions";
 import NavBar from "../navBar/navBar";
 import s from './form.module.css'
 import Validate from "./validate.js";
@@ -25,6 +25,7 @@ export default function Form(props) {
   function handleSubmit(e) {
     e.preventDefault()
     dispatch(createVideoGame(input))
+    dispatch(allVideoGames())
     dispatch(ResetFilter())
     resetForm(e)
 

@@ -42,7 +42,6 @@ export default function Filtered({ setCurrentPage, setOrden, setInitial, setFina
 
   function handlerOnClick(e) {
     resetPagination()
-    dispatch(allVideoGames())
     dispatch(ResetFilter())
     setCurrentPage(1)
     setOrden(`Ordenado por ${e.target.value}`)
