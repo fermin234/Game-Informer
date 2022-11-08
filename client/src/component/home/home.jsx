@@ -5,7 +5,7 @@ import s from './home.module.css'
 import NavBar from "../navBar/navBar";
 import Card from "../card/card.jsx";
 import Pagination from "../pagination/pagination.jsx";
-import { allVideoGames } from "../../redux/actions";
+import { allVideoGames, setLoader } from "../../redux/actions";
 import Filtered from "../filtered/filtered";
 
 export default function Home({ match }) {
@@ -18,6 +18,7 @@ export default function Home({ match }) {
   const [oreden, setOrden] = useState("")
   const listVideoGames = useSelector(s => s.filtred)
   const stateVideoGames = useSelector(s => s.videoGames)
+  const loader = useSelector(s => s.loader)
   const [currentPage, setCurrentPage] = useState(1)
   const videoGamePerPage = 15
   const indexOfLastVideoGame = currentPage * videoGamePerPage
@@ -32,8 +33,10 @@ export default function Home({ match }) {
   }
 
   useEffect(() => {
-    if (!stateVideoGames.length)
+    if (!stateVideoGames.length) {
       dispatch(allVideoGames())
+    }
+
   }, [dispatch, listVideoGames])
 
   return (
@@ -47,7 +50,7 @@ export default function Home({ match }) {
       />
 
       <div className={s.container}>
-        {listVideoGames.length
+        {loader
           ? <div className={s.div}>
             {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} />)}
           </div>

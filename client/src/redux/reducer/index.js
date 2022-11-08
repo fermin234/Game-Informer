@@ -9,6 +9,7 @@ import {
   RESET_CREATE,
   RESET_FILTRES,
   FILTERED_CREATE,
+  SET_LOADER,
 } from '../actions/index.js';
 
 const initialState = {
@@ -16,7 +17,7 @@ const initialState = {
   filtred: [],
   genres: [],
   detail: {},
-  filtredOnOff: false,
+  loader: false,
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -28,6 +29,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         videoGames: action.payload,
         filtred: filtrando,
+        loader: true,
       };
 
     case ALL_GENRES:
