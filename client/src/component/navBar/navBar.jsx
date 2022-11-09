@@ -1,8 +1,8 @@
 import React from "react";
 import s from './navBar.module.css'
 import { Link } from 'react-router-dom'
-import { useDispatch } from "react-redux";
-import { VideoGameByName } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { VideoGameByName, desplegarFiltros } from "../../redux/actions";
 
 import img from './img/4.png'
 
@@ -10,6 +10,7 @@ export default function NavBar({ match, setCurrentPage }) {
 
   const dispatch = useDispatch()
   const form = document.getElementById("form")
+  const boolean = useSelector(s => s.desplegarFiltros)
 
   function onHandleChange(e) {
     e.preventDefault()
@@ -28,9 +29,15 @@ export default function NavBar({ match, setCurrentPage }) {
   return (
     <>
       <div className={s.div}>
-        <Link className={s.home} to='/home'>
-          <img src={img} alt="logo" />
-        </Link>
+        {match.url !== "/home" && match.url !== "/detail" ?
+          <Link className={s.home} to='/home'>
+            <img src={img} alt="logo" />
+          </Link>
+          : <button onClick={() => {
+            dispatch(desplegarFiltros())
+          }
+          }> Filtros </button>
+        }
 
         {match.url === "/home" ?
           <div className={s.containerSearch}>
@@ -45,7 +52,7 @@ export default function NavBar({ match, setCurrentPage }) {
 
         {match.url === "/home" ?
           <Link to='/create'>
-            <button>Create</button>
+            <button> Create </button>
           </Link>
           : null}
       </div>

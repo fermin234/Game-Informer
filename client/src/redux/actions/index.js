@@ -9,6 +9,7 @@ export const SORTING_BY_RATING = 'SORTING_BY_RATING';
 export const GET_ALL_VIDEOGAMES = 'GET_ALL_VIDEOGAMES';
 export const GET_VIDEOGAME_BY_ID = 'GET_VIDEOGAME_BY_ID';
 export const GET_VIDEOGAME_BY_NAME = 'GET_VIDEOGAME_BY_NAME';
+export const DESPLEGAR_FILTROS = 'DESPLEGAR_FILTROS';
 const axios = require('axios');
 
 export function allVideoGames() {
@@ -99,5 +100,12 @@ export function filterByCreate() {
   return (dispatch) =>
     dispatch({
       type: FILTERED_CREATE,
+    });
+}
+
+export function desplegarFiltros() {
+  return (dispatch) =>
+    dispatch({
+      type: DESPLEGAR_FILTROS,
     });
 }

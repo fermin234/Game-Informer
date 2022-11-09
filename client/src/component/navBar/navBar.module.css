@@ -53,6 +53,10 @@
   border-radius: 25px;
 }
 
+.div button:hover {
+  cursor: pointer;
+}
+
 .containerSearch {
   background-color: rgba(237, 237, 237);
   height: 60%;

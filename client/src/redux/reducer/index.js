@@ -10,6 +10,7 @@ import {
   RESET_FILTRES,
   FILTERED_CREATE,
   CREATE_VIDEO_GAME,
+  DESPLEGAR_FILTROS,
 } from '../actions/index.js';
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   detail: {},
   loader: false,
   switchFiltred: false,
+  desplegarFiltros: false,
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -162,6 +164,12 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         filtred: state.videoGames,
+      };
+
+    case DESPLEGAR_FILTROS:
+      return {
+        ...state,
+        desplegarFiltros: !state.desplegarFiltros,
       };
     default:
       return { ...state };
