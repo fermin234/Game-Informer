@@ -2,8 +2,7 @@ import React from "react";
 import s from './filtered.module.css'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { todosLosGeneros, filterViodeGamesByGenres, SortByAz, ResetFilter, allVideoGames, SortByRating, filterByCreate, desplegarFiltros } from "../../redux/actions";
-import { useState } from "react";
+import { todosLosGeneros, filterViodeGamesByGenres, SortByAz, ResetFilter, SortByRating, filterByCreate, desplegarFiltros } from "../../redux/actions";
 
 export default function Filtered({ setCurrentPage, setOrden, setInitial, setFinal }) {
 
@@ -13,7 +12,6 @@ export default function Filtered({ setCurrentPage, setOrden, setInitial, setFina
   let filtredByRating = document.getElementById("filtradoRating")
 
 
-  let todosLosVideoGames = useSelector(s => s.videoGames)
   let boolean = useSelector(s => s.desplegarFiltros)
   let generos = useSelector(s => s.genres).sort((a, b) => {
     if (a.name > b.name) {
@@ -88,7 +86,7 @@ export default function Filtered({ setCurrentPage, setOrden, setInitial, setFina
             <button className={s.cerrarFiltros}
               onClick={() => {
                 dispatch(desplegarFiltros())
-              }}> Filtros </button>
+              }}> X </button>
           </div>
           <div className={s.slideInLeft}>
             <select className={s.slect} id="filtradoPorGenero" onChange={handlerFilterByGenres}>
@@ -108,9 +106,9 @@ export default function Filtered({ setCurrentPage, setOrden, setInitial, setFina
               <option value="RatingDES">Rating 🡳</option>
             </select>
 
-            <button onClick={handlerFilterByCreate}> Created </button>
+            <button className={s.buttonsFilters} onClick={handlerFilterByCreate}> Created </button>
 
-            <button onClick={handlerOnClick}> Remove filters </button>
+            <button className={s.buttonsFilters} onClick={handlerOnClick}> Remove filters </button>
           </div>
         </div>
       }

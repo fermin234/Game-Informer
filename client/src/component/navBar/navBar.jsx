@@ -10,7 +10,7 @@ export default function NavBar({ match, setCurrentPage }) {
 
   const dispatch = useDispatch()
   const form = document.getElementById("form")
-  const boolean = useSelector(s => s.desplegarFiltros)
+  const allVideoGames = useSelector(s => s.filtred)
 
   function onHandleChange(e) {
     e.preventDefault()
@@ -36,7 +36,7 @@ export default function NavBar({ match, setCurrentPage }) {
           : <button onClick={() => {
             dispatch(desplegarFiltros())
           }
-          }> Filtros </button>
+          } disabled={allVideoGames.length ? false : true}> Filters </button>
         }
 
         {match.url === "/home" ?
@@ -45,7 +45,7 @@ export default function NavBar({ match, setCurrentPage }) {
               <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
             </svg>
             <form id="form" className={s.form} onSubmit={onHandelSubmit}>
-              <input className={s.input} name='input' type="search" placeholder="Buscar Video Game" autoComplete="off" onChange={onHandleChange} />
+              <input className={s.input} name='input' type="search" placeholder="Search Video Game" autoComplete="off" onChange={onHandleChange} />
             </form>
           </div>
           : null}

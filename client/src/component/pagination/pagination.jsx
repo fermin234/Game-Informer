@@ -48,7 +48,7 @@ export default function Pagination({ videoGamePerPage, listVideoGames, paginado,
             }}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" width="16" height="16" focusable="false"><path d="M11 1L6.39 8 11 15H8.61L4 8l4.61-7z"></path>
               </svg>
-              Anterior
+              Previus
             </button>
 
             {/* Boton 1 */}
@@ -112,7 +112,7 @@ export default function Pagination({ videoGamePerPage, listVideoGames, paginado,
                 setFinal(final + 1)
               }
             }}>
-              Siguiente
+              Next
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" width="16" height="16" focusable="false">
                 <path d="M5 15l4.61-7L5 1h2.39L12 8l-4.61 7z"></path>
               </svg>

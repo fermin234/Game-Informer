@@ -118,6 +118,31 @@ button:hover {
   animation-duration: 1.5s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slideInLeft select {
+  width: 100%;
+  border-radius: 10px;
+  font-size: 15px;
+  height: 5%;
+  background-color: #0071e2;
+  color: white;
+  border: solid 2px white;
+  text-align: center;
+}
+
+.buttonsFilters {
+  width: 100%;
+  border-radius: 10px;
+  font-size: 15px;
+  height: 5%;
+  background-color: rgba(255, 0, 0, 0);
+  color: white;
+  border: solid 2px white;
+  text-align: center;
 }
 
 @-webkit-keyframes slideInLeft {
@@ -145,21 +170,30 @@ button:hover {
 
 .cerrarFiltros {
   background-color: rgba(255, 255, 255, 0);
-  display: flex;
-  align-items: center;
-  justify-self: center;
-  height: 40px;
   margin: 0 10px;
   color: white;
   border: solid 2px white;
-  font-size: 20px;
-  border-radius: 25px;
+  font-size: 15px;
+  border-radius: 50%;
+}
+
+.cerrarFiltros:hover {
+  cursor: pointer;
 }
 
 .containerButton {
+  /* padding: 10px; */
+  margin: 15px 0px;
   display: flex;
+  justify-content: end;
   width: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
+}
+
+.slideInLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 20px;
+  width: 80%;
+  height: 100%;
 }

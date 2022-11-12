@@ -5,7 +5,7 @@ import s from './home.module.css'
 import NavBar from "../navBar/navBar";
 import Card from "../card/card.jsx";
 import Pagination from "../pagination/pagination.jsx";
-import { allVideoGames, setLoader } from "../../redux/actions";
+import { allVideoGames } from "../../redux/actions";
 import Filtered from "../filtered/filtered";
 
 export default function Home({ match }) {
