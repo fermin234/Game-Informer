@@ -29,6 +29,8 @@ export default function Form(props) {
     dispatch(ResetFilter())
     resetForm(e)
 
+    alert(`${input.name} creado exitosamente.`)
+
     setInput({
       name: "",
       description: null,
