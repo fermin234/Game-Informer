@@ -36,13 +36,10 @@ export default function Home({ match }) {
     if (!stateVideoGames.length) {
       dispatch(allVideoGames())
     }
-
-
-  }, [dispatch, listVideoGames])
+  }, [dispatch, listVideoGames, oreden, stateVideoGames.length])
 
   return (
     <>
-
       <NavBar match={match} setCurrentPage={setCurrentPage} />
       <Filtered setCurrentPage={setCurrentPage}
         setOrden={setOrden}

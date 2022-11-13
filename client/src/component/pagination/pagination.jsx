@@ -124,5 +124,3 @@ export default function Pagination({ videoGamePerPage, listVideoGames, paginado,
     </div >
   )
 }
-
-//cosas para mejorar:

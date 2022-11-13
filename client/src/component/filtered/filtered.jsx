@@ -26,10 +26,10 @@ export default function Filtered({ setCurrentPage, setOrden, setInitial, setFina
   useEffect(() => {
     if (!generos.length)
       dispatch(todosLosGeneros())
-    filtredByGenre = document.getElementById("filtradoPorGenero")
-    filtredByA_Z = document.getElementById("filtradoAlfabeticamente")
-    filtredByRating = document.getElementById("filtradoRating")
-  }, [dispatch, filtredByGenre, filtredByA_Z, filtredByRating, boolean])
+    // filtredByGenre = document.getElementById("filtradoPorGenero")
+    // filtredByA_Z = document.getElementById("filtradoAlfabeticamente")
+    // filtredByRating = document.getElementById("filtradoRating")
+  }, [dispatch, boolean, generos.length])
 
   function handlerFilterByGenres(e) {
     resetPagination()
