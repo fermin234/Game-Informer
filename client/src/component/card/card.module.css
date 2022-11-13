@@ -30,3 +30,14 @@
   height: 100%;
   object-fit: cover;
 }
+
+.containerFav {
+  background-color: red;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fav {
+  position: absolute;
+  margin: 10px;
+}

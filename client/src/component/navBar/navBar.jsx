@@ -51,9 +51,14 @@ export default function NavBar({ match, setCurrentPage }) {
           : null}
 
         {match.url === "/home" ?
-          <Link to='/create'>
-            <button> Create </button>
-          </Link>
+          <div className={s.divLeftNavBar}>
+            <Link to='/create'>
+              <button> Create </button>
+            </Link>
+            <Link to='/favorites'>
+              <button> Favorites </button>
+            </Link>
+          </div>
           : null}
       </div>
     </>

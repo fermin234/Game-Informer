@@ -71,3 +71,7 @@
   top: 7px;
   left: 10px;
 }
+
+.divLeftNavBar {
+  display: flex;
+}
