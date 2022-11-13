@@ -39,5 +39,14 @@
 
 .fav {
   position: absolute;
-  margin: 10px;
+  background-color: rgba(255, 0, 0, 0);
+  border: none;
+  font-size: 25px;
+  color: red;
+  border-radius: 50%;
+}
+
+.fav:hover {
+  color: rgb(182, 39, 39);
+  cursor: pointer;
 }
