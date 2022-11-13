@@ -11,9 +11,10 @@ export default function Favorites({ match }) {
   const [favs, setFavs] = useState([])
 
   const dispatch = useDispatch()
-  for (const key in localStorage) {
-    favs.push(JSON.parse(localStorage.getItem(key)))
-  }
+  if (localStorage.length)
+    for (const key in localStorage) {
+      favs.push(JSON.parse(localStorage.getItem(key)))
+    }
 
 
   function removeFav() {

@@ -37,6 +37,7 @@ export default function Home({ match }) {
       dispatch(allVideoGames())
     }
 
+
   }, [dispatch, listVideoGames])
 
   return (
