@@ -61,7 +61,6 @@ export default function Home({ match }) {
             <h1 className={s.noGames}>
               No hay juegos
             </h1>
-
         }
 
         <Pagination videoGamePerPage={videoGamePerPage}

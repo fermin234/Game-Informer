@@ -5,10 +5,14 @@ import s from './cardFavorite.module.css'
 export default function CardFavorite({ name, genres, image, id, setUpdate, update }) {
 
   function handelDeleted() {
-    localStorage.removeItem(id)
-    setUpdate(!update)
-    console.log(id);
+    let boolean = window.confirm(`Desea eliminar [ ${name} ] de su lista de favoritos?`)
+
+    if (boolean) {
+      localStorage.removeItem(id);
+      setUpdate(!update)
+    }
   }
+
   return (
     <div>
       <div className={s.containerFav}>
