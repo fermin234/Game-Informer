@@ -58,9 +58,7 @@ export default function Home({ match }) {
               {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} />)}
             </div>
             :
-            <h1 className={s.noGames}>{
-              alert("Usted no creo ningun juego, por favor cree uno para poder visualizarlo.", window.location = 'http://localhost:3000/create')
-            }
+            <h1 className={s.noGames}>
               No hay juegos
             </h1>
 
