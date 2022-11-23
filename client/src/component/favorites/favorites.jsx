@@ -14,7 +14,6 @@ export default function Favorites({ match }) {
       <div className={s.containerCardsFav}>
         {JSON.parse(localStorage.getItem("favorites"))?.map(e => <CardFavorite key={e.id} name={e.name} genres={e.genres} image={e.image} id={e.id} setUpdate={setUpdate} update={update} />)}
       </div>
-      <button onClick={() => handelDeletAll()}> Eliminar todos los favoritos </button>
     </>
   )
 }
