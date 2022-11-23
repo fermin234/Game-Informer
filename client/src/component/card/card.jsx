@@ -4,10 +4,30 @@ import s from './card.module.css'
 
 export default function Card({ name, genres, image, id }) {
 
+  let butonFav = document.getElementsByName(`buttonFav${id}`)
+  let favorites = JSON.parse(localStorage.getItem("favorites"))
+
+  function handleFavorite() {
+    let favorites = JSON.parse(localStorage.getItem("favorites"))
+    if (favorites.find(e => e.id === id)) {
+      let index = favorites.findIndex(e => e.id === id)
+      favorites.splice(index, 1)
+      localStorage.setItem("favorites", JSON.stringify(favorites))
+      butonFav[0].innerHTML = "🤍"
+    } else {
+      favorites = [...favorites, { name, genres, image, id }]
+      localStorage.setItem("favorites", JSON.stringify(favorites))
+      butonFav[0].innerHTML = "❤"
+    }
+  }
+
+
   return (
     <div>
       <div className={s.containerFav}>
-        <button className={s.fav} onClick={() => localStorage.setItem(id, JSON.stringify({ name, genres, image, id }))}> ❤ </button>
+        <button name={`buttonFav${id}`} className={s.fav} onClick={() => handleFavorite()}> {
+          favorites.find(e => e.id === id) ? "❤" : "🤍"
+        } </button>
       </div>
       <Link className={s.div} to={`/detail/${id}`} >
         <img className={s.img} src={image} alt={`${name}-imagen`} />
