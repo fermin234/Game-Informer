@@ -36,9 +36,10 @@ export default function Home({ match }) {
     if (!stateVideoGames.length) {
       dispatch(allVideoGames())
     }
-
-
   }, [dispatch, listVideoGames])
+
+  //localStorage
+  if (!localStorage.getItem("favorites")) localStorage.setItem("favorites", "[]")
 
   return (
     <>

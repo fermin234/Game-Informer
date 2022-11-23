@@ -5,14 +5,16 @@ import s from './cardFavorite.module.css'
 export default function CardFavorite({ name, genres, image, id, setUpdate, update }) {
 
   function handelDeleted() {
-    localStorage.removeItem(id)
+    let favorites = JSON.parse(localStorage.getItem("favorites"))
+    let index = favorites.findIndex(e => e.id === id)
+    favorites.splice(index, 1)
+    localStorage.setItem("favorites", JSON.stringify(favorites))
     setUpdate(!update)
-    console.log(id);
   }
   return (
     <div>
       <div className={s.containerFav}>
-        <button className={s.fav} onClick={() => handelDeleted()}> X </button>
+        <button className={s.fav} onClick={() => handelDeleted()}> ❤ </button>
       </div>
       <Link className={s.div} to={`/detail/${id}`} >
         <img className={s.img} src={image} alt={`${name}-imagen`} />

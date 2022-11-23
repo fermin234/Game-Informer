@@ -8,7 +8,7 @@
   text-decoration: none;
   color: black;
   line-height: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .div:hover {
@@ -42,7 +42,7 @@
   background-color: rgba(255, 0, 0, 0);
   border: none;
   font-size: 25px;
-  color: black;
+  color: red;
   border-radius: 50%;
   margin: 5px;
 }
