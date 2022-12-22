@@ -1,34 +1,43 @@
-.div {
-  background-color: #0071e2;
-  border-radius: 20px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 200px 1fr 1fr;
-  text-align: center;
-  text-decoration: none;
+.card {
+  position: relative;
+}
+
+.link {
+  border-radius: 15px;
   color: black;
-  line-height: 20px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.div:hover {
-  box-shadow: var(--bordes-shadow);
-}
-
-.div h3 {
-  margin: 0px 2px;
-}
-
-.div h6 {
-  margin-top: 0px;
-  margin-bottom: 0px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: min-content;
 }
 
 .img {
-  width: 100%;
-  border-radius: 15px 15px 0 0;
-  height: 100%;
+  width: 360px;
+  height: 360px;
   object-fit: cover;
+  border-radius: 25px;
+}
+
+.card h3 {
+  background-color: white;
+  padding: 1px 20px 1px 20px;
+  border-radius: 15px;
+  max-width: fit-content;
+  display: flex;
+  position: relative;
+  top: -30px;
+  justify-items: center;
+}
+
+.card .name {
+  color: black;
+  display: flex;
+}
+
+.card h6 {
+  padding: 0;
+  margin: 0;
 }
 
 .containerFav {
@@ -49,4 +58,19 @@
 .fav:hover {
   color: rgb(182, 39, 39);
   cursor: pointer;
+}
+
+.labels {
+  display: flex;
+  position: relative;
+  top: -15px;
+  gap: 5px;
+}
+
+.labels label {
+  background-color: #0071e2;
+  border-radius: 5px;
+  padding: 0 1px 0 1px;
+  color: black;
+  font-weight: 501;
 }

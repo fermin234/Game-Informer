@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import s from './card.module.css'
 
-export default function Card({ name, genres, image, id }) {
+export default function Card({ name, genres, image, id, created }) {
 
   let butonFav = document.getElementsByName(`buttonFav${id}`)
   let favorites = JSON.parse(localStorage.getItem("favorites"))
@@ -23,17 +23,20 @@ export default function Card({ name, genres, image, id }) {
 
 
   return (
-    <div>
+    <div className={s.card}>
       <div className={s.containerFav}>
         <button name={`buttonFav${id}`} className={s.fav} onClick={() => handleFavorite()}> {
           favorites.find(e => e.id === id) ? "❤" : "🤍"
         } </button>
       </div>
-      <Link className={s.div} to={`/detail/${id}`} >
+      <Link className={s.link} to={`/detail/${id}`} >
         <img className={s.img} src={image} alt={`${name}-imagen`} />
-        <h3>{name}</h3>
-        <h6>{genres.map(e => ` ${e} `)}</h6>
+        <h3 className={s.name}>{name}</h3>
+        <div className={s.labels}>{genres.map(e => <label>{e}</label>)}</div>
       </Link>
+      {
+        created ? <button> Delete </button> : undefined
+      }
     </div>
   )
 }

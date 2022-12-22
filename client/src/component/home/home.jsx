@@ -53,7 +53,7 @@ export default function Home({ match }) {
           ? <div className={s.loader}></div>
           : listVideoGames.length ?
             <div className={s.div}>
-              {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} />)}
+              {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} created={e.created} />)}
             </div>
             :
             <h1 className={s.noGames}>
