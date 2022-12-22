@@ -1,72 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import s from './filtered.module.css'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { todosLosGeneros, filterViodeGamesByGenres, SortByAz, ResetFilter, SortByRating, filterByCreate, desplegarFiltros } from "../../redux/actions";
+import { todosLosGeneros, ResetFilter, desplegarFiltros, filter } from "../../redux/actions";
 
-export default function Filtered({ setCurrentPage, setOrden, setInitial, setFinal }) {
-
+export default function Filtered({ setCurrentPage, setUpdate, update, setInitial, setFinal }) {
   const dispatch = useDispatch()
-  let filtredByGenre = document.getElementById("filtradoPorGenero")
-  let filtredByA_Z = document.getElementById("filtradoAlfabeticamente")
-  let filtredByRating = document.getElementById("filtradoRating")
-
 
   let boolean = useSelector(s => s.desplegarFiltros)
-  let generos = useSelector(s => s.genres).sort((a, b) => {
-    if (a.name > b.name) {
-      return 1;
-    }
-    if (a.name < b.name) {
-      return -1;
-    }
-    return 0;
-  });
+  let generos = useSelector(s => s.genres).sort((a, b) => a.name > b.name ? 1 : a.name < b.name ? -1 : 0)
 
-  useEffect(() => {
-    if (!generos.length)
-      dispatch(todosLosGeneros())
-    // filtredByGenre = document.getElementById("filtradoPorGenero")
-    // filtredByA_Z = document.getElementById("filtradoAlfabeticamente")
-    // filtredByRating = document.getElementById("filtradoRating")
-  }, [dispatch, boolean, generos.length])
+  const [value, setValue] = useState({
+    genre: null,
+    sort: null,
+    rating: null,
+    created: false
+  })
 
-  function handlerFilterByGenres(e) {
-    resetPagination()
-    dispatch(filterViodeGamesByGenres(e.target.value))
-    setCurrentPage(1)
-    setOrden(`Ordenado por ${e.target.value}`)
+  const handleFilter = (e) => {
+    if (e.target.name === "created") {
+      setValue({
+        ...value,
+        [e.target.name]: !value.created
+      })
+    } else if (e.target.value === "null") {
+      setValue({
+        ...value,
+        [e.target.name]: null
+      })
+    } else {
+      setValue({
+        ...value,
+        [e.target.name]: e.target.value
+      })
+    }
   }
 
   function handlerOnClick(e) {
     resetPagination()
     dispatch(ResetFilter())
     setCurrentPage(1)
-    setOrden(`Ordenado por ${e.target.value}`)
-    filtredByGenre.value = "All Genres"
-    filtredByA_Z.value = "Ordenamiento"
-    filtredByRating.value = "Rating"
-  }
-
-  function handlerFilterByA_Z(e) {
-    resetPagination()
-    dispatch(SortByAz(e.target.value))
-    setCurrentPage(1)
-    setOrden(`Ordenado por ${e.target.value}`)
-  }
-
-  function handlerFilterByRating(e) {
-    resetPagination()
-    dispatch(SortByRating(e.target.value))
-    setCurrentPage(1)
-    setOrden(`Ordenado por ${e.target.value}`)
-  }
-
-  function handlerFilterByCreate(e) {
-    e.preventDefault()
-    dispatch(filterByCreate())
-    setCurrentPage(1)
-    setOrden(`Ordenado por creacion`)
+    setUpdate(!update)
+    document.getElementById("1").selected = "selected"
+    document.getElementById("2").selected = "selected"
+    document.getElementById("3").selected = "selected"
   }
 
   function resetPagination() {
@@ -74,7 +51,12 @@ export default function Filtered({ setCurrentPage, setOrden, setInitial, setFina
     setFinal(8)
   }
 
-
+  useEffect(() => {
+    if (!generos.length)
+      dispatch(todosLosGeneros())
+    dispatch(filter(value)) //ARREGLAR ASINCRONISMO
+    setUpdate(!update)
+  }, [dispatch, value])
 
   return (
     <>
@@ -89,24 +71,24 @@ export default function Filtered({ setCurrentPage, setOrden, setInitial, setFina
               }}> X </button>
           </div>
           <div className={s.slideInLeft}>
-            <select className={s.slect} id="filtradoPorGenero" onChange={handlerFilterByGenres}>
-              <option value="All Genres">All Genres</option>
-              {generos?.map(e => <option key={e.id} value={`${e.name}`}>{e.name}</option>)}
+            <select className={s.slect} name="genre" onChange={handleFilter}>
+              <option className="option" id="1" value="null">All Genres</option>
+              {generos?.map(e => <option className="option" key={e.id} value={`${e.name}`}>{e.name}</option>)}
             </select>
 
-            <select className={s.slect} id="filtradoAlfabeticamente" onChange={handlerFilterByA_Z}>
-              <option value="Ordenamiento">Sort</option>
-              <option value="A-Z">A-Z</option>
-              <option value="Z-A">Z-A</option>
+            <select className={s.slect} name="sort" onChange={handleFilter}>
+              <option className="option" id="2" value="null">Sort</option>
+              <option className="option" value="A-Z">A-Z</option>
+              <option className="option" value="Z-A">Z-A</option>
             </select>
 
-            <select className={s.slect} id="filtradoRating" onChange={handlerFilterByRating}>
-              <option value="Rating">Rating</option>
-              <option value="RatingASC">Rating 🡱</option>
-              <option value="RatingDES">Rating 🡳</option>
+            <select className={s.slect} name="rating" onChange={handleFilter}>
+              <option className="option" id="3" value="null">Rating</option>
+              <option className="option" value="RatingASC">Rating 🡱</option>
+              <option className="option" value="RatingDES">Rating 🡳</option>
             </select>
 
-            <button className={s.buttonsFilters} onClick={handlerFilterByCreate}> Created </button>
+            <button className={s.buttonsFilters} name="created" onClick={handleFilter}> Created </button>
 
             <button className={s.buttonsFilters} onClick={handlerOnClick}> Remove filters </button>
           </div>

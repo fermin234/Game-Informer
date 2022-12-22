@@ -14,8 +14,7 @@ export default function Home({ match }) {
   const [initial, setInitial] = useState(1)
   const [final, setFinal] = useState(8)
 
-
-  const [oreden, setOrden] = useState("")
+  const [update, setUpdate] = useState(true)
   const listVideoGames = useSelector(s => s.filtred)
   const stateVideoGames = useSelector(s => s.videoGames)
   const loader = useSelector(s => s.loader)
@@ -27,10 +26,11 @@ export default function Home({ match }) {
     ? listVideoGames.slice(indexOfFirstVideoGame, indexOfLastVideoGame)
     : []
 
-
   function paginado(pageNumber) {
     setCurrentPage(pageNumber)
   }
+
+  if (!localStorage.getItem("favorites")) localStorage.setItem("favorites", "[]")
 
   useEffect(() => {
     if (!stateVideoGames.length) {
@@ -38,14 +38,12 @@ export default function Home({ match }) {
     }
   }, [dispatch, listVideoGames])
 
-  //localStorage
-  if (!localStorage.getItem("favorites")) localStorage.setItem("favorites", "[]")
-
   return (
     <>
       <NavBar match={match} setCurrentPage={setCurrentPage} />
       <Filtered setCurrentPage={setCurrentPage}
-        setOrden={setOrden}
+        update={update}
+        setUpdate={setUpdate}
         setInitial={setInitial}
         setFinal={setFinal}
       />

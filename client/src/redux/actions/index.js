@@ -1,20 +1,17 @@
-export const ALL_GENRES = 'ALL_GENRES';
-export const RESET_CREATE = 'RESET_CREATE';
-export const SORTING_BY_AZ = 'SORTING_BY_AZ';
-export const RESET_FILTRES = 'RESET_FILTRES';
-export const FILTERED_GENRES = 'FRILTERED_GENRES';
-export const FILTERED_CREATE = 'FRILTERED_CREATE';
-export const CREATE_VIDEO_GAME = 'CREATE_VIDEO_GAME';
-export const SORTING_BY_RATING = 'SORTING_BY_RATING';
-export const GET_ALL_VIDEOGAMES = 'GET_ALL_VIDEOGAMES';
-export const GET_VIDEOGAME_BY_ID = 'GET_VIDEOGAME_BY_ID';
-export const GET_VIDEOGAME_BY_NAME = 'GET_VIDEOGAME_BY_NAME';
-export const DESPLEGAR_FILTROS = 'DESPLEGAR_FILTROS';
-const axios = require('axios');
+export const FILTER = "FILTER";
+export const ALL_GENRES = "ALL_GENRES";
+export const RESET_CREATE = "RESET_CREATE";
+export const RESET_FILTRES = "RESET_FILTRES";
+export const CREATE_VIDEO_GAME = "CREATE_VIDEO_GAME";
+export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES";
+export const GET_VIDEOGAME_BY_ID = "GET_VIDEOGAME_BY_ID";
+export const GET_VIDEOGAME_BY_NAME = "GET_VIDEOGAME_BY_NAME";
+export const DESPLEGAR_FILTROS = "DESPLEGAR_FILTROS";
+const axios = require("axios");
 
 export function allVideoGames() {
   return async (dispatch) => {
-    let data = await axios.get('/videogames');
+    let data = await axios.get("/videogames");
     return dispatch({
       type: GET_ALL_VIDEOGAMES,
       payload: data.data,
@@ -24,20 +21,12 @@ export function allVideoGames() {
 
 export function todosLosGeneros() {
   return async (dispatch) => {
-    let data = await axios.get('/genres');
+    let data = await axios.get("/genres");
     return dispatch({
       type: ALL_GENRES,
       payload: data.data,
     });
   };
-}
-
-export function filterViodeGamesByGenres(payload) {
-  return (dispatch) =>
-    dispatch({
-      type: FILTERED_GENRES,
-      payload,
-    });
 }
 
 export function VideoGameByName(name) {
@@ -66,22 +55,6 @@ export function createVideoGame(videoGameInfo) {
   };
 }
 
-export function SortByAz(payload) {
-  return (dispatch) =>
-    dispatch({
-      type: SORTING_BY_AZ,
-      payload,
-    });
-}
-
-export function SortByRating(payload) {
-  return (dispatch) =>
-    dispatch({
-      type: SORTING_BY_RATING,
-      payload,
-    });
-}
-
 export function ResetCreate() {
   return (dispatch) =>
     dispatch({
@@ -96,16 +69,17 @@ export function ResetFilter() {
     });
 }
 
-export function filterByCreate() {
-  return (dispatch) =>
-    dispatch({
-      type: FILTERED_CREATE,
-    });
-}
-
 export function desplegarFiltros() {
   return (dispatch) =>
     dispatch({
       type: DESPLEGAR_FILTROS,
+    });
+}
+
+export function filter(payload) {
+  return (dispatch) =>
+    dispatch({
+      type: FILTER,
+      payload,
     });
 }

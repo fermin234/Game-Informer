@@ -1,17 +1,14 @@
 import {
   ALL_GENRES,
-  SORTING_BY_AZ,
-  FILTERED_GENRES,
-  SORTING_BY_RATING,
   GET_ALL_VIDEOGAMES,
   GET_VIDEOGAME_BY_ID,
   GET_VIDEOGAME_BY_NAME,
   RESET_CREATE,
   RESET_FILTRES,
-  FILTERED_CREATE,
   CREATE_VIDEO_GAME,
   DESPLEGAR_FILTROS,
-} from '../actions/index.js';
+  FILTER,
+} from "../actions/index.js";
 
 const initialState = {
   videoGames: [],
@@ -39,21 +36,6 @@ export default function rootReducer(state = initialState, action) {
         genres: action.payload,
       };
 
-    case FILTERED_GENRES:
-      const allVideoGames = [...state.videoGames];
-      const filtrado =
-        action.payload === 'All Genres'
-          ? allVideoGames
-          : action.payload === 'All Genres'
-          ? [state.createVideoGame]
-          : allVideoGames.filter((e) => e.genres.includes(action.payload));
-
-      return {
-        ...state,
-        filtred: [...filtrado],
-        switchFiltred: true,
-      };
-
     case GET_VIDEOGAME_BY_NAME:
       return {
         ...state,
@@ -66,76 +48,51 @@ export default function rootReducer(state = initialState, action) {
         detail: action.payload,
       };
 
-    case SORTING_BY_AZ:
-      let sortArr = [...state.filtred];
+    case FILTER:
+      let gamesFiltred = [...state.videoGames];
+      const value = action.payload;
 
-      if (action.payload === 'A-Z') {
-        sortArr = sortArr.sort((a, b) => {
-          if (a.name > b.name) {
-            return 1;
-          }
-          if (a.name < b.name) {
-            return -1;
-          }
-          return 0;
-        });
-      }
-      if (action.payload === 'Z-A') {
-        sortArr = sortArr.sort((a, b) => {
-          if (a.name > b.name) {
-            return -1;
-          }
-          if (a.name < b.name) {
-            return 1;
-          }
-          return 0;
-        });
-      }
-      if (action.payload === 'Ordenamiento') {
-        sortArr = [...state.videoGames];
+      if (value.genre) {
+        gamesFiltred = gamesFiltred.filter((e) =>
+          e.genres.includes(value.genre)
+        );
       }
 
-      return {
-        ...state,
-        filtred: [...sortArr],
-        switchFiltred: true,
-      };
+      if (value.sort) {
+        if (value.sort === "A-Z") {
+          gamesFiltred = gamesFiltred.sort((a, b) =>
+            a.name > b.name ? 1 : a.name < b.name ? -1 : 0
+          );
+        }
 
-    case SORTING_BY_RATING:
-      let ratingSort = [...state.filtred];
-
-      if (action.payload === 'RatingDES') {
-        ratingSort.sort((a, b) => {
-          if (a.rating > b.rating) {
-            return 1;
-          }
-          if (a.rating < b.rating) {
-            return -1;
-          }
-          return 0;
-        });
+        if (value.sort === "Z-A") {
+          gamesFiltred = gamesFiltred.sort((a, b) =>
+            a.name > b.name ? -1 : a.name < b.name ? 1 : 0
+          );
+        }
       }
 
-      if (action.payload === 'RatingASC') {
-        ratingSort.sort((a, b) => {
-          if (a.rating > b.rating) {
-            return -1;
-          }
-          if (a.rating < b.rating) {
-            return 1;
-          }
-          return 0;
-        });
+      if (value.rating) {
+        if (value.rating === "RatingDES") {
+          gamesFiltred = gamesFiltred.sort((a, b) =>
+            a.rating > b.rating ? 1 : a.rating < b.rating ? -1 : 0
+          );
+        }
+
+        if (value.rating === "RatingASC") {
+          gamesFiltred = gamesFiltred.sort((a, b) =>
+            a.rating > b.rating ? -1 : a.rating < b.rating ? 1 : 0
+          );
+        }
       }
 
-      if (action.payload === 'Rating') {
-        ratingSort = [...state.videoGames];
+      if (value.created) {
+        gamesFiltred = gamesFiltred.filter((e) => e.created);
       }
 
       return {
         ...state,
-        filtred: [...ratingSort],
-        switchFiltred: true,
+        filtred: gamesFiltred,
       };
 
     case RESET_CREATE:
@@ -149,15 +106,6 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         filtred: state.videoGames,
         switchFiltred: false,
-      };
-
-    case FILTERED_CREATE:
-      const creados = state.filtred.filter((e) => e.created === true);
-
-      return {
-        ...state,
-        filtred: [...creados],
-        switchFiltred: true,
       };
 
     case CREATE_VIDEO_GAME:

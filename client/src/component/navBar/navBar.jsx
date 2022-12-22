@@ -36,7 +36,7 @@ export default function NavBar({ match, setCurrentPage }) {
           : <button onClick={() => {
             dispatch(desplegarFiltros())
           }
-          } disabled={allVideoGames.length ? false : true}> Filters </button>
+          } disabled={allVideoGames?.length ? false : true}> Filters </button>
         }
 
         {match.url === "/home" ?

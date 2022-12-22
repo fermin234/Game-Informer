@@ -1,7 +1,7 @@
 .div {
   background-color: #212121;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
   padding: 15px 10px 45px 10px;
 }
@@ -22,7 +22,7 @@
 }
 
 .loader::before {
-  content: '';
+  content: "";
   position: absolute;
   background: var(--loader-color);
   top: 0;
