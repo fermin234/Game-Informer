@@ -23,8 +23,10 @@ export default function Home({ match }) {
   const indexOfLastVideoGame = currentPage * videoGamePerPage
   const indexOfFirstVideoGame = indexOfLastVideoGame - videoGamePerPage
   let currentVideoGame = Array.isArray(listVideoGames)
-    ? listVideoGames.slice(indexOfFirstVideoGame, indexOfLastVideoGame)
+    ? listVideoGames?.slice(indexOfFirstVideoGame, indexOfLastVideoGame)
     : []
+  const filterValues = useSelector(s => s.filterValues)
+  // console.log(filterValues);
 
   function paginado(pageNumber) {
     setCurrentPage(pageNumber)
@@ -39,40 +41,40 @@ export default function Home({ match }) {
   }, [dispatch, listVideoGames])
 
   return (
-    <>
+    <div className={s.containerAll}>
       <NavBar match={match} setCurrentPage={setCurrentPage} />
-      <Filtered setCurrentPage={setCurrentPage}
-        update={update}
-        setUpdate={setUpdate}
+      <div className={s.container}>
+        <div className={s.containerFilter}>
+          <Filtered setCurrentPage={setCurrentPage}
+            update={update}
+            setUpdate={setUpdate}
+            setInitial={setInitial}
+            setFinal={setFinal}
+          />
+        </div>
+        <div className={s.containerCards}>
+          {!loader
+            ? <div className={s.loader}></div>
+            : listVideoGames.length ?
+              <>{currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} created={e.created} />)}</>
+              :
+              <h1 className={s.noGames}>
+                No hay juegos
+              </h1>
+          }
+        </div>
+      </div>
+
+      <Pagination videoGamePerPage={videoGamePerPage}
+        listVideoGames={listVideoGames.length}
+        paginado={paginado}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        initial={initial}
         setInitial={setInitial}
+        final={final}
         setFinal={setFinal}
       />
-
-      <div className={s.container}>
-        {!loader
-          ? <div className={s.loader}></div>
-          : listVideoGames.length ?
-            <div className={s.div}>
-              {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} created={e.created} />)}
-            </div>
-            :
-            <h1 className={s.noGames}>
-              No hay juegos
-            </h1>
-        }
-
-        <Pagination videoGamePerPage={videoGamePerPage}
-          listVideoGames={listVideoGames.length}
-          paginado={paginado}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          initial={initial}
-          setInitial={setInitial}
-          final={final}
-          setFinal={setFinal}
-        />
-
-      </div>
-    </>
+    </div>
   )
 } 

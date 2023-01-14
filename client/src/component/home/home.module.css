@@ -1,14 +1,32 @@
-.div {
-  background-color: #212121;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
-  padding: 15px 10px 45px 10px;
+.containerAll {
+  width: 100%;
+}
+
+h1 {
+  margin: 0;
 }
 
 .container {
-  background-color: #212121;
-  height: 100vh;
+  display: flex;
+  justify-content: end;
+  background-color: blue;
+  min-height: 100vh;
+}
+
+.containerFilter {
+  position: fixed;
+  left: 0;
+  background-color: red;
+  width: 25%;
+}
+.containerCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 0px 30px 0px;
+  background-color: purple;
+  width: 75%;
 }
 
 .loader {
