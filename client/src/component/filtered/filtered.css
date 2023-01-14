@@ -1,0 +1,23 @@
+.labelategory {
+  background-color: #0071e2;
+  border-radius: 5px;
+  color: black;
+  font-weight: 501;
+  padding: 5px;
+}
+
+.labelategory:hover {
+  cursor: pointer;
+}
+
+.labelategoryActive {
+  background-color: black;
+  border-radius: 5px;
+  color: white;
+  font-weight: 501;
+  padding: 5px;
+}
+
+.labelategoryActive:hover {
+  cursor: pointer;
+}
