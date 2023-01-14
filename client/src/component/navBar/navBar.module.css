@@ -1,4 +1,4 @@
-.div {
+/* .div {
   background-color: #0071e2;
   display: flex;
   justify-content: space-around;
@@ -76,4 +76,29 @@
 
 .divLeftNavBar {
   display: flex;
+} */
+
+.containerAll {
+  display: flex;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.containerFilter {
+  background-color: yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+}
+
+.containterNavBar {
+  background-color: blue;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 75%;
 }

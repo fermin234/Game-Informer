@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { VideoGameByName, desplegarFiltros } from "../../redux/actions";
 
 import img from './img/4.png'
+import Filtered from "../filtered/filtered";
 
 export default function NavBar({ match, setCurrentPage }) {
 
@@ -27,18 +28,8 @@ export default function NavBar({ match, setCurrentPage }) {
     form.reset()
   }
   return (
-    <>
-      <div className={s.div}>
-        {match.url !== "/home" && match.url !== "/detail" ?
-          <Link className={s.home} to='/home'>
-            <img src={img} alt="logo" />
-          </Link>
-          : <button onClick={() => {
-            dispatch(desplegarFiltros())
-          }
-          } disabled={allVideoGames?.length ? false : true}> Filters </button>
-        }
-
+    <div className={s.containerAll} >
+      {/* <div className={s.div}>
         {match.url === "/home" ?
           <div className={s.containerSearch}>
             <svg className={s.loupin} xmlns="http://www.w3.org/2000/svg"  >
@@ -60,7 +51,24 @@ export default function NavBar({ match, setCurrentPage }) {
             </Link>
           </div>
           : null}
+      </div> */}
+      <div className={s.containerFilter}>
+        <Link to="/home">
+          <button>{`<==`}</button>
+        </Link>
+        <h1>Filters</h1>
       </div>
-    </>
+      <div className={s.containterNavBar}>
+        <Link to='/create'>
+          <button> Create </button>
+        </Link>
+        <form id="form" className={s.form} onSubmit={onHandelSubmit}>
+          <input className={s.input} name='input' type="search" placeholder="Search Video Game" autoComplete="off" onChange={onHandleChange} />
+        </form>
+        <Link to='/favorites'>
+          <button> Favorites </button>
+        </Link>
+      </div>
+    </div>
   )
 }
