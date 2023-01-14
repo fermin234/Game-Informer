@@ -21,9 +21,8 @@ export default function Card({ name, genres, image, id, created }) {
     }
   }
 
-
   return (
-    <div className={s.card}>
+    <div className={s.card} >
       <div className={s.containerFav}>
         <button name={`buttonFav${id}`} className={s.fav} onClick={() => handleFavorite()}> {
           favorites.find(e => e.id === id) ? "❤" : "🤍"
@@ -32,7 +31,9 @@ export default function Card({ name, genres, image, id, created }) {
       <Link className={s.link} to={`/detail/${id}`} >
         <img className={s.img} src={image} alt={`${name}-imagen`} />
         <h3 className={s.name}>{name}</h3>
-        <div className={s.labels}>{genres.map(e => <label>{e}</label>)}</div>
+        <div className={s.labels}>{genres.length > 3 ?
+          genres.slice(0, 3).map(e => <label>{e}</label>)
+          : genres.map(e => <label>{e}</label>)}</div>
       </Link>
       {
         created ? <button> Delete </button> : undefined
