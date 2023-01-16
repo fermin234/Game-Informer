@@ -1,4 +1,5 @@
 export const FILTER = "FILTER";
+export const LOADER = "LOADER";
 export const ALL_GENRES = "ALL_GENRES";
 export const RESET_CREATE = "RESET_CREATE";
 export const RESET_FILTRES = "RESET_FILTRES";
@@ -80,6 +81,14 @@ export function filter(payload) {
   return (dispatch) =>
     dispatch({
       type: FILTER,
+      payload,
+    });
+}
+
+export function loader(payload) {
+  return (dispatch) =>
+    dispatch({
+      type: LOADER,
       payload,
     });
 }

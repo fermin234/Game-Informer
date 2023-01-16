@@ -8,6 +8,7 @@ import {
   CREATE_VIDEO_GAME,
   DESPLEGAR_FILTROS,
   FILTER,
+  LOADER,
 } from "../actions/index.js";
 
 const initialState = {
@@ -17,8 +18,6 @@ const initialState = {
   detail: {},
   filterValues: {},
   loader: false,
-  switchFiltred: false,
-  desplegarFiltros: false,
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -28,7 +27,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         videoGames: action.payload,
         filtred: action.payload,
-        loader: true,
+        loader: false,
       };
 
     case ALL_GENRES:
@@ -125,6 +124,12 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         desplegarFiltros: !state.desplegarFiltros,
+      };
+
+    case LOADER:
+      return {
+        ...state,
+        loader: action.payload ? action.payload : !state.loader,
       };
     default:
       return { ...state };
