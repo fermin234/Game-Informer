@@ -32,6 +32,10 @@
   border-radius: 10px 10px 10px 10px;
 }
 
+.containerFilters h1 {
+  font-size: 25px;
+}
+
 .containerSorts {
   background-color: rgb(67, 62, 67);
   display: flex;
@@ -43,6 +47,7 @@
   border: 2.5px solid #0071e2;
   margin-left: 20px;
   border-radius: 10px 10px 10px 10px;
+  font-size: 13px;
 }
 
 .containerButtons {
@@ -74,6 +79,7 @@
   border: 2.5px solid #0071e2;
   margin-left: 20px;
   border-radius: 10px 10px 10px 10px;
+  font-size: small;
 }
 
 .byCreated {
@@ -85,22 +91,12 @@
   margin-left: 20px;
   border: 2.5px solid #0071e2;
   border-radius: 10px 10px 10px 10px;
+  font-size: 13px;
 }
 
 .containerLabelCreated {
   display: flex;
   justify-content: center;
-}
-
-.selectSort {
-  height: 32px;
-  border-radius: 10px;
-  text-align: center;
-  border: none;
-  background-color: #0071e2;
-  font-weight: 501;
-  color: black;
-  font-size: 17px;
 }
 
 .filtersActiveLabels {
@@ -120,6 +116,10 @@
 
 .button:hover {
   cursor: pointer;
+  background-color: black;
+  color: white;
+  font-weight: 501;
+  padding: 5px;
 }
 
 .socials {

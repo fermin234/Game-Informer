@@ -8,6 +8,11 @@
 
 .labelategory:hover {
   cursor: pointer;
+  background-color: black;
+  border-radius: 5px;
+  color: white;
+  font-weight: 501;
+  padding: 5px;
 }
 
 .labelategoryActive {
@@ -20,6 +25,11 @@
 
 .labelategoryActive:hover {
   cursor: pointer;
+  background-color: black;
+  border-radius: 5px;
+  color: white;
+  font-weight: 501;
+  padding: 5px;
 }
 
 .labelCreated {
@@ -32,6 +42,15 @@
   text-align: center;
 }
 
+.labelCreated:hover {
+  cursor: pointer;
+  background-color: black;
+  border-radius: 5px;
+  color: white;
+  font-weight: 501;
+  padding: 5px;
+}
+
 .labelCreatedActive {
   background-color: black;
   border-radius: 5px;
@@ -40,4 +59,27 @@
   padding: 5px;
   width: 30%;
   text-align: center;
+}
+
+.selectSort {
+  height: 32px;
+  border-radius: 10px;
+  text-align: center;
+  border: none;
+  background-color: #0071e2;
+  font-weight: 501;
+  color: black;
+  font-size: 17px;
+}
+
+.selectSortActive {
+  height: 32px;
+  border-radius: 10px;
+  text-align: center;
+  border: none;
+  background-color: black;
+  font-weight: 501;
+  color: white;
+  font-size: 17px;
+  border: none;
 }

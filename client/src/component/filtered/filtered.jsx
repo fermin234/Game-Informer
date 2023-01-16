@@ -138,7 +138,7 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
         </div>
         <div className={s.containerSorts}>
           <h1>Sort:</h1>
-          <select className={s.selectSort} name="sort" onChange={handleFilter}>
+          <select class={filtersActive?.sort || filtersActive?.rating ? "selectSortActive" : "selectSort"} name="sort" onChange={handleFilter}>
             <option className="option" id='1' value="null">Sort</option>
             <option name="alphabetical" id="A-Z" value="A-Z">A-Z</option>
             <option name="alphabetical" id="Z-A" value="Z-A">Z-A</option>
