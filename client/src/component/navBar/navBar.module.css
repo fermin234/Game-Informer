@@ -1,24 +1,75 @@
 .containerAll {
   display: flex;
   position: sticky;
+  justify-content: center;
   top: 0;
   width: 100%;
   z-index: 1;
 }
 
+.containerAll button {
+  --primary-color: #645bff;
+  --secondary-color: #fff;
+  --hover-color: #111;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 20px;
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+  height: 10px;
+  text-align: center;
+}
+
+.containerAll button:hover {
+  background-color: var(--hover-color);
+}
+
 .containerFilter {
   background-color: blue;
+  background-color: rgb(67, 62, 67);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25%;
+  width: 26.5%;
 }
 
 .containterNavBar {
   background-color: blue;
+  background-color: rgb(67, 62, 67);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
   width: 75%;
+}
+
+.input {
+  border-radius: 20px;
+  height: 30px;
+}
+
+.label {
+  background-color: #0071e2;
+  border-radius: 5px;
+  color: black;
+  font-weight: 501;
+  padding: 5px;
+}
+
+.label:hover {
+  cursor: pointer;
+  background-color: black;
+  border-radius: 5px;
+  color: white;
+  font-weight: 501;
+  padding: 5px;
+}
+
+.link {
+  text-decoration: none;
 }

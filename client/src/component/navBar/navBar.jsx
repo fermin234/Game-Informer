@@ -53,20 +53,21 @@ export default function NavBar({ match, setCurrentPage }) {
           : null}
       </div> */}
       <div className={s.containerFilter}>
-        <Link to="/home">
-          <button>{`<==`}</button>
+        <Link className={s.link} to="/home">
+          <label className={s.label}>{"<=="}</label>
         </Link>
         <h1>Filters</h1>
       </div>
       <div className={s.containterNavBar}>
-        <Link to='/create'>
-          <button> Create </button>
+        <Link className={s.link} to='/create'>
+          <label className={s.label}>Create</label>
+          {/* <button> Create </button> */}
         </Link>
         <form id="form" className={s.form} onSubmit={onHandelSubmit}>
           <input className={s.input} name='input' type="search" placeholder="Search Video Game" autoComplete="off" onChange={onHandleChange} />
         </form>
-        <Link to='/favorites'>
-          <button> Favorites </button>
+        <Link className={s.link} to='/favorites'>
+          <label className={s.label}>Favorites</label>
         </Link>
       </div>
     </div>
