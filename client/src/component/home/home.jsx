@@ -26,7 +26,6 @@ export default function Home({ match }) {
     ? listVideoGames?.slice(indexOfFirstVideoGame, indexOfLastVideoGame)
     : []
   const filterValues = useSelector(s => s.filterValues)
-  // console.log(filterValues);
 
   function paginado(pageNumber) {
     setCurrentPage(pageNumber)
@@ -64,17 +63,24 @@ export default function Home({ match }) {
           }
         </div>
       </div>
-
-      <Pagination videoGamePerPage={videoGamePerPage}
-        listVideoGames={listVideoGames.length}
-        paginado={paginado}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        initial={initial}
-        setInitial={setInitial}
-        final={final}
-        setFinal={setFinal}
-      />
+      <div className={s.containerPagination}>
+        <div className={s.div}>
+        </div>
+        <div className={s.div2}>
+          <div>
+            <Pagination videoGamePerPage={videoGamePerPage}
+              listVideoGames={listVideoGames.length}
+              paginado={paginado}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              initial={initial}
+              setInitial={setInitial}
+              final={final}
+              setFinal={setFinal}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   )
 } 

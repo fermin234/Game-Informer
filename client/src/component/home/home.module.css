@@ -9,15 +9,14 @@ h1 {
 .container {
   display: flex;
   justify-content: end;
-  background-color: blue;
+  background-color: #212121;
   min-height: 100vh;
 }
 
 .containerFilter {
   position: fixed;
   left: 0;
-  background-color: red;
-  width: 25%;
+  width: 24%;
 }
 .containerCards {
   display: flex;
@@ -25,7 +24,7 @@ h1 {
   justify-content: center;
   gap: 10px;
   padding: 10px 0px 30px 0px;
-  background-color: purple;
+  background-color: #212121;
   width: 75%;
 }
 
@@ -68,4 +67,27 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.containerPagination {
+  background-color: #212121;
+  display: flex;
+  right: 0px;
+  width: 100%;
+  background-color: purple;
+}
+
+.div {
+  width: 25%;
+  background-color: #212121;
+}
+
+.div2 {
+  background-color: #21212100;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 46.5%;
+  width: fit-content;
 }
