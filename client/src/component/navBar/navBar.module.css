@@ -1,83 +1,3 @@
-/* .div {
-  background-color: #0071e2;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 60px;
-}
-
-.div img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.home {
-  width: 5%;
-  height: 80%;
-  border-radius: 50%;
-}
-
-.div a {
-  border-radius: 50px;
-  text-decoration: none;
-}
-
-.input {
-  width: 330px;
-  border: none;
-  height: 100%;
-  background-color: rgba(255, 0, 0, 0);
-}
-
-.input:focus {
-  outline: none;
-}
-
-.input::placeholder {
-  font-size: 15px;
-}
-
-.form {
-  height: 100%;
-  width: 80%;
-}
-
-.div button {
-  background-color: rgba(255, 255, 255, 0);
-  display: flex;
-  align-items: center;
-  height: 40px;
-  margin: 0 10px;
-  color: white;
-  border: solid 2px white;
-  font-size: 20px;
-  border-radius: 25px;
-}
-
-.div button:hover {
-  cursor: pointer;
-}
-
-.containerSearch {
-  background-color: rgba(237, 237, 237);
-  height: 60%;
-  width: 25%;
-  border-radius: 50px;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.loupin {
-  position: relative;
-  top: 7px;
-  left: 10px;
-}
-
-.divLeftNavBar {
-  display: flex;
-} */
-
 .containerAll {
   display: flex;
   position: sticky;
@@ -87,7 +7,7 @@
 }
 
 .containerFilter {
-  background-color: yellow;
+  background-color: blue;
   display: flex;
   align-items: center;
   justify-content: center;
