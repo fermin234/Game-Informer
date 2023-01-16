@@ -19,35 +19,8 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
     created: false
   })
 
-  // let value = {
-  //   genre: null,
-  //   sort: null,
-  //   rating: null,
-  //   created: false
-  // }
-
-
-  // const handleFilter = (e) => {
-  //   if (e.target.name === "created") {
-  //     setValue({
-  //       ...value,
-  //       [e.target.name]: !value.created
-  //     })
-  //   } else if (e.target.value === "null") {
-  //     setValue({
-  //       ...value,
-  //       [e.target.name]: null
-  //     })
-  //   } else {
-  //     setValue({
-  //       ...value,
-  //       [e.target.name]: e.target.value
-  //     })
-  //   }
-  // }
-
   const handleFilter = (e) => {
-    if (e.target.name === "created") {
+    if (e.target.id === "created") {
       setValue(value = {
         ...value,
         created: !value.created
@@ -139,75 +112,24 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
           <h1>Actives:</h1>
           <div className={s.filtersActiveLabels}>
             {
-              filtersActive?.genre && filtersActive?.sort && filtersActive?.created ?
-                <>
-                  <label className={s.labelategory}>{filtersActive.genre}</label>
-                  <label className={s.labelategory}>{filtersActive.sort}</label>
-                  <label className={s.labelategory}>Created</label>
-                  <button className={s.button} onClick={handleClearFilters}> X </button>
-                </>
-                : filtersActive?.genre && filtersActive?.rating && filtersActive?.created ?
-                  <>
-                    <label className={s.labelategory}>{filtersActive.genre}</label>
-                    <label className={s.labelategory}>{filtersActive.sort}</label>
-                    <label className={s.labelategory}>Created</label>
-                    <button className={s.button} onClick={handleClearFilters}> X </button>
-                  </>
-                  : filtersActive?.genre && filtersActive?.sort ?
-                    <>
-                      <label className={s.labelategory}>{filtersActive.genre}</label>
-                      <label className={s.labelategory}>{filtersActive.sort}</label>
-                      <button className={s.button} onClick={handleClearFilters}> X </button>
-                    </>
-                    : filtersActive?.genre && filtersActive?.rating ?
-                      <>
-                        <label className={s.labelategory}>{filtersActive.genre}</label>
-                        <label className={s.labelategory}>{filtersActive.rating}</label>
-                        <button className={s.button} onClick={handleClearFilters}> X </button>
-                      </>
-                      : filtersActive?.genre && filtersActive?.created ?
-                        <>
-                          <label className={s.labelategory}>{filtersActive.genre}</label>
-                          <label className={s.labelategory}>Created</label>
-                          <button className={s.button} onClick={handleClearFilters}> X </button>
-                        </>
-                        : filtersActive?.rating && filtersActive?.created ?
-                          <>
-                            <label className={s.labelategory}>{filtersActive.rating}</label>
-                            <label className={s.labelategory}>Created</label>
-                            <button className={s.button} onClick={handleClearFilters}> X </button>
-                          </>
-                          : filtersActive?.sort && filtersActive?.created ?
-                            <>
-                              <label className={s.labelategory}>{filtersActive.sort}</label>
-                              <label className={s.labelategory}>Created</label>
-                              <button className={s.button} onClick={handleClearFilters}> X </button>
-                            </>
-                            : filtersActive?.genre ?
-                              <>
-                                <label className={s.labelategory}>{filtersActive.genre}</label>
-                                <button className={s.button} onClick={handleClearFilters}> X </button>
-                              </>
-                              : filtersActive?.created ?
-                                <>
-                                  <label className={s.labelategory}>Created</label>
-                                  <button className={s.button} onClick={handleClearFilters}> X </button>
-                                </>
-                                : filtersActive?.sort ?
-                                  <>
-                                    <label className={s.labelategory}>{filtersActive.sort}</label>
-                                    <button className={s.button} onClick={handleClearFilters}> X </button>
-                                  </>
-                                  : filtersActive?.rating &&
-                                  <>
-                                    <label className={s.labelategory}>{filtersActive.rating}</label>
-                                    <button className={s.button} onClick={handleClearFilters}> X </button>
-                                  </>
+              filtersActive?.genre && <label className={s.labelategory}>{filtersActive.genre}</label>
+            }
+            {
+              filtersActive?.sort && <label className={s.labelategory}>{filtersActive.sort}</label>
+            }
+            {
+              filtersActive?.rating && <label className={s.labelategory}>{filtersActive.rating}</label>
+            }
+            {
+              filtersActive?.created && <label className={s.labelategory}>Create</label>
+            }
+            {
+              filtersActive?.genre || filtersActive?.sort || filtersActive?.rating || filtersActive?.created ? <button className={s.button} onClick={handleClearFilters}> X </button> : undefined
             }
           </div>
         </div>
         <div className={s.containerFilters}>
-          <h1>By category</h1>
+          <h1>By category:</h1>
           <div className={s.containerButtons}>
             {generos?.map(e => <label key={e.id} id={e.name} class={filtersActive?.genre == e.name
               ? "labelategoryActive"
@@ -215,7 +137,7 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
           </div>
         </div>
         <div className={s.containerSorts}>
-          <h1>Sort</h1>
+          <h1>Sort:</h1>
           <select className={s.selectSort} name="sort" onChange={handleFilter}>
             <option className="option" id='1' value="null">Sort</option>
             <option name="alphabetical" id="A-Z" value="A-Z">A-Z</option>
@@ -225,14 +147,18 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
           </select>
         </div>
         <div className={s.byCreated}>
-          <h1>By created</h1>
-          <button name="created" onClick={handleFilter}> Created </button>
+          <h1>By created:</h1>
+          <div className={s.containerLabelCreated}>
+            <label class={filtersActive?.created
+              ? "labelCreatedActive"
+              : "labelCreated"} id="created" onClick={handleFilter}> Created </label>
+          </div>
         </div>
-        {/* <select className={s.slect} name="rating" onChange={handleFilter}>
-          <option className="option" id="3" value="null">Rating</option>
-          <option className="option" value="RatingASC">Rating 🡱</option>
-          <option className="option" value="RatingDES">Rating 🡳</option>
-        </select> */}
+        <div className={s.socials}>
+          <button> linkedin </button>
+          <button> CV </button>
+          <button> portfolio </button>
+        </div>
       </div>
     </>
   )

@@ -1,5 +1,5 @@
 .containerAll {
-  background-color: yellow;
+  background-color: #212121;
   position: sticky;
   top: 0;
   display: flex;
@@ -8,7 +8,7 @@
   gap: 25px;
   padding-top: 10px;
   padding-bottom: 10px;
-  /* height: 31.1%; */
+  padding-right: 5px;
 }
 
 .button {
@@ -20,22 +20,29 @@
 }
 
 .containerFilters {
-  background-color: purple;
+  background-color: rgb(67, 62, 67);
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin: 5px;
-  padding: 0 0 5px 5px;
+  padding: 5px 0 5px 0;
+  padding: 5px;
+  width: 100%;
+  border: 2.5px solid #0071e2;
+  margin-left: 20px;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .containerSorts {
-  background-color: purple;
+  background-color: rgb(67, 62, 67);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 95%;
+  width: 100%;
   margin: 5px;
   padding: 5px;
+  border: 2.5px solid #0071e2;
+  margin-left: 20px;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .containerButtons {
@@ -59,23 +66,41 @@
 }
 
 .filtersActive {
-  background-color: purple;
+  background-color: rgb(67, 62, 67);
   display: flex;
   align-items: center;
-  width: 95%;
+  width: 100%;
   padding: 5px;
+  border: 2.5px solid #0071e2;
+  margin-left: 20px;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .byCreated {
-  background-color: purple;
-  width: 95%;
+  background-color: rgb(67, 62, 67);
+  width: 100%;
   padding: 5px;
   display: flex;
   flex-direction: column;
+  margin-left: 20px;
+  border: 2.5px solid #0071e2;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.containerLabelCreated {
+  display: flex;
+  justify-content: center;
 }
 
 .selectSort {
+  height: 32px;
+  border-radius: 10px;
   text-align: center;
+  border: none;
+  background-color: #0071e2;
+  font-weight: 501;
+  color: black;
+  font-size: 17px;
 }
 
 .filtersActiveLabels {
@@ -83,4 +108,27 @@
   justify-content: space-between;
   width: 100%;
   padding: 5px;
+}
+
+.button {
+  background-color: #0071e2;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.socials {
+  background-color: rgb(67, 62, 67);
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-left: 20px;
+  padding: 5px;
+  border: 2.5px solid #0071e2;
+  border-radius: 10px 10px 10px 10px;
 }
