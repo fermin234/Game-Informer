@@ -4,6 +4,7 @@
   justify-content: center;
   top: 0;
   width: 100%;
+  height: 55px;
   z-index: 1;
 }
 
@@ -30,7 +31,6 @@
 }
 
 .containerFilter {
-  background-color: blue;
   background-color: rgb(67, 62, 67);
   display: flex;
   align-items: center;
@@ -49,8 +49,21 @@
 }
 
 .input {
-  border-radius: 20px;
-  height: 30px;
+  background-color: rgb(109, 99, 109);
+  border-radius: 15px;
+  height: 40px;
+  width: 250px;
+  color: white;
+  padding: 0px 0px 0px 10px;
+  border: none;
+}
+
+.input:focus {
+  border: none;
+}
+
+.input::placeholder {
+  color: white;
 }
 
 .label {
@@ -72,4 +85,8 @@
 
 .link {
   text-decoration: none;
+}
+
+.form {
+  border-radius: 20px;
 }
