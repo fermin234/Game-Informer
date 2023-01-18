@@ -1,6 +1,19 @@
-.containerCardsFav {
+.container {
+  background-color: red;
+  display: flex;
+}
+
+.containerList {
+  background-color: blue;
+  width: 30%;
+}
+
+.contarinerCard {
+  background-color: purple;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 20px;
-  padding: 10px 10px 0px 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  width: 70%;
+  justify-content: center;
+  padding: 10px 0 10px 0;
 }
