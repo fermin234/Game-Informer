@@ -19,8 +19,8 @@ export default function Detail({ match }) {
   return (
     <>
       <NavBar match={match} />
-      {Object.entries(videoGame).length
-        ? <div className={s.container} key={videoGame.id}>
+      {Object.entries(videoGame).length ?
+        <div className={s.container} key={videoGame.id}>
           <div className={s.item}>
             <h1>{videoGame.name}</h1>
           </div>
