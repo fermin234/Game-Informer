@@ -43,47 +43,57 @@ export default function Home({ match }) {
   return (
     <div className={s.containerAll}>
       <NavBar match={match} setCurrentPage={setCurrentPage} />
-      <div className={s.container}>
-        <div className={s.containerFilter}>
-          <Filtered setCurrentPage={setCurrentPage}
-            update={update}
-            setUpdate={setUpdate}
-            setInitial={setInitial}
-            setFinal={setFinal}
-          />
-        </div>
-        <div className={s.containerCards}>
-          {loaderStatus
-            ? <div className={s.loader}></div>
-            : listVideoGames.length ?
-              <>
-                {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} created={e.created} />)}
-              </>
-              :
+      {
+        loaderStatus
+          ? <div className={s.loader}></div>
+          : listVideoGames.length ?
+            <>
+              <div className={s.container}>
+                <div className={s.containerFilter}>
+                  <Filtered setCurrentPage={setCurrentPage}
+                    update={update}
+                    setUpdate={setUpdate}
+                    setInitial={setInitial}
+                    setFinal={setFinal}
+                  />
+                </div>
+                <div className={s.containerCards}>
+                  {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} created={e.created} />)}
+                </div>
+              </div>
+              <div className={s.containerPagination}>
+                <div className={s.div}>
+                </div>
+                <div className={s.div2}>
+                  <div>
+                    <Pagination videoGamePerPage={videoGamePerPage}
+                      listVideoGames={listVideoGames.length}
+                      paginado={paginado}
+                      currentPage={currentPage}
+                      setCurrentPage={setCurrentPage}
+                      initial={initial}
+                      setInitial={setInitial}
+                      final={final}
+                      setFinal={setFinal}
+                    />
+                  </div>
+                </div>
+              </div>
+            </>
+            : <div className={s.container}>
+              <div className={s.containerFilter}>
+                <Filtered setCurrentPage={setCurrentPage}
+                  update={update}
+                  setUpdate={setUpdate}
+                  setInitial={setInitial}
+                  setFinal={setFinal}
+                />
+              </div>
               <h1 className={s.noGames}>
                 No hay juegos
               </h1>
-          }
-        </div>
-      </div>
-      <div className={s.containerPagination}>
-        <div className={s.div}>
-        </div>
-        <div className={s.div2}>
-          <div>
-            <Pagination videoGamePerPage={videoGamePerPage}
-              listVideoGames={listVideoGames.length}
-              paginado={paginado}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              initial={initial}
-              setInitial={setInitial}
-              final={final}
-              setFinal={setFinal}
-            />
-          </div>
-        </div>
-      </div>
+            </div>
+      }
     </div>
   )
 } 
