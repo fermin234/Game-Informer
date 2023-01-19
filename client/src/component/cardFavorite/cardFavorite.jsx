@@ -7,9 +7,12 @@ export default function CardFavorite({ name, genres, image, id, setUpdate, updat
   function handelDeleted() {
     let favorites = JSON.parse(localStorage.getItem("favorites"))
     let index = favorites.findIndex(e => e.id === id)
-    favorites.splice(index, 1)
-    localStorage.setItem("favorites", JSON.stringify(favorites))
-    setUpdate(!update)
+    const result = window.confirm(`Desea eliminar ${favorites[index].name} de su lista de favoritos?`)
+    if (result) {
+      favorites.splice(index, 1)
+      localStorage.setItem("favorites", JSON.stringify(favorites))
+      setUpdate(!update)
+    }
   }
 
   return (

@@ -31,10 +31,10 @@ export default function Card({ name, genres, image, id, created }) {
       <Link className={s.link} to={`/detail/${id}`} >
         <img className={s.img} src={image} alt={`${name}-imagen`} />
         <h3 className={s.name}>{name}</h3>
-        <div className={s.labels}>{genres.length > 3 ?
-          genres.slice(0, 3).map(e => <label>{e}</label>)
-          : genres.map(e => <label>{e}</label>)}</div>
       </Link>
+      <div className={s.labels}>{genres.length > 3 ?
+        genres.slice(0, 3).map(e => <label>{e}</label>)
+        : genres.map(e => <label>{e}</label>)}</div>
       {
         created ? <button> Delete </button> : undefined
       }

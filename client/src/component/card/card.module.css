@@ -6,6 +6,8 @@
   overflow: hidden;
   word-wrap: break-word;
   text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .link {
@@ -47,6 +49,7 @@
 
 .containerFav {
   background-color: red;
+  width: 100%;
   display: flex;
   justify-content: flex-end;
 }
@@ -78,4 +81,8 @@
   padding: 2px;
   color: black;
   font-weight: 501;
+}
+
+a {
+  text-decoration: none;
 }
