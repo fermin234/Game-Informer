@@ -1,14 +1,13 @@
 import React from "react";
 import s from './navBar.module.css'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { VideoGameByName } from "../../redux/actions";
 
 export default function NavBar({ match, setCurrentPage }) {
 
   const dispatch = useDispatch()
   const form = document.getElementById("form")
-  const allVideoGames = useSelector(s => s.filtred)
 
   function onHandleChange(e) {
     e.preventDefault()
@@ -24,7 +23,7 @@ export default function NavBar({ match, setCurrentPage }) {
     e.preventDefault()
     form.reset()
   }
-  console.log();
+
   return (
     <div className={s.containerAll} >
       <div className={s.containerFilter}>
@@ -35,7 +34,7 @@ export default function NavBar({ match, setCurrentPage }) {
           </Link>
         }
         {match.path === "/home" &&
-          <h1>Filters</h1>
+          <label className={s.label}>Filters</label>
         }
         {match.path === "/favorites" &&
           <h1>List</h1>
@@ -45,11 +44,14 @@ export default function NavBar({ match, setCurrentPage }) {
         <Link className={s.link} to='/create'>
           <label className={s.label}>Create</label>
         </Link>
-        <form id="form" className={s.form} onSubmit={onHandelSubmit}>
-          <input className={s.input} name='input' type="search" placeholder="Search Video Game" autoComplete="off" onChange={onHandleChange} />
-        </form>
+        {
+          !match.path?.includes("detail") &&
+          <form id="form" className={s.form} onSubmit={onHandelSubmit}>
+            <input className={s.input} name='input' type="search" placeholder="Search Video Game" autoComplete="off" onChange={onHandleChange} />
+          </form>
+        }
         <Link className={s.link} to='/favorites'>
-          <label className={s.label}>Favorites</label>
+          <label className={s.label} >Favorites</label>
         </Link>
       </div>
     </div>
