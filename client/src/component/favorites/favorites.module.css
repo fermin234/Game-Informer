@@ -1,19 +1,91 @@
 .container {
   background-color: red;
   display: flex;
+  position: sticky;
 }
 
 .containerList {
-  background-color: blue;
-  width: 30%;
+  background-color: rgb(67, 62, 67);
+  width: 25%;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  gap: 10px;
+}
+
+.error {
+  position: absolute;
+  color: white;
 }
 
 .contarinerCard {
-  background-color: purple;
+  background-color: #212121;
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
-  width: 70%;
+  width: 75%;
   justify-content: center;
-  padding: 10px 0 10px 0;
+  padding: 10px;
+}
+
+.item {
+  background-color: #212121;
+  width: 90%;
+  min-height: 50px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+.span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0071e2;
+  border-radius: 5px;
+  color: black;
+  font-weight: 501;
+  padding: 5px;
+}
+
+.removeFavs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0071e2;
+  border-radius: 5px;
+  color: black;
+  font-weight: 501;
+  padding: 5px;
+}
+
+.removeFavs:hover {
+  cursor: pointer;
+}
+
+.delete {
+  background-color: #0071e2;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete:hover {
+  background-color: black;
+  width: 25px;
+  height: 25px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
