@@ -132,3 +132,41 @@
   border: 2.5px solid #0071e2;
   border-radius: 10px 10px 10px 10px;
 }
+
+.icons {
+  background-color: #0071e200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 35px;
+  border: none;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.icons:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  border: 2.5px solid black;
+}
+
+.iconsPorfolio {
+  gap: 5px;
+  background-color: #0071e200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 10px 10px 10px 10px;
+  border: none;
+}
+
+.iconsPorfolio:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  border: 2.5px solid black;
+}

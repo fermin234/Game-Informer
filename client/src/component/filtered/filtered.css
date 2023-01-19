@@ -40,6 +40,7 @@
   padding: 5px;
   width: 30%;
   text-align: center;
+  border: none;
 }
 
 .labelCreated:hover {
@@ -49,6 +50,7 @@
   color: white;
   font-weight: 501;
   padding: 5px;
+  border: none;
 }
 
 .labelCreatedActive {
