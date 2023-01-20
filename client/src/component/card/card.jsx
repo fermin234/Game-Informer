@@ -33,8 +33,8 @@ export default function Card({ name, genres, image, id, created }) {
         <h3 className={s.name}>{name}</h3>
       </Link>
       <div className={s.labels}>{genres.length > 3 ?
-        genres.slice(0, 3).map(e => <label>{e}</label>)
-        : genres.map(e => <label>{e}</label>)}</div>
+        genres.slice(0, 3).map(e => <label key={Math.random() * 100}>{e}</label>)
+        : genres.map(e => <label key={Math.random() * 100}>{e}</label>)}</div>
       {
         created ? <button> Delete </button> : undefined
       }
