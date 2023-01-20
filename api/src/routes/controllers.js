@@ -1,8 +1,8 @@
-require('dotenv').config();
-const axios = require('axios');
+require("dotenv").config();
+const axios = require("axios");
 const { API_KEY } = process.env;
-const { Videogame, Genre } = require('../db.js');
-const { Op } = require('sequelize');
+const { Videogame, Genre } = require("../db.js");
+const { Op } = require("sequelize");
 
 async function getAllVideoGames() {
   try {
@@ -38,7 +38,7 @@ async function getAllVideoGames() {
     let DBInfo = await Videogame.findAll({
       include: {
         model: Genre,
-        attributes: ['name'],
+        attributes: ["name"],
         through: { attributes: [] },
       },
     });
@@ -72,7 +72,7 @@ async function getVideoGameName(name) {
       },
       include: {
         model: Genre,
-        attributes: ['name'],
+        attributes: ["name"],
         through: { attributes: [] },
       },
     });
@@ -128,7 +128,7 @@ async function getVideoGameId(id) {
         where: { id },
         include: {
           model: Genre,
-          attributes: ['name'],
+          attributes: ["name"],
           through: { attributes: [] },
         },
       });
@@ -144,7 +144,7 @@ async function getVideoGameId(id) {
           genres: DBInfo.genres?.map((e) => e.name),
           background_image: DBInfo.image,
         };
-      return 'ID invalido.';
+      return "ID invalido.";
     } else {
       //busco en la api
       let ApiInfo = await axios.get(
@@ -230,10 +230,23 @@ async function getGenres() {
     return error;
   }
 }
+
+async function getScreenshotsGame({ idVideoGame }) {
+  try {
+    let results = await axios.get(
+      `https://api.rawg.io/api/games/${idVideoGame}/screenshots?key=${API_KEY}`
+    );
+    results = results.data.results?.map((e) => e.image);
+    return results;
+  } catch (error) {
+    return error;
+  }
+}
 module.exports = {
   getAllVideoGames,
   getVideoGameName,
   getVideoGameId,
   createVideoGame,
   getGenres,
+  getScreenshotsGame,
 };

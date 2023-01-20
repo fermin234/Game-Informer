@@ -1,15 +1,16 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const router = Router();
 const {
   getAllVideoGames,
   getVideoGameName,
   getVideoGameId,
   createVideoGame,
-} = require('./controllers.js');
+  getScreenshotsGame,
+} = require("./controllers.js");
 
-router.get('/', async (req, res) => {
-  const { name } = req.query;
+router.get("/", async (req, res) => {
   try {
+    const { name } = req.query;
     name
       ? res.json(await getVideoGameName(name))
       : res.json(await getAllVideoGames());
@@ -18,9 +19,18 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:idVideogame', async (req, res) => {
-  const { idVideogame } = req.params;
+router.get("/screenShots/:idVideoGame", async (req, res) => {
   try {
+    // return res.json("asd");
+    res.json(await getScreenshotsGame(req.params));
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+router.get("/:idVideogame", async (req, res) => {
+  try {
+    const { idVideogame } = req.params;
     res.json(await getVideoGameId(idVideogame));
   } catch (error) {
     res.status(404).json(error.message);
@@ -28,7 +38,7 @@ router.get('/:idVideogame', async (req, res) => {
 });
 
 //falta relacionar los generos
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   const {
     name,
     description,
@@ -40,18 +50,8 @@ router.post('/', async (req, res) => {
     created,
   } = req.body;
   try {
-    console.log('el input que llega: ', {
-      name,
-      description,
-      released,
-      rating,
-      platforms,
-      genres,
-      image,
-      created,
-    });
-    if (!name) throw new Error('Debe ingresar un nombre.');
-    if (!description) throw new Error('Debe ingresar una descripcion.');
+    if (!name) throw new Error("Debe ingresar un nombre.");
+    if (!description) throw new Error("Debe ingresar una descripcion.");
     res.json(
       await createVideoGame(
         name,
