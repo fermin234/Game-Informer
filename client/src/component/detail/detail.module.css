@@ -12,6 +12,28 @@
   padding: 50px;
 }
 
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.item button:hover {
+  background-color: black;
+  color: white;
+}
+
+.item button {
+  background-color: #0071e2;
+  border-radius: 5px;
+  color: black;
+  font-weight: 501;
+  padding: 5px;
+  border: none;
+}
+
 .container ul {
   list-style: none;
   justify-self: center;
@@ -110,4 +132,77 @@
     right: 0;
     left: unset;
   }
+}
+
+.containerImg {
+  background-color: rgb(67, 62, 67);
+  height: 80%;
+  border: 4px solid #0071e2;
+  border-radius: 30px;
+  margin: 2% 10%;
+  font-family: Arial, Helvetica, sans-serif;
+  grid-column-gap: 30px;
+  padding: 50px;
+}
+
+.containerImgs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  object-fit: contain;
+  width: 100%;
+}
+
+.imgs {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 50px;
+}
+
+.buttonCloseImages {
+  display: flex;
+  height: fit-content;
+  background-color: #0071e2;
+  border-radius: 5px;
+  color: black;
+  font-weight: 501;
+  padding: 5px;
+  width: fit-content;
+  border: none;
+}
+
+.buttonCloseImages:hover {
+  cursor: pointer;
+}
+
+.containerSmallImgs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.smallImgs {
+  width: 15%;
+  border-radius: 10px;
+}
+
+.smallImgs:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.contarnerCardsImag {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.imageDetail:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
