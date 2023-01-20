@@ -8,7 +8,7 @@
     "npm": ">=6.14.6"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon",
     "test": "mocha -w ./tests/**/*.spec.js"
   },
   "author": "Henry",
