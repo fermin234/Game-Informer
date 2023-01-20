@@ -28,7 +28,8 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
         created: !value.created
       })
     }
-    else if (e.target.name === "sort") {
+    //SORTING
+    if (e.target.name === "sort") {
       switch (e.target.value) {
         case "null":
           setValue(value = {
@@ -40,41 +41,49 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
         case "A-Z":
           setValue(value = {
             ...value,
+            rating: null,
             sort: e.target.value
           })
           break;
         case "Z-A":
           setValue(value = {
             ...value,
+            rating: null,
             sort: e.target.value
           })
           break;
         case "RatingASC":
           setValue(value = {
             ...value,
+            sort: null,
             rating: e.target.value
           })
           break;
         case "RatingDES":
           setValue(value = {
             ...value,
+            sort: null,
             rating: e.target.value
           })
           break;
       }
-    } else if (e.target.id === value.genre) {
-      setValue(
-        value = {
-          ...value,
-          genre: null
-        }
-      )
-    } else {
-      setValue(value = {
-        ...value,
-        genre: e.target.id
-      })
     }
+    //GENRES
+    if (e.target.id === "genre")
+      if (e.target.id === value.genre) {
+        setValue(
+          value = {
+            ...value,
+            genre: null
+          }
+        )
+      } else {
+        setValue(value = {
+          ...value,
+          genre: e.target.value
+        })
+      }
+
     dispatch(filter(value))
   }
 
@@ -105,7 +114,6 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
       document.getElementById(filtersActive.sort).selected = "selected"
     if (filtersActive?.rating)
       document.getElementById(filtersActive.rating).selected = "selected"
-
   }, [dispatch])
 
   return (
@@ -137,9 +145,9 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
             <div className={s.containerFilters}>
               <h1>By category:</h1>
               <div className={s.containerButtons}>
-                {generos?.map(e => <label key={e.id} id={e.name} class={filtersActive?.genre == e.name
+                {generos?.map(e => <button key={e.id} id="genre" value={e.name} class={filtersActive?.genre == e.name
                   ? "labelategoryActive"
-                  : "labelategory"} onClick={handleFilter} >{e.name}</label>)}
+                  : "labelategory"} onClick={handleFilter} >{e.name}</button>)}
               </div>
             </div>
             <div className={s.containerSorts}>
@@ -155,9 +163,9 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
             <div className={s.byCreated}>
               <h1>By created:</h1>
               <div className={s.containerLabelCreated}>
-                <label class={filtersActive?.created
+                <button class={filtersActive?.created
                   ? "labelCreatedActive"
-                  : "labelCreated"} id="created" onClick={handleFilter}> Created </label>
+                  : "labelCreated"} id="created" value={"false"} onClick={handleFilter}> Created </button>
               </div>
             </div>
             <div className={s.socials}>

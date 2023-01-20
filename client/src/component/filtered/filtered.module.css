@@ -153,20 +153,20 @@
 }
 
 .iconsPorfolio {
-  gap: 5px;
+  font-size: 20px;
   background-color: #0071e200;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 40px;
-  font-size: 20px;
-  border-radius: 10px 10px 10px 10px;
   border: none;
+  border-radius: 10px 10px 10px 10px;
+  /* gap: 3px; */
 }
 
 .iconsPorfolio:hover {
   background-color: black;
   color: white;
   cursor: pointer;
-  border: 2.5px solid black;
+  border: none;
 }
