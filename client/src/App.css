@@ -9,3 +9,40 @@ body {
 button:hover {
   cursor: pointer;
 }
+
+.containerImages {
+  background-color: rgba(255, 0, 0, 0);
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.containerImages:hover {
+  opacity: 0.5;
+  background-color: rgba(128, 128, 128, 0.166);
+  border-radius: 15px;
+}
+
+.containerImagesActive {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  opacity: 0.4;
+  background-color: rgba(255, 255, 255, 0.27);
+}
+
+.containerImagesActive:hover {
+  opacity: 0.5;
+  background-color: rgba(128, 128, 128, 0.166);
+  border-radius: 15px;
+}
+
+h3 {
+  padding: 0 10px;
+  margin: 0;
+}
