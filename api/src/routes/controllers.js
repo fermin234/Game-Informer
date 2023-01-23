@@ -7,7 +7,7 @@ const { Op } = require("sequelize");
 async function getAllVideoGames() {
   try {
     //peticion a la api
-    let NumPage = 74;
+    let NumPage = 35;
     let ApiInfo = [];
 
     for (let i = 1; i <= NumPage; i++) {
@@ -85,7 +85,6 @@ async function getVideoGameName(name) {
       released: e.released,
       rating: e.rating,
       platforms: e.platforms,
-      // platforms: e.platforms ? e.platforms.map((e) => e.platform.name) : null,
       genres: e.genres?.map((e) => e.name),
       background_image: e.image,
     }));
@@ -102,7 +101,6 @@ async function getVideoGameName(name) {
         return {
           id: e.id,
           name: e.name,
-          // description: e.description,
           released: e.released,
           rating: e.rating,
           platforms: e.platforms.map((e) => e.platform.name),
@@ -113,7 +111,7 @@ async function getVideoGameName(name) {
       })
       .concat(DBInfo);
 
-    return ApiInfo.length ? ApiInfo : `${name} no existe.`;
+    return ApiInfo.length ? ApiInfo : `${name} does not exist.`;
   } catch (error) {
     return error;
   }
@@ -124,7 +122,6 @@ async function getVideoGameId(id) {
     //busco en la db primero
     if (id.length > 15) {
       let DBInfo = await Videogame.findOne({
-        //falta hacer el join con genre
         where: { id },
         include: {
           model: Genre,
@@ -144,7 +141,7 @@ async function getVideoGameId(id) {
           genres: DBInfo.genres?.map((e) => e.name),
           background_image: DBInfo.image,
         };
-      return "ID invalido.";
+      return "ID invalid.";
     } else {
       //busco en la api
       let ApiInfo = await axios.get(
@@ -162,7 +159,6 @@ async function getVideoGameId(id) {
       };
     }
   } catch (error) {
-    // console.log(error);
     return error;
   }
 }
@@ -191,16 +187,10 @@ async function createVideoGame(
       created,
     });
 
-    // let listGenres = await Promise.all(
-    //   genres.map((e) => Genre.findOne({ where: { name: e } }))
-    // );
-    // game.addGenre(listGenres);
-
-    //preguntar esto
-    //Genre con s al final?
     let listGenres = await Genre.findAll({ where: { name: genres } });
     game.addGenre(listGenres);
-    return `${name} creado con exito.`;
+
+    return `${name} successfully created.`;
   } catch (error) {
     console.log(error);
     return error;
@@ -242,6 +232,18 @@ async function getScreenshotsGame({ idVideoGame }) {
     return error;
   }
 }
+
+async function deleteVideoGame({ idVideoGame }) {
+  try {
+    await Videogame.destroy({
+      where: { id: idVideoGame },
+    });
+
+    return "Video game removed.";
+  } catch (error) {
+    return error;
+  }
+}
 module.exports = {
   getAllVideoGames,
   getVideoGameName,
@@ -249,4 +251,5 @@ module.exports = {
   createVideoGame,
   getGenres,
   getScreenshotsGame,
+  deleteVideoGame,
 };
