@@ -6,6 +6,7 @@ const {
   getVideoGameId,
   createVideoGame,
   getScreenshotsGame,
+  deleteVideoGame,
 } = require("./controllers.js");
 
 router.get("/", async (req, res) => {
@@ -66,6 +67,14 @@ router.post("/", async (req, res) => {
     );
   } catch (error) {
     res.status(404).json(error.message);
+  }
+});
+
+router.delete("/deleteVideoGame/:idVideoGame", async (req, res) => {
+  try {
+    res.json(await deleteVideoGame(req.params));
+  } catch (error) {
+    res.json(error);
   }
 });
 
