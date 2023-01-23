@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import s from './card.module.css'
+import s from './Card.module.css'
+import axios from 'axios'
+import { useDispatch } from "react-redux";
 
 export default function Card({ name, genres, image, id, created }) {
 
+  const dispatch = useDispatch()
   let butonFav = document.getElementsByName(`buttonFav${id}`)
   let favorites = JSON.parse(localStorage.getItem("favorites"))
 
@@ -21,6 +24,10 @@ export default function Card({ name, genres, image, id, created }) {
     }
   }
 
+  async function handleDelete(id) {
+    const result = await axios.delete(`videogames/deleteVideoGame/${id}`)
+  }
+
   return (
     <div className={s.card} >
       <div className={s.containerFav}>
@@ -36,7 +43,7 @@ export default function Card({ name, genres, image, id, created }) {
         genres.slice(0, 3).map(e => <label key={Math.random() * 100}>{e}</label>)
         : genres.map(e => <label key={Math.random() * 100}>{e}</label>)}</div>
       {
-        created ? <button> Delete </button> : undefined
+        created ? <button className={s.deletedButton} onClick={() => handleDelete(id)}> Delete </button> : undefined
       }
     </div>
   )
