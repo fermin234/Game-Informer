@@ -8,6 +8,7 @@
   text-align: center;
   justify-content: center;
   align-items: center;
+  height: fit-content;
 }
 
 .link {
@@ -85,4 +86,12 @@
 
 a {
   text-decoration: none;
+}
+
+.deletedButton {
+  position: absolute;
+  border-radius: 1rem;
+  margin: 1rem;
+  top: 0;
+  left: 0;
 }
