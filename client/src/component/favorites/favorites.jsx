@@ -1,34 +1,22 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import CardFavorite from "../cardFavorite/cardFavorite";
-import NavBar from "../navBar/navBar";
-import s from './favorites.module.css'
+import CardFavorite from "../CardFavorite/CardFavorite";
+import NavBar from "../NavBar/NavBar";
+import s from './Favorites.module.css'
+import { useModal } from '../../hooks/useModal.js'
+import ModalConfimation from "../Modals/ModalConfimation";
 
 export default function Favorites({ match, history }) {
 
   let [update, setUpdate] = useState(false)
   const favorites = JSON.parse(localStorage.getItem("favorites"))
-
-
-  function handelDeleted(e) {
-    const id = e.target.id
-    let favorites = JSON.parse(localStorage.getItem("favorites"))
-    let index = favorites.findIndex(e => e.id == id)
-    const result = window.confirm(`Desea eliminar ${favorites[index].name} de su lista de favoritos?`)
-    if (result) {
-      favorites.splice(index, 1)
-      localStorage.setItem("favorites", JSON.stringify(favorites))
-      setUpdate(!update)
-    }
-  }
+  const [isOpen, openModal, closeModal] = useModal()
 
   function handleClearFavs() {
-    const result = window.confirm(`Desea eliminar todos sus favoritos?`)
-    if (result) {
-      localStorage.clear()
-      setUpdate(!update)
-    }
+    localStorage.clear()
+    setUpdate(!update)
+    closeModal()
   }
 
   useEffect(() => {
@@ -39,18 +27,22 @@ export default function Favorites({ match, history }) {
       <NavBar match={match} />
       <div className={s.container}>
         <div className={s.containerList}>
+          <ModalConfimation isOpen={isOpen} closeModal={closeModal} >
+            <h1 className={s.h1Modal}>¿Desea eliminar todos los juegos de sus favoritos?</h1>
+            <div className={s.containerButtonsModal}>
+              <button className={s.accept} onClick={() => handleClearFavs()}>Accept</button>
+              <button className={s.cancel} onClick={() => closeModal()}>Cancel</button>
+            </div>
+          </ModalConfimation>
           {
             favorites?.map(e =>
               <div className={s.item}>
                 <div className={s.span}>
                   <span>{e.name}</span>
                 </div>
-                <div>
-                  <button className={s.delete} id={e.id} onClick={handelDeleted}> X </button>
-                </div>
               </div>)
           }
-          <button className={s.removeFavs} onClick={handleClearFavs}> Eliminar todos los favoritos </button>
+          <button className={s.removeFavs} onClick={() => openModal()}> Eliminar todos los favoritos </button>
         </div>
         <div className={s.contarinerCard}>
           {
@@ -69,6 +61,6 @@ export default function Favorites({ match, history }) {
           {favorites?.map(e => <CardFavorite key={e.id} name={e.name} genres={e.genres} image={e.image} id={e.id} setUpdate={setUpdate} update={update} />)}
         </div>
       </div>
-    </div>
+    </div >
   )
 }

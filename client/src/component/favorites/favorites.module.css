@@ -59,6 +59,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
   background-color: #0071e2;
   border-radius: 5px;
   color: black;
@@ -88,4 +89,34 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.containerButtonsModal {
+  margin-top: 1rem;
+  display: flex;
+  gap: 10px;
+}
+
+.h1Modal {
+  color: #0071e2;
+}
+
+.accept {
+  border-radius: 15px;
+  border: none;
+  padding: 0.4rem;
+}
+
+.accept:hover {
+  cursor: pointer;
+}
+
+.cancel {
+  border-radius: 15px;
+  border: none;
+  padding: 0.4rem;
+}
+
+.cancel:hover {
+  cursor: pointer;
 }

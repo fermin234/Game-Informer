@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import s from './Card.module.css'
 import axios from 'axios'
 import { useDispatch } from "react-redux";
+import { allVideoGames, ResetFilter } from "../../redux/actions";
 
-export default function Card({ name, genres, image, id, created }) {
+export default function Card({ name, genres, image, id, created, openModal, closeModal }) {
 
   const dispatch = useDispatch()
   let butonFav = document.getElementsByName(`buttonFav${id}`)
@@ -25,7 +26,13 @@ export default function Card({ name, genres, image, id, created }) {
   }
 
   async function handleDelete(id) {
+    openModal()
     const result = await axios.delete(`videogames/deleteVideoGame/${id}`)
+    dispatch(allVideoGames())
+    setTimeout(() => {
+      closeModal()
+    }, 5000);
+    dispatch(ResetFilter())
   }
 
   return (
