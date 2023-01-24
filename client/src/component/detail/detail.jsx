@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ResetCreate, VideoGameById } from "../../redux/actions";
-import NavBar from "../navBar/navBar";
-import s from './detail.module.css'
+import NavBar from "../NavBar/NavBar";
+import s from './Detail.module.css'
 
 export default function Detail({ match }) {
   const dispatch = useDispatch()

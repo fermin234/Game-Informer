@@ -7,9 +7,10 @@ import Validate from "./validate.js";
 import * as allImages from '../../assets/iconsGenres'
 import { useModal } from "../../hooks/useModal";
 import ModalInformation from "../Modals/ModalInformation";
+import ModalSuccessfully from "../Modals/ModalSuccessfully";
+import iconWarning from '../../assets/iconWarning.png'
 
 export default function Form(props) {
-
   const dispatch = useDispatch()
   !localStorage.getItem("form") && localStorage.setItem("form", "{}")
   const [form, setForm] = useState(JSON.parse(localStorage.getItem("form")))
@@ -26,6 +27,7 @@ export default function Form(props) {
   })
   const images = []
   const [isOpen, openModal, closeModal] = useModal()
+  const [isOpenSucces, openModalSucces, closeModalSucces] = useModal()
 
 
 
@@ -45,7 +47,7 @@ export default function Form(props) {
     dispatch(ResetFilter())
     resetForm(e)
 
-    alert(`${input.name} creado exitosamente.`)
+    openModalSucces()
 
     setInput({
       name: "",
@@ -72,14 +74,10 @@ export default function Form(props) {
         let arr = input.genres
         const index = arr.findIndex(e => e === id)
         arr.splice(index, 1)
-        // let form = JSON.parse(localStorage.getItem("form"))
-        // form.genres = arr
-        // localStorage.setItem("form", JSON.stringify(form))
         setInput({
           ...input,
           genres: arr
         })
-
       } else {
         setInput({
           ...input,
@@ -120,34 +118,46 @@ export default function Form(props) {
         <ModalInformation isOpen={isOpen} closeModal={closeModal}>
           <h2>{Object.values(errors)[0]}</h2>
         </ModalInformation>
+        <ModalSuccessfully isOpen={isOpenSucces} closeModal={closeModalSucces}>
+          <h2>Video game successfully created.</h2>
+        </ModalSuccessfully>
         <form className={s.form} onSubmit={handleSubmit} method="post" id="form">
           {/* Name */}
-          <label htmlFor="">*Name:</label>
+          <div className={s.containerLabel}>
+            {errors.name && <img src={iconWarning} alt="Warning" />}
+            <label className={errors.name && s.labelError}>*Name:</label>
+          </div>
           <input type="text" name="name" autoComplete="off" placeholder="Counter Strike 1.6" onChange={onHandleChange}
             value={input.name && input.name} />
 
           {/* Description */}
-          <label htmlFor="" >* Description:</label>
+          <div className={s.containerLabel}>
+            {errors.description && <img src={iconWarning} alt="Warning" />}
+            <label className={errors.description && s.labelError}>*Description:</label>
+          </div>
           <input type="text" name="description" autoComplete="off" placeholder="The shooter game..." onChange={onHandleChange}
             value={input.description && input.description} />
 
           {/* Released */}
-          <label htmlFor="">Released:</label>
+          <label>Released:</label>
           <input type="date" name="released" autoComplete="off" onChange={onHandleChange} className={s.inputReleased}
             value={input.released && input.released} />
 
           {/* Rating */}
-          <label htmlFor="">*Rating:</label>
+          <div className={s.containerLabel}>
+            {errors.rating && <img src={iconWarning} alt="Warning" />}
+            <label className={errors.rating && s.labelError}>*Rating:</label>
+          </div>
           <input type="input" name="rating" autoComplete="off" placeholder="0-5" onChange={onHandleChange}
             value={input.rating && input.rating} />
 
           {/* Platforms */}
-          <label htmlFor="">Platforms:</label>
+          <label>Platforms:</label>
           <input type="text" name="platforms" autoComplete="off" placeholder="PC" onChange={onHandleChange}
             value={input.platforms && input.platforms} />
 
           {/* Image */}
-          <label htmlFor="">Image:</label>
+          <label>Image:</label>
           <input type="text" name="image" autoComplete="off" placeholder="URL" onChange={onHandleChange}
             value={input.image !== "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s.png" ? input.image : ""} />
 
@@ -155,8 +165,9 @@ export default function Form(props) {
           <button type="submit" > Create </button>
         </form>
         <div className={s.divContarner}>
-          <div>
+          <div className={s.containerHs}>
             <h2>Select genres for your video game</h2>
+            {errors.genres && <h4 className={errors.genres && s.labelError}>It is mandatory to select at least one gender</h4>}
           </div>
           {/* Genres */}
           <div className={s.containgerGenres}>

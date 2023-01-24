@@ -16,24 +16,10 @@
   gap: 10px;
 }
 
-/* .img {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  border-radius: 20px 20px 0 0;
-  object-fit: contain;
+.inputReleased {
+  width: 90%;
 }
 
-.card label {
-  background-color: #0071e2;
-  border-radius: 5px;
-  color: black;
-  font-weight: 501;
-  padding: 5px;
-  border: none;
-} */
-
-/* ************ */
 .card {
   position: relative;
   display: flex;
@@ -119,6 +105,7 @@
 
 .divContarner {
   background-color: #0071e2;
+  background-color: #4f6a85;
   border-radius: 15px;
   width: 40%;
   display: flex;
@@ -132,7 +119,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: #0071e2;
+  background-color: #4f6a85;
   border-radius: 15px;
   width: fit-content;
   padding: 25px;
@@ -142,6 +129,11 @@
 .form input {
   text-align: center;
   margin: 5px;
+  font-weight: bold;
+}
+
+.labelError {
+  color: red;
 }
 
 .danger {
@@ -154,4 +146,23 @@
   color: green;
   margin: 3px;
   font-size: 12.5px;
+}
+
+.containerLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.containerHs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerHs h4 {
+  margin: 0;
+  padding: 0;
 }
