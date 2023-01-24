@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import s from './filtered.module.css'
-import "./filtered.css"
+import s from './Filtered.module.css'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { todosLosGeneros, ResetFilter, filter } from "../../redux/actions";
@@ -15,10 +14,10 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
   const allVideoGames = useSelector(s => s.videoGames)
 
   let [value, setValue] = useState({
-    genre: null,
-    sort: null,
-    rating: null,
-    created: false
+    genre: filtersActive.genre ? filtersActive.genre : null,
+    sort: filtersActive.sort ? filtersActive.sort : null,
+    rating: filtersActive.rating ? filtersActive.rating : null,
+    created: filtersActive.created ? filtersActive.created : false
   })
 
   const handleFilter = (e) => {
@@ -69,8 +68,8 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
       }
     }
     //GENRES
-    if (e.target.id === "genre")
-      if (e.target.id === value.genre) {
+    if (e.target.id === "genre") {
+      if (e.target.value === value.genre) {
         setValue(
           value = {
             ...value,
@@ -83,7 +82,7 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
           genre: e.target.value
         })
       }
-
+    }
     dispatch(filter(value))
   }
 
@@ -145,14 +144,14 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
             <div className={s.containerFilters}>
               <h1>By category:</h1>
               <div className={s.containerButtons}>
-                {generos?.map(e => <button key={e.id} id="genre" value={e.name} class={filtersActive?.genre == e.name
-                  ? "labelategoryActive"
-                  : "labelategory"} onClick={handleFilter} >{e.name}</button>)}
+                {generos?.map(e => <button key={e.id} id="genre" value={e.name} className={filtersActive?.genre == e.name
+                  ? s.labelategoryActive
+                  : s.labelategory} onClick={handleFilter} >{e.name}</button>)}
               </div>
             </div>
             <div className={s.containerSorts}>
               <h1>Sort:</h1>
-              <select class={filtersActive?.sort || filtersActive?.rating ? "selectSortActive" : "selectSort"} name="sort" onChange={handleFilter}>
+              <select className={filtersActive?.sort || filtersActive?.rating ? s.selectSortActive : s.selectSort} name="sort" onChange={handleFilter}>
                 <option className="option" id='1' value="null">Sort</option>
                 <option name="alphabetical" id="A-Z" value="A-Z">A-Z</option>
                 <option name="alphabetical" id="Z-A" value="Z-A">Z-A</option>
@@ -163,9 +162,9 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
             <div className={s.byCreated}>
               <h1>By created:</h1>
               <div className={s.containerLabelCreated}>
-                <button class={filtersActive?.created
-                  ? "labelCreatedActive"
-                  : "labelCreated"} id="created" value={"false"} onClick={handleFilter}> Created </button>
+                <button className={filtersActive?.created
+                  ? s.labelCreatedActive
+                  : s.labelCreated} id="created" value={"false"} onClick={handleFilter}> Created </button>
               </div>
             </div>
             <div className={s.socials}>
