@@ -1,10 +1,10 @@
-import './App.css';
-import Form from './component/form/form';
-import { Route } from 'react-router-dom';
-import Home from './component/home/home.jsx';
-import LandingPage from './component/landingPage/landingPage';
-import Detail from './component/detail/detail';
-import Favorites from './component/favorites/favorites';
+import "./App.css";
+import Form from "./component/Form/Form";
+import Home from "./component/Home/Home.jsx";
+import Detail from "./component/Detail/Detail";
+import Favorites from "./component/Favorites/Favorites";
+import LandingPage from "./component/landingPage/LandingPage";
+import { Route } from "react-router-dom";
 
 function App() {
   return (
