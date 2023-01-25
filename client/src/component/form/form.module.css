@@ -130,6 +130,7 @@
   text-align: center;
   margin: 5px;
   font-weight: bold;
+  width: 100%;
 }
 
 .labelError {

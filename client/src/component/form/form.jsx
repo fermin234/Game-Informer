@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { createVideoGame, ResetFilter, allVideoGames } from "../../redux/actions";
+import { createVideoGame, ResetFilter, loader } from "../../redux/actions";
 import NavBar from "../NavBar/NavBar";
 import s from './Form.module.css'
 import Validate from "./validate.js";
@@ -19,7 +19,7 @@ export default function Form(props) {
     name: form?.name ? form.name : "",
     description: form?.description ? form.description : "",
     released: form?.released ? form.released : "",
-    rating: form?.rating ? form.rating : null,
+    rating: form?.rating ? form.rating : "",
     platforms: form?.platforms ? form.platforms : [],
     genres: form?.genres?.length ? form.genres : [],
     image: form?.image ? form.image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s.png",
@@ -28,8 +28,6 @@ export default function Form(props) {
   const images = []
   const [isOpen, openModal, closeModal] = useModal()
   const [isOpenSucces, openModalSucces, closeModalSucces] = useModal()
-
-
 
   for (const e in allImages) {
     images.push(allImages[e])
@@ -42,18 +40,18 @@ export default function Form(props) {
     if (Object.entries(errors).length) {
       return openModal()
     }
+
     dispatch(createVideoGame(input))
-    dispatch(allVideoGames())
+    dispatch(loader(true))
     dispatch(ResetFilter())
     resetForm(e)
-
     openModalSucces()
 
     setInput({
       name: "",
-      description: null,
+      description: "",
       released: "",
-      rating: null,
+      rating: "",
       platforms: [],
       genres: [],
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s.png",
@@ -69,7 +67,6 @@ export default function Form(props) {
       })
     } else if (e.target.name === "genres") {
       if (input.genres.includes(e.target.id)) {
-        console.log('entra al if')
         const id = e.target.id
         let arr = input.genres
         const index = arr.findIndex(e => e === id)
@@ -87,7 +84,8 @@ export default function Form(props) {
     } else if (e.target.name === "rating") {
       setInput({
         ...input,
-        rating: parseFloat(e.target.value),
+        // rating: parseFloat(e.target.value),
+        rating: e.target.value,
       })
     } else {
       setInput({
@@ -148,7 +146,7 @@ export default function Form(props) {
             {errors.rating && <img src={iconWarning} alt="Warning" />}
             <label className={errors.rating && s.labelError}>*Rating:</label>
           </div>
-          <input type="input" name="rating" autoComplete="off" placeholder="0-5" onChange={onHandleChange}
+          <input type="number" name="rating" autoComplete="off" placeholder="0-5" min={0} max={5} onChange={onHandleChange}
             value={input.rating && input.rating} />
 
           {/* Platforms */}
@@ -175,7 +173,7 @@ export default function Form(props) {
               images?.map(e => {
                 const name = e.split("/")[3].split(".")[0]
                 return (
-                  <div className={input?.genres.includes(name) ? 'containerImagesActive' : 'containerImages'}>
+                  <div key={name} className={input?.genres.includes(name) ? 'containerImagesActive' : 'containerImages'}>
                     <img className={s.imgGenre} src={e} id={name} name='genres' onClick={onHandleChange} />
                     {name.split(` `).length > 1 ? <><h3>{name.split(" ")[0]}</h3><h3>{name.split(" ")[1]}</h3></> : <h3>{name}</h3>}
                   </div>)
