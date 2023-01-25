@@ -21,8 +21,10 @@
 }
 
 .img {
-  width: 360px;
-  height: 360px;
+  min-width: 360px;
+  max-width: 360px;
+  min-height: 360px;
+  max-height: 360px;
   object-fit: cover;
   border-radius: 25px;
 }
@@ -94,4 +96,13 @@ a {
   margin: 1rem;
   top: 0;
   left: 0;
+}
+
+.inputModal {
+  width: 30vh;
+  height: 3vh;
+  border: #0071e2 solid 5px;
+  border-radius: 10px;
+  background-color: #0071e21b;
+  font-size: 1rem;
 }

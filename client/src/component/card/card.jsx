@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 import s from './Card.module.css'
 import axios from 'axios'
 import { useDispatch } from "react-redux";
-import { allVideoGames, ResetFilter } from "../../redux/actions";
+import { deleteVideoGame } from "../../redux/actions";
 import ModalInput from "../Modals/ModalInput";
 import { useModal } from "../../hooks/useModal";
 
-
-
-export default function Card({ name, genres, image, id, created, openModal, closeModal }) {
+export default function Card({ name, genres, image, id, created }) {
 
   const dispatch = useDispatch()
   const [isOpenInput, openModalInput, closeModalInput] = useModal()
@@ -34,20 +32,14 @@ export default function Card({ name, genres, image, id, created, openModal, clos
     let result = false
     result = await axios.get(`/videogames/validatePassword?password=${e.target.value}`)
     if (result.data === true) {
-      openModal()
-      await axios.delete(`videogames/deleteVideoGame/${id}`)
-      dispatch(allVideoGames())
-      setTimeout(() => {
-        closeModal()
-      }, 5000);
-      dispatch(ResetFilter())
+      dispatch(deleteVideoGame(id))
     }
   }
 
   return (
     <div className={s.card} >
       <ModalInput isOpen={isOpenInput} closeModal={closeModalInput}>
-        <input type="text" onChange={handleDelete} />
+        <input className={s.inputModal} type="password" onChange={handleDelete} />
       </ModalInput>
       <div className={s.containerFav}>
         <button name={`buttonFav${id}`} className={s.fav} onClick={() => handleFavorite()}> {
@@ -61,8 +53,8 @@ export default function Card({ name, genres, image, id, created, openModal, clos
       <div className={s.labels}>
         {
           genres.length > 3 ?
-            genres.slice(0, 3).map(e => <label key={Math.random() * 100}>{e}</label>)
-            : genres.map(e => <label key={Math.random() * 100}>{e}</label>)
+            genres.slice(0, 3).map(e => <label key={e + id}>{e}</label>)
+            : genres.map(e => <label key={e + id}>{e}</label>)
         }
       </div>
       {
