@@ -7,7 +7,7 @@ export const CREATE_VIDEO_GAME = "CREATE_VIDEO_GAME";
 export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES";
 export const GET_VIDEOGAME_BY_ID = "GET_VIDEOGAME_BY_ID";
 export const GET_VIDEOGAME_BY_NAME = "GET_VIDEOGAME_BY_NAME";
-export const DESPLEGAR_FILTROS = "DESPLEGAR_FILTROS";
+export const DELETE_VIDEOGAME = "DELETE_VIDEOGAME";
 const axios = require("axios");
 
 export function allVideoGames() {
@@ -51,8 +51,12 @@ export function VideoGameById(id) {
 }
 
 export function createVideoGame(videoGameInfo) {
-  return async () => {
+  return async (dispatch) => {
     await axios.post(`/videogames`, videoGameInfo);
+    return dispatch({
+      type: CREATE_VIDEO_GAME,
+      payload: videoGameInfo,
+    });
   };
 }
 
@@ -70,13 +74,6 @@ export function ResetFilter() {
     });
 }
 
-export function desplegarFiltros() {
-  return (dispatch) =>
-    dispatch({
-      type: DESPLEGAR_FILTROS,
-    });
-}
-
 export function filter(payload) {
   return (dispatch) =>
     dispatch({
@@ -91,4 +88,17 @@ export function loader(payload) {
       type: LOADER,
       payload,
     });
+}
+
+export function deleteVideoGame(payload) {
+  axios.delete(`videogames/deleteVideoGame/${payload}`);
+  return (dispatch) => {
+    dispatch({
+      type: DELETE_VIDEOGAME,
+      payload,
+    });
+    dispatch({
+      type: RESET_FILTRES,
+    });
+  };
 }

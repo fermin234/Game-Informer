@@ -6,17 +6,17 @@ import {
   RESET_CREATE,
   RESET_FILTRES,
   CREATE_VIDEO_GAME,
-  DESPLEGAR_FILTROS,
   FILTER,
   LOADER,
+  DELETE_VIDEOGAME,
 } from "../actions/index.js";
 
 const initialState = {
   videoGames: [],
   filtred: [],
   genres: [],
-  detail: {},
   filterValues: {},
+  detail: {},
   loader: false,
 };
 
@@ -117,19 +117,23 @@ export default function rootReducer(state = initialState, action) {
     case CREATE_VIDEO_GAME:
       return {
         ...state,
-        filtred: state.videoGames,
-      };
-
-    case DESPLEGAR_FILTROS:
-      return {
-        ...state,
-        desplegarFiltros: !state.desplegarFiltros,
+        videoGames: [...state.videoGames, action.payload],
+        filtred: [...state.filtred, action.payload],
       };
 
     case LOADER:
       return {
         ...state,
         loader: action.payload ? action.payload : !state.loader,
+      };
+
+    case DELETE_VIDEOGAME:
+      let filtered = [...state.videoGames];
+      filtered = filtered.filter((e) => e.id !== action.payload);
+      return {
+        ...state,
+        videoGames: filtered,
+        filtred: filtered,
       };
     default:
       return { ...state };
