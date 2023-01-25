@@ -244,6 +244,14 @@ async function deleteVideoGame({ idVideoGame }) {
     return error;
   }
 }
+
+async function validatePassword({ password }) {
+  try {
+    return password === process.env.PASSWORD_DELETE;
+  } catch (error) {
+    return error;
+  }
+}
 module.exports = {
   getAllVideoGames,
   getVideoGameName,
@@ -252,4 +260,5 @@ module.exports = {
   getGenres,
   getScreenshotsGame,
   deleteVideoGame,
+  validatePassword,
 };
