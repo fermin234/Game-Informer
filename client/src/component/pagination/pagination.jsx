@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import s from './pagination.module.css'
-import './prueba.css'
+import s from './Pagination.module.css'
+import './pagination.css'
 
 export default function Pagination({ videoGamePerPage, listVideoGames, paginado, currentPage, initial, setInitial, final, setFinal }) {
 
