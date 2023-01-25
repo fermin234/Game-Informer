@@ -1,5 +1,5 @@
 import React from "react";
-import s from './navBar.module.css'
+import s from './NavBar.module.css'
 import { Link } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { VideoGameByName } from "../../redux/actions";
@@ -23,7 +23,6 @@ export default function NavBar({ match, setCurrentPage }) {
     e.preventDefault()
     form.reset()
   }
-
   return (
     <div className={s.containerAll} >
       <div className={s.containerFilter}>
@@ -45,7 +44,7 @@ export default function NavBar({ match, setCurrentPage }) {
           <label className={s.label}>Create</label>
         </Link>
         {
-          !match.path?.includes("detail") &&
+          match.path === "/home" &&
           <form id="form" className={s.form} onSubmit={onHandelSubmit}>
             <input className={s.input} name='input' type="search" placeholder="Search Video Game" autoComplete="off" onChange={onHandleChange} />
           </form>
