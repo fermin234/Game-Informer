@@ -19,7 +19,7 @@ export default function CardFavorite({ name, genres, image, id, setUpdate, updat
   return (
     <div>
       <ModalConfimation isOpen={isOpen} closeModal={closeModal}>
-        <h1 className={s.h1Modal}>{`desea eleiminar ${name}`}</h1>
+        <h1 className={s.h1Modal}>{`Remove ${name} from your favourites?`}</h1>
         <div className={s.containerButtonsModal}>
           <button className={s.accept} onClick={handelDeleted}>Accept</button>
           <button className={s.cancel} onClick={closeModal}>Cancel</button>

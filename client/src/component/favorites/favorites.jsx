@@ -28,7 +28,7 @@ export default function Favorites({ match, history }) {
       <div className={s.container}>
         <div className={s.containerList}>
           <ModalConfimation isOpen={isOpen} closeModal={closeModal} >
-            <h1 className={s.h1Modal}>¿Desea eliminar todos los juegos de sus favoritos?</h1>
+            <h1 className={s.h1Modal}>Do you want to remove all games from your favourites?</h1>
             <div className={s.containerButtonsModal}>
               <button className={s.accept} onClick={() => handleClearFavs()}>Accept</button>
               <button className={s.cancel} onClick={() => closeModal()}>Cancel</button>
@@ -36,22 +36,22 @@ export default function Favorites({ match, history }) {
           </ModalConfimation>
           {
             favorites?.map(e =>
-              <div className={s.item}>
+              <div className={s.item} key={e.id}>
                 <div className={s.span}>
                   <span>{e.name}</span>
                 </div>
               </div>)
           }
-          <button className={s.removeFavs} onClick={() => openModal()}> Eliminar todos los favoritos </button>
+          <button className={s.removeFavs} onClick={() => openModal()}> Remove all favourites </button>
         </div>
         <div className={s.contarinerCard}>
           {
             !favorites?.length ?
               <div >
-                <h1 className={s.error}>Usted no a agregado ningun juego a sus favoritos.</h1>
+                <h1 className={s.error}>You have not added any games to your favourites.</h1>
                 <br />
                 <br />
-                <h1 className={s.error}>Redireccionando a la pagina principal...</h1>
+                <h1 className={s.error}>Redirecting to the main page....</h1>
                 {setTimeout(() => {
                   history.push("/home")
                 }, 5000)}

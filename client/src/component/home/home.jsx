@@ -1,19 +1,18 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import s from './home.module.css'
-import NavBar from "../navBar/navBar";
-import Card from "../card/card.jsx";
-import Pagination from "../pagination/pagination.jsx";
+import s from './Home.module.css'
+import NavBar from "../NavBar/NavBar";
+import Card from "../Card/Card.jsx";
+import Pagination from "../Pagination/Pagination.jsx";
 import { allVideoGames, loader } from "../../redux/actions";
-import Filtered from "../filtered/filtered";
+import Filtered from "../Filtered/Filtered";
 
 export default function Home({ match }) {
   const dispatch = useDispatch()
 
   const [initial, setInitial] = useState(1)
   const [final, setFinal] = useState(8)
-
   const [update, setUpdate] = useState(true)
   const listVideoGames = useSelector(s => s.filtred)
   const stateVideoGames = useSelector(s => s.videoGames)
@@ -32,13 +31,12 @@ export default function Home({ match }) {
     setCurrentPage(pageNumber)
   }
 
-
   useEffect(() => {
-    if (!stateVideoGames.length) {
+    if (!stateVideoGames.length || loaderStatus) {
       dispatch(allVideoGames())
       dispatch(loader(true))
     }
-  }, [dispatch, listVideoGames])
+  }, [dispatch])
 
   return (
     <div className={s.containerAll}>
@@ -58,7 +56,7 @@ export default function Home({ match }) {
                   />
                 </div>
                 <div className={s.containerCards}>
-                  {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} created={e.created} />)}
+                  {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} created={e.created} update={update} setUpdate={setUpdate} />)}
                 </div>
               </div>
               <div className={s.containerPagination}>
@@ -90,7 +88,7 @@ export default function Home({ match }) {
                 />
               </div>
               <h1 className={s.noGames}>
-                No hay juegos
+                No games
               </h1>
             </div>
       }

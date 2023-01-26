@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { todosLosGeneros, ResetFilter, filter } from "../../redux/actions";
 import { AiFillLinkedin, AiOutlineGithub, AiOutlineFilePdf } from "react-icons/ai"
 import { BsFillBriefcaseFill } from "react-icons/bs";
+import { Link } from 'react-router-dom'
 
 export default function Filtered({ setCurrentPage, setUpdate, update, setInitial, setFinal }) {
   const dispatch = useDispatch()
@@ -17,7 +18,7 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
     genre: filtersActive.genre ? filtersActive.genre : null,
     sort: filtersActive.sort ? filtersActive.sort : null,
     rating: filtersActive.rating ? filtersActive.rating : null,
-    created: filtersActive.created ? filtersActive.created : false
+    created: filtersActive.created
   })
 
   const handleFilter = (e) => {
@@ -108,11 +109,11 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
   useEffect(() => {
     if (!generos.length)
       dispatch(todosLosGeneros())
-    setUpdate(!update)
     if (filtersActive?.sort)
       document.getElementById(filtersActive.sort).selected = "selected"
     if (filtersActive?.rating)
       document.getElementById(filtersActive.rating).selected = "selected"
+    setUpdate(!update)
   }, [dispatch])
 
   return (
@@ -181,6 +182,11 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
                 <button className={s.iconsPorfolio}> <BsFillBriefcaseFill />Portfolio </button>
               </a>
             </div>
+            <Link className={s.socials} to='/about'>
+              <div>
+                <h1>About</h1>
+              </div>
+            </Link>
           </>
           : undefined
         }

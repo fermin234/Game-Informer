@@ -34,7 +34,7 @@ export default function Detail({ match }) {
 
 
   return (
-    <>
+    <div>
       <NavBar match={match} />
       {Object.entries(videoGame).length ?
         boolean ?
@@ -54,7 +54,7 @@ export default function Detail({ match }) {
               </div>
             </div>
             <div className={s.containerImgs}>
-              <img className={s.imgs} id="image" src={videoGame.background_image} alt="asdasd" />
+              <img className={s.imgs} id="image" src={videoGame.background_image} alt="ImageVideoGame" />
             </div>
           </div>
           :
@@ -85,5 +85,5 @@ export default function Detail({ match }) {
         : <div className={s.loader}></div>
       }
 
-    </>)
+    </div>)
 }
