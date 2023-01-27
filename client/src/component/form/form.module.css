@@ -1,9 +1,16 @@
 .containerAll {
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: 40px;
-  margin-top: 25px;
+  height: 93vh;
+}
+
+.prueba {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .card {
@@ -33,9 +40,9 @@
 }
 
 .img {
-  width: 360px;
-  height: 360px;
-  object-fit: cover;
+  max-width: 360px;
+  max-height: 400px;
+  object-fit: contain;
   border-radius: 25px;
 }
 
@@ -115,15 +122,13 @@
 }
 
 .form {
+  background-color: #4f6a85;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
-  background-color: #4f6a85;
-  border-radius: 15px;
   width: fit-content;
   padding: 25px;
-  height: fit-content;
+  border-radius: 15px;
 }
 
 .form input {

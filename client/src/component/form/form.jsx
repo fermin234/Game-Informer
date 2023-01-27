@@ -9,6 +9,7 @@ import { useModal } from "../../hooks/useModal";
 import ModalInformation from "../Modals/ModalInformation";
 import ModalSuccessfully from "../Modals/ModalSuccessfully";
 import iconWarning from '../../assets/iconWarning.png'
+import Card from '../Card/Card.jsx'
 
 export default function Form(props) {
   const dispatch = useDispatch()
@@ -25,10 +26,10 @@ export default function Form(props) {
     image: form?.image ? form.image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s.png",
     created: form?.created ? form.created : true
   })
-  const images = []
   const [isOpen, openModal, closeModal] = useModal()
   const [isOpenSucces, openModalSucces, closeModalSucces] = useModal()
 
+  const images = []
   for (const e in allImages) {
     images.push(allImages[e])
   }
@@ -119,73 +120,72 @@ export default function Form(props) {
         <ModalSuccessfully isOpen={isOpenSucces} closeModal={closeModalSucces}>
           <h2>Video game successfully created.</h2>
         </ModalSuccessfully>
-        <form className={s.form} onSubmit={handleSubmit} method="post" id="form">
-          {/* Name */}
-          <div className={s.containerLabel}>
-            {errors.name && <img src={iconWarning} alt="Warning" />}
-            <label className={errors.name && s.labelError}>*Name:</label>
-          </div>
-          <input type="text" name="name" autoComplete="off" placeholder="Counter Strike 1.6" onChange={onHandleChange}
-            value={input.name && input.name} />
+        <div className={s.prueba}>
+          <div className={s.containerForm}>
+            <form className={s.form} onSubmit={handleSubmit} method="post" id="form">
+              {/* Name */}
+              <div className={s.containerLabel}>
+                {errors.name && <img src={iconWarning} alt="Warning" />}
+                <label className={errors.name && s.labelError}>*Name:</label>
+              </div>
+              <input type="text" name="name" autoComplete="off" placeholder="Counter Strike 1.6" onChange={onHandleChange}
+                value={input.name && input.name} />
 
-          {/* Description */}
-          <div className={s.containerLabel}>
-            {errors.description && <img src={iconWarning} alt="Warning" />}
-            <label className={errors.description && s.labelError}>*Description:</label>
-          </div>
-          <input type="text" name="description" autoComplete="off" placeholder="The shooter game..." onChange={onHandleChange}
-            value={input.description && input.description} />
+              {/* Description */}
+              <div className={s.containerLabel}>
+                {errors.description && <img src={iconWarning} alt="Warning" />}
+                <label className={errors.description && s.labelError}>*Description:</label>
+              </div>
+              <input type="text" name="description" autoComplete="off" placeholder="The shooter game..." onChange={onHandleChange}
+                value={input.description && input.description} />
 
-          {/* Released */}
-          <label>Released:</label>
-          <input type="date" name="released" autoComplete="off" onChange={onHandleChange} className={s.inputReleased}
-            value={input.released && input.released} />
+              {/* Released */}
+              <label>Released:</label>
+              <input type="date" name="released" autoComplete="off" onChange={onHandleChange} className={s.inputReleased}
+                value={input.released && input.released} />
 
-          {/* Rating */}
-          <div className={s.containerLabel}>
-            {errors.rating && <img src={iconWarning} alt="Warning" />}
-            <label className={errors.rating && s.labelError}>*Rating:</label>
-          </div>
-          <input type="number" name="rating" autoComplete="off" placeholder="0-5" min={0} max={5} onChange={onHandleChange}
-            value={input.rating && input.rating} />
+              {/* Rating */}
+              <div className={s.containerLabel}>
+                {errors.rating && <img src={iconWarning} alt="Warning" />}
+                <label className={errors.rating && s.labelError}>*Rating:</label>
+              </div>
+              <input type="number" name="rating" autoComplete="off" placeholder="0-5" min={0} max={5} onChange={onHandleChange}
+                value={input.rating && input.rating} />
 
-          {/* Platforms */}
-          <label>Platforms:</label>
-          <input type="text" name="platforms" autoComplete="off" placeholder="PC" onChange={onHandleChange}
-            value={input.platforms && input.platforms} />
+              {/* Platforms */}
+              <label>Platforms:</label>
+              <input type="text" name="platforms" autoComplete="off" placeholder="PC" onChange={onHandleChange}
+                value={input.platforms && input.platforms} />
 
-          {/* Image */}
-          <label>Image:</label>
-          <input type="text" name="image" autoComplete="off" placeholder="URL" onChange={onHandleChange}
-            value={input.image !== "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s.png" ? input.image : ""} />
+              {/* Image */}
+              <label>Image:</label>
+              <input type="text" name="image" autoComplete="off" placeholder="URL" onChange={onHandleChange}
+                value={input.image !== "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s.png" ? input.image : ""} />
 
-          {/* Create */}
-          <button type="submit" > Create </button>
-        </form>
-        <div className={s.divContarner}>
-          <div className={s.containerHs}>
-            <h2>Select genres for your video game</h2>
-            {errors.genres && <h4 className={errors.genres && s.labelError}>It is mandatory to select at least one gender</h4>}
+              {/* Create */}
+              <button type="submit" > Create </button>
+            </form>
           </div>
-          {/* Genres */}
-          <div className={s.containgerGenres}>
-            {
-              images?.map(e => {
-                const name = e.split("/")[3].split(".")[0]
-                return (
-                  <div key={name} className={input?.genres.includes(name) ? 'containerImagesActive' : 'containerImages'}>
-                    <img className={s.imgGenre} src={e} id={name} name='genres' onClick={onHandleChange} />
-                    {name.split(` `).length > 1 ? <><h3>{name.split(" ")[0]}</h3><h3>{name.split(" ")[1]}</h3></> : <h3>{name}</h3>}
-                  </div>)
-              })
-            }
+          <div className={s.divContarner}>
+            <div className={s.containerHs}>
+              <h2>Select genres for your video game</h2>
+              {errors.genres && <h4 className={errors.genres && s.labelError}>It is mandatory to select at least one gender</h4>}
+            </div>
+            {/* Genres */}
+            <div className={s.containgerGenres}>
+              {
+                images?.map(e => {
+                  const name = e.split("/")[3].split(".")[0]
+                  return (
+                    <div key={name} className={input?.genres.includes(name) ? 'containerImagesActive' : 'containerImages'}>
+                      <img className={s.imgGenre} src={e} id={name} name='genres' onClick={onHandleChange} />
+                      {name.split(` `).length > 1 ? <><h3>{name.split(" ")[0]}</h3><h3>{name.split(" ")[1]}</h3></> : <h3>{name}</h3>}
+                    </div>)
+                })
+              }
+            </div>
           </div>
-        </div>
-        <div className={s.card}>
-          <img className={s.img} src={input.image} alt={`${input.name}-imagen`} />
-          <h3 className={s.name}>{input.name}</h3>
-          <div className={s.labels}>{input.genres.map(e => <label key={Math.random() * 100}>{e}</label>)}
-          </div>
+          <Card name={input.name} genres={input?.genres} image={input.image} created={true} match={props.match} />
         </div>
       </div>
     </>)
