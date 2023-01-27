@@ -2,13 +2,16 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 360px;
-  overflow: hidden;
+  width: 300px;
   word-wrap: break-word;
   text-align: center;
-  justify-content: center;
   align-items: center;
-  height: fit-content;
+  border: 2px solid white;
+  overflow: hidden;
+}
+
+.link:hover {
+  opacity: 0.6;
 }
 
 .link {
@@ -21,33 +24,17 @@
 }
 
 .img {
-  min-width: 360px;
-  max-width: 360px;
-  min-height: 360px;
-  max-height: 360px;
+  width: 100%;
+  height: 300px;
   object-fit: cover;
-  border-radius: 25px;
+}
+
+.containerName {
+  width: 100%;
 }
 
 .card h3 {
-  background-color: white;
-  padding: 1px 20px 1px 20px;
-  border-radius: 15px;
-  max-width: fit-content;
-  display: flex;
-  position: relative;
-  top: -30px;
-  justify-items: center;
-}
-
-.name {
-  color: black;
-  display: flex;
-}
-
-.card h6 {
-  padding: 0;
-  margin: 0;
+  background-color: #0071e2;
 }
 
 .containerFav {
@@ -59,11 +46,14 @@
 
 .fav {
   position: absolute;
+  top: 0;
+  right: 0;
   background-color: rgba(255, 0, 0, 0);
-  border: none;
-  font-size: 25px;
   color: red;
+  border: none;
   border-radius: 50%;
+  font-size: 25px;
+  z-index: 1;
 }
 
 .fav:hover {
@@ -73,12 +63,15 @@
 
 .labels {
   display: flex;
-  position: relative;
-  top: -15px;
-  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px;
+  gap: 10px;
 }
 
 .labels label {
+  display: flex;
+  align-items: center;
   background-color: #0071e2;
   border-radius: 5px;
   padding: 2px;
@@ -86,8 +79,8 @@
   font-weight: 501;
 }
 
-a {
-  text-decoration: none;
+.labels label:hover {
+  cursor: pointer;
 }
 
 .deletedButton {
@@ -101,8 +94,44 @@ a {
 .inputModal {
   width: 30vh;
   height: 3vh;
-  border: #0071e2 solid 5px;
-  border-radius: 10px;
+  margin-top: 1rem;
   background-color: #0071e21b;
+}
+
+.accept {
+  border-radius: 10px;
+  border: none;
+  padding: 0.4rem;
   font-size: 1rem;
+  background-color: #0071e2;
+}
+
+.accept:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.cancel {
+  border-radius: 10px;
+  border: none;
+  padding: 0.4rem;
+  font-size: 1rem;
+  background-color: #0071e2;
+}
+
+.cancel:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.containerButtonsModal {
+  margin-top: 1rem;
+  display: flex;
+  gap: 10px;
+}
+
+.h1Modal {
+  color: #0071e2;
 }

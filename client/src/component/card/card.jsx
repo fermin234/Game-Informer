@@ -6,11 +6,15 @@ import { useDispatch } from "react-redux";
 import { deleteVideoGame } from "../../redux/actions";
 import ModalInput from "../Modals/ModalInput";
 import { useModal } from "../../hooks/useModal";
+import ModalConfimation from "../Modals/ModalConfimation";
+import ModalSuccessfully from "../Modals/ModalSuccessfully";
 
-export default function Card({ name, genres, image, id, created }) {
+export default function Card({ name, genres, image, id, created, match, update, setUpdate }) {
 
   const dispatch = useDispatch()
+  const [isOpen, openModal, closeModal] = useModal()
   const [isOpenInput, openModalInput, closeModalInput] = useModal()
+  const [isOpenInfo, openModalInfo, closeModalInfo] = useModal()
   let butonFav = document.getElementsByName(`buttonFav${id}`)
   let favorites = JSON.parse(localStorage.getItem("favorites"))
 
@@ -21,11 +25,14 @@ export default function Card({ name, genres, image, id, created }) {
       favorites.splice(index, 1)
       localStorage.setItem("favorites", JSON.stringify(favorites))
       butonFav[0].innerHTML = "🤍"
+      setUpdate(!update)
     } else {
       favorites = [...favorites, { name, genres, image, id }]
       localStorage.setItem("favorites", JSON.stringify(favorites))
       butonFav[0].innerHTML = "❤"
+      setUpdate(!update)
     }
+    closeModal()
   }
 
   async function handleDelete(e) {
@@ -37,29 +44,73 @@ export default function Card({ name, genres, image, id, created }) {
   }
 
   return (
-    <div className={s.card} >
+    <>
       <ModalInput isOpen={isOpenInput} closeModal={closeModalInput}>
         <input className={s.inputModal} type="password" onChange={handleDelete} />
       </ModalInput>
-      <div className={s.containerFav}>
-        <button name={`buttonFav${id}`} className={s.fav} onClick={() => handleFavorite()}> {
-          favorites.find(e => e.id === id) ? "❤" : "🤍"
-        } </button>
-      </div>
-      <Link className={s.link} to={`/detail/${id}`} >
-        <img className={s.img} src={image} alt={`${name}-imagen`} />
-        <h3 className={s.name}>{name}</h3>
-      </Link>
-      <div className={s.labels}>
+      <ModalConfimation isOpen={isOpen} closeModal={closeModal}>
+        <h1 className={s.h1Modal}>{`Remove ${name} from your favourites?`}</h1>
+        <div className={s.containerButtonsModal}>
+          <button className={s.accept} onClick={handleFavorite}>Accept</button>
+          <button className={s.cancel} onClick={closeModal}>Cancel</button>
+        </div>
+      </ModalConfimation>
+      <ModalSuccessfully isOpen={isOpenInfo} closeModal={closeModalInfo}>
+        <h1>Video Game deleted succes</h1>
+      </ModalSuccessfully>
+      <div className={s.card} >
         {
-          genres.length > 3 ?
-            genres.slice(0, 3).map(e => <label key={e + id}>{e}</label>)
-            : genres.map(e => <label key={e + id}>{e}</label>)
+          match.path === '/create' ?
+            undefined
+            : match.path !== '/home' ?
+              <button name={`buttonFav${id}`} className={s.fav} onClick={openModal}> {
+                favorites.find(e => e.id === id) ? "❤" : "🤍"
+              } </button>
+              : match.path === '/home' ?
+                <button name={`buttonFav${id}`} className={s.fav} onClick={handleFavorite}> {
+                  favorites.find(e => e.id === id) ? "❤" : "🤍"
+                } </button>
+                : undefined
+        }
+        {
+          match.path !== '/create' ?
+            <Link className={s.link} to={`/detail/${id}`} >
+              <img className={s.img} src={image} alt={`${name}-imagen`} />
+              <div className={s.containerName}>
+                <h3>{name}</h3>
+              </div>
+              <div className={s.labels}>
+                {
+                  match.path !== '/create' ?
+                    genres.length > 3 ?
+                      genres.slice(0, 3).map(e => <label key={e + id}>{e}</label>)
+                      : genres.map(e => <label key={e + id}>{e}</label>)
+                    : genres.map(e => <label key={e + id}>{e}</label>)
+                }
+              </div>
+            </Link>
+            :
+            <div className={s.link}>
+              <img className={s.img} src={image} alt={`${name}-imagen`} />
+              <div className={s.containerName}>
+                <h3>{name}</h3>
+              </div>
+              <div className={s.labels}>
+                {
+                  match.path !== '/create' ?
+                    genres.length > 3 ?
+                      genres.slice(0, 3).map(e => <label key={e + id}>{e}</label>)
+                      : genres.map(e => <label key={e + id}>{e}</label>)
+                    : genres.map(e => <label key={e + id}>{e}</label>)
+                }
+              </div>
+            </div>
+        }
+        {
+          match.path !== '/create' &&
+            created ? <button className={s.deletedButton} onClick={openModalInput}> Delete </button> : undefined
         }
       </div>
-      {
-        created ? <button className={s.deletedButton} onClick={openModalInput}> Delete </button> : undefined
-      }
-    </div>
+    </>
   )
 }
