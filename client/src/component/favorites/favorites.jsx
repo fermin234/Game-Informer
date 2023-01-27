@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import CardFavorite from "../CardFavorite/CardFavorite";
+import Card from "../Card/Card.jsx";
 import NavBar from "../NavBar/NavBar";
 import s from './Favorites.module.css'
 import { useModal } from '../../hooks/useModal.js'
@@ -47,7 +47,7 @@ export default function Favorites({ match, history }) {
         <div className={s.contarinerCard}>
           {
             !favorites?.length ?
-              <div >
+              <>
                 <h1 className={s.error}>You have not added any games to your favourites.</h1>
                 <br />
                 <br />
@@ -55,10 +55,12 @@ export default function Favorites({ match, history }) {
                 {setTimeout(() => {
                   history.push("/home")
                 }, 5000)}
+              </>
+              :
+              <div className={s.prueba}>
+                {favorites?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.image} id={e.id} setUpdate={setUpdate} update={update} match={match} />)}
               </div>
-              : undefined
           }
-          {favorites?.map(e => <CardFavorite key={e.id} name={e.name} genres={e.genres} image={e.image} id={e.id} setUpdate={setUpdate} update={update} />)}
         </div>
       </div>
     </div >
