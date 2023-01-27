@@ -64,7 +64,8 @@
 }
 
 .accept {
-  border-radius: 15px;
+  background-color: #0071e2;
+  border-radius: 10px;
   border: none;
   padding: 0.4rem;
 }
@@ -74,7 +75,8 @@
 }
 
 .cancel {
-  border-radius: 15px;
+  background-color: #0071e2;
+  border-radius: 10px;
   border: none;
   padding: 0.4rem;
 }
