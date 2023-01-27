@@ -1,12 +1,13 @@
 import './modal.css'
 
-function ModalLoader({ children, isOpen }) {
+function ModalImage({ children, isOpen }) {
   return (
     <div className={`modal ${isOpen && "is-open"}`}>
       <div className="modal-loader-container">
         <div className='container-icon-text'>
           <h1>Loading!</h1>
         </div>
+        {console.log(children)}
         {children}
         <div className="loader"></div>
       </div>
@@ -14,4 +15,4 @@ function ModalLoader({ children, isOpen }) {
   )
 }
 
-export default ModalLoader
+export default ModalImage

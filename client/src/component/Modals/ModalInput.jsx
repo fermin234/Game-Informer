@@ -7,7 +7,7 @@ function ModalInput({ children, isOpen, closeModal }) {
       <div className="modal-container" onClick={handleCloseModal}>
         <button className='modal-close' onClick={closeModal}> X </button>
         <div className='container-icon-text'>
-          <h1>Por favor introduzca la contraseña para poder borrar el video juego</h1>
+          <h1>Please enter the password in order to delete the video game.</h1>
         </div>
         {children}
       </div>

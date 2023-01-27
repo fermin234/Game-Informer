@@ -6,8 +6,6 @@ function ModalConfimation({ children, isOpen, closeModal }) {
     <div className={`modal ${isOpen && "is-open"}`} onClick={closeModal}>
       <div className="modal-container" onClick={handleCloseModal}>
         <button className='modal-close' onClick={closeModal}> X </button>
-        <div className='container-icon-text'>
-        </div>
         {children}
       </div>
     </div>
