@@ -56,14 +56,8 @@ export default function Home({ match }) {
                   />
                 </div>
                 <div className={s.containerCards}>
-                  {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} created={e.created} update={update} setUpdate={setUpdate} />)}
-                </div>
-              </div>
-              <div className={s.containerPagination}>
-                <div className={s.div}>
-                </div>
-                <div className={s.div2}>
-                  <div>
+                  {currentVideoGame?.map(e => <Card key={e.id} name={e.name} genres={e.genres} image={e.background_image} id={e.id} created={e.created} update={update} setUpdate={setUpdate} match={match} />)}
+                  <div className={s.prueba}>
                     <Pagination videoGamePerPage={videoGamePerPage}
                       listVideoGames={listVideoGames.length}
                       paginado={paginado}

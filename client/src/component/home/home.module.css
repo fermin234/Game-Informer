@@ -22,10 +22,11 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  padding: 10px 0px 30px 0px;
+  gap: 30px;
   background-color: #212121;
   width: 75%;
+  margin: 1rem 0 3rem 0;
+  height: fit-content;
 }
 
 .loader {
@@ -70,25 +71,8 @@ h1 {
   width: 75%;
 }
 
-.containerPagination {
-  background-color: #212121;
-  display: flex;
-  right: 0px;
-  width: 100%;
-  background-color: purple;
-}
-
-.div {
-  width: 25%;
-  background-color: #212121;
-}
-
-.div2 {
-  background-color: #21212100;
-  display: flex;
-  justify-content: center;
+.prueba {
   position: fixed;
   bottom: 0;
-  left: 46.5%;
-  width: fit-content;
+  z-index: 1;
 }
