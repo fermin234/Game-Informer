@@ -39,10 +39,25 @@
 
 .images {
   width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .image {
   width: 20%;
   height: auto;
   object-fit: cover;
+}
+
+.image:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.imgModal {
+  width: 100%;
+  max-height: 90%;
 }

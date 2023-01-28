@@ -4,14 +4,23 @@ import s from './About.module.css'
 import * as imagesPage from '../../assets/App'
 import { useModal } from '../../hooks/useModal'
 import ModalImage from '../Modals/ModalImage'
+import { useState } from 'react'
 
 export default function About({ match }) {
 
   const [isOpen, openModal, closeModal] = useModal()
+  let [imgValue, setImgValue] = useState(null)
 
   const images = []
   for (const e in imagesPage) {
     images.push(imagesPage[e])
+  }
+
+  function handleModal(e) {
+    console.log(e.target.src);
+    setImgValue(e.target.src)
+    console.log(document.getElementById("img"))
+    openModal()
   }
 
   return (
@@ -48,16 +57,39 @@ export default function About({ match }) {
           <div className={s.subContarnerTechnologies}>
             <div>
               <h1>Technologies and Tools</h1>
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="50" width="52" alt="javascript logo" />
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="50" width="52" alt="react logo" />
-              <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/redux/redux-original.svg" height="50" width="52" alt="redux logo" />
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="50" width="52" alt="nodejs logo" />
-              <img src="https://www.nextontop.com/assets/img/services/web/expressjs.svg" height="55" width="80" alt="express logo" />
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" height="40" width="40" alt="postgresql logo" />
-              <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/sequelize/sequelize-original.svg" height="50" width="52" alt="sequelize logo" />
+              <a href="https://www.javascript.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="50" width="52" alt="javascript logo" />
+              </a>
+
+              <a href="https://es.reactjs.org/" target="_blank" rel="noopener noreferrer">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="50" width="52" alt="react logo" />
+              </a>
+
+              <a href="https://es.redux.js.org/" target="_blank" rel="noopener noreferrer">
+                <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/redux/redux-original.svg" height="50" width="52" alt="redux logo" />
+              </a>
+
+              <a href="https://nodejs.org/es/" target="_blank" rel="noopener noreferrer">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="50" width="52" alt="nodejs logo" />
+              </a>
+
+              <a href="https://expressjs.com/es/" target="_blank" rel="noopener noreferrer">
+                <img src="https://www.nextontop.com/assets/img/services/web/expressjs.svg" height="55" width="80" alt="express logo" />
+              </a>
+
+              <a href="https://www.postgresql.org/" target="_blank" rel="noopener noreferrer">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" height="40" width="40" alt="postgresql logo" />
+              </a>
+
+              <a href="https://sequelize.org/" target="_blank" rel="noopener noreferrer">
+                <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/sequelize/sequelize-original.svg" height="50" width="52" alt="sequelize logo" />
+              </a>
+
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="40" width="52" alt="css3 logo" />
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="40" width="52" alt="html5 logo" />
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="40" width="52" alt="git logo" />
+              <a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="40" width="52" alt="git logo" />
+              </a>
             </div>
             <div className={s.containerTechnologiesText}>
               <p>
@@ -78,11 +110,11 @@ export default function About({ match }) {
         </div>
         <div className={s.images}>
           {
-            images?.length && images.map(e => <img className={s.image} src={e} alt={e} onClick={() => openModal(e)} />)
+            images?.length && images.map(e => <img className={s.image} src={e} alt={e} onClick={e => handleModal(e)} />)
           }
         </div>
         <ModalImage isOpen={isOpen} closeModal={closeModal}>
-
+          <img className={s.imgModal} id="img" src={imgValue} alt={imgValue} />
         </ModalImage>
       </div>
     </div >
