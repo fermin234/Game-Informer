@@ -31,10 +31,11 @@
 
 .containerName {
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .card h3 {
-  background-color: #0071e2;
+  background-color: #1664b1;
 }
 
 .containerFav {
@@ -72,7 +73,7 @@
 .labels label {
   display: flex;
   align-items: center;
-  background-color: #0071e2;
+  background-color: #1664b1;
   border-radius: 5px;
   padding: 2px;
   color: black;
@@ -134,4 +135,35 @@
 
 .h1Modal {
   color: #0071e2;
+}
+
+.platforms {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.containerPlatforms {
+  width: 100%;
+}
+
+.containerPlatforms h3 {
+  background-color: #1664b1;
+  margin-bottom: 10px;
+}
+
+.platforms label {
+  display: flex;
+  align-items: center;
+  background-color: #1664b1;
+  border-radius: 5px;
+  padding: 2px;
+  color: black;
+  font-weight: 501;
+}
+
+.containerGenres {
+  width: 100%;
 }

@@ -9,7 +9,7 @@ import { useModal } from "../../hooks/useModal";
 import ModalConfimation from "../Modals/ModalConfimation";
 import ModalSuccessfully from "../Modals/ModalSuccessfully";
 
-export default function Card({ name, genres, image, id, created, match, update, setUpdate }) {
+export default function Card({ id, name, genres, image, platforms, created, match, update, setUpdate }) {
 
   const dispatch = useDispatch()
   const [isOpen, openModal, closeModal] = useModal()
@@ -81,10 +81,8 @@ export default function Card({ name, genres, image, id, created, match, update, 
               </div>
               <div className={s.labels}>
                 {
-                  match.path !== '/create' ?
-                    genres.length > 3 ?
-                      genres.slice(0, 3).map(e => <label key={e + id}>{e}</label>)
-                      : genres.map(e => <label key={e + id}>{e}</label>)
+                  genres.length > 3 ?
+                    genres.slice(0, 3).map(e => <label key={e + id}>{e}</label>)
                     : genres.map(e => <label key={e + id}>{e}</label>)
                 }
               </div>
@@ -95,14 +93,25 @@ export default function Card({ name, genres, image, id, created, match, update, 
               <div className={s.containerName}>
                 <h3>{name}</h3>
               </div>
-              <div className={s.labels}>
+              <div className={s.containerGenres}>
                 {
-                  match.path !== '/create' ?
-                    genres.length > 3 ?
-                      genres.slice(0, 3).map(e => <label key={e + id}>{e}</label>)
-                      : genres.map(e => <label key={e + id}>{e}</label>)
-                    : genres.map(e => <label key={e + id}>{e}</label>)
+                  genres?.length ? <h3>Genres:</h3> : undefined
                 }
+                <div className={s.labels}>
+                  {
+                    genres.map(e => <label key={e + id}>{e}</label>)
+                  }
+                </div>
+              </div>
+              <div className={s.containerPlatforms}>
+                {
+                  platforms?.length ? <h3>Platforms:</h3> : undefined
+                }
+                <div className={s.platforms}>
+                  {
+                    platforms?.length ? platforms.map(e => <label key={e}>{e}</label>) : undefined
+                  }
+                </div>
               </div>
             </div>
         }
