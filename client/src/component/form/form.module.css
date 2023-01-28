@@ -23,6 +23,13 @@
   gap: 10px;
 }
 
+.platforms {
+  text-align: center;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 .inputReleased {
   width: 90%;
 }
@@ -136,6 +143,7 @@
   margin: 5px;
   font-weight: bold;
   width: 100%;
+  font-size: 1rem;
 }
 
 .labelError {
@@ -171,4 +179,28 @@
 .containerHs h4 {
   margin: 0;
   padding: 0;
+}
+
+.buttonCreate {
+  background-color: black;
+  color: white;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.buttonCreate:hover {
+  background-color: transparent;
+  cursor: pointer;
+  color: black;
+}
+
+.clearAllPlatforms {
+  margin-top: 5px;
+  width: 100%;
+}
+
+.clearAllPlatforms:hover {
+  cursor: pointer;
 }

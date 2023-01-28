@@ -1,40 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { createVideoGame, ResetFilter, loader } from "../../redux/actions";
-import NavBar from "../NavBar/NavBar";
 import s from './Form.module.css'
-import Validate from "./validate.js";
 import * as allImages from '../../assets/iconsGenres'
-import { useModal } from "../../hooks/useModal";
-import ModalInformation from "../Modals/ModalInformation";
-import ModalSuccessfully from "../Modals/ModalSuccessfully";
 import iconWarning from '../../assets/iconWarning.png'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createVideoGame, ResetFilter, loader, getPlataforms } from "../../redux/actions";
+import { useModal } from "../../hooks/useModal";
+import Validate from "./validate.js";
 import Card from '../Card/Card.jsx'
+import NavBar from "../NavBar/NavBar.jsx";
+import ModalInformation from "../Modals/ModalInformation.jsx";
+import ModalSuccessfully from "../Modals/ModalSuccessfully.jsx";
 
 export default function Form(props) {
   const dispatch = useDispatch()
+  // LocalStorage
   !localStorage.getItem("form") && localStorage.setItem("form", "{}")
-  const [form, setForm] = useState(JSON.parse(localStorage.getItem("form")))
+  const [form] = useState(JSON.parse(localStorage.getItem("form")))
+
+  const plataforms = useSelector(s => s.plataforms)
 
   const [input, setInput] = useState({
     name: form?.name ? form.name : "",
     description: form?.description ? form.description : "",
     released: form?.released ? form.released : "",
     rating: form?.rating ? form.rating : "",
-    platforms: form?.platforms ? form.platforms : [],
+    platforms: form?.platforms?.length ? form.platforms : [],
     genres: form?.genres?.length ? form.genres : [],
     image: form?.image ? form.image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s.png",
     created: form?.created ? form.created : true
   })
+  const [errors, setErrors] = useState({})
+
   const [isOpen, openModal, closeModal] = useModal()
   const [isOpenSucces, openModalSucces, closeModalSucces] = useModal()
 
   const images = []
+
   for (const e in allImages) {
     images.push(allImages[e])
   }
 
-  const [errors, setErrors] = useState({})
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -62,9 +67,11 @@ export default function Form(props) {
 
   function onHandleChange(e) {
     if (e.target.name === "platforms") {
+      if (!e.target.value) return
+      if (input.platforms.includes(e.target.value)) return
       setInput({
         ...input,
-        platforms: e.target.value.split(" "),
+        platforms: [...input.platforms, e.target.value]
       })
     } else if (e.target.name === "genres") {
       if (input.genres.includes(e.target.id)) {
@@ -96,11 +103,6 @@ export default function Form(props) {
     }
   }
 
-  useEffect(() => {
-    setErrors(Validate(input))
-    localStorage.setItem("form", JSON.stringify(input))
-  }, [input])
-
   function resetForm(e) {
     e.target.name.value = ''
     e.target.description.value = ''
@@ -109,6 +111,16 @@ export default function Form(props) {
     e.target.platforms.value = ''
     e.target.image.value = ''
   }
+
+  useEffect(() => {
+    setErrors(Validate(input))
+    localStorage.setItem("form", JSON.stringify(input))
+  }, [input])
+
+  useEffect(() => {
+    if (!plataforms.length)
+      dispatch(getPlataforms())
+  }, [dispatch, plataforms])
 
   return (
     <>
@@ -154,8 +166,14 @@ export default function Form(props) {
 
               {/* Platforms */}
               <label>Platforms:</label>
-              <input type="text" name="platforms" autoComplete="off" placeholder="PC" onChange={onHandleChange}
-                value={input.platforms && input.platforms} />
+              <select name="platforms" className={s.platforms} onChange={onHandleChange}>
+                <option></option>
+                {
+                  plataforms?.length && plataforms.map(e => <option key={e.name} value={e.name}>{e.name}</option>)
+                }
+              </select>
+              <button type='button' className={s.clearAllPlatforms} onClick={() => setInput({ ...input, platforms: [] })}>Clear all platforms</button>
+
 
               {/* Image */}
               <label>Image:</label>
@@ -163,7 +181,7 @@ export default function Form(props) {
                 value={input.image !== "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch19yXTth6yL5J-SU6FafjJAUv1C1ptwziIyqk_3Skw&s.png" ? input.image : ""} />
 
               {/* Create */}
-              <button type="submit" > Create </button>
+              <button type="submit" className={s.buttonCreate}> Create </button>
             </form>
           </div>
           <div className={s.divContarner}>
@@ -178,14 +196,14 @@ export default function Form(props) {
                   const name = e.split("/")[3].split(".")[0]
                   return (
                     <div key={name} className={input?.genres.includes(name) ? 'containerImagesActive' : 'containerImages'}>
-                      <img className={s.imgGenre} src={e} id={name} name='genres' onClick={onHandleChange} />
+                      <img className={s.imgGenre} src={e} id={name} name='genres' alt={name} onClick={onHandleChange} />
                       {name.split(` `).length > 1 ? <><h3>{name.split(" ")[0]}</h3><h3>{name.split(" ")[1]}</h3></> : <h3>{name}</h3>}
                     </div>)
                 })
               }
             </div>
           </div>
-          <Card name={input.name} genres={input?.genres} image={input.image} created={true} match={props.match} />
+          <Card name={input.name} genres={input?.genres} image={input.image} created={true} match={props.match} platforms={input.platforms} />
         </div>
       </div>
     </>)
