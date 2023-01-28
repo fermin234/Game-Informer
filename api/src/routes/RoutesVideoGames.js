@@ -8,6 +8,7 @@ const {
   getScreenshotsGame,
   deleteVideoGame,
   validatePassword,
+  getPlataforms,
 } = require("./controllers.js");
 
 router.get("/", async (req, res) => {
@@ -23,8 +24,15 @@ router.get("/", async (req, res) => {
 
 router.get("/validatePassword", async (req, res) => {
   try {
-    console.log(req.query);
     res.json(await validatePassword(req.query));
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
+});
+
+router.get("/getPlataforms", async (req, res) => {
+  try {
+    res.json(await getPlataforms());
   } catch (error) {
     res.status(404).json(error.message);
   }
@@ -47,7 +55,6 @@ router.get("/:idVideogame", async (req, res) => {
   }
 });
 
-//falta relacionar los generos
 router.post("/", async (req, res) => {
   const {
     name,
