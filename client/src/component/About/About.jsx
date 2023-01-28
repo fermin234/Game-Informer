@@ -17,9 +17,7 @@ export default function About({ match }) {
   }
 
   function handleModal(e) {
-    console.log(e.target.src);
     setImgValue(e.target.src)
-    console.log(document.getElementById("img"))
     openModal()
   }
 
@@ -110,7 +108,7 @@ export default function About({ match }) {
         </div>
         <div className={s.images}>
           {
-            images?.length && images.map(e => <img className={s.image} src={e} alt={e} onClick={e => handleModal(e)} />)
+            images?.length && images.map(e => <img key={e} className={s.image} src={e} alt={e} onClick={e => handleModal(e)} />)
           }
         </div>
         <ModalImage isOpen={isOpen} closeModal={closeModal}>
