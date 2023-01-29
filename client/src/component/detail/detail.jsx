@@ -48,7 +48,7 @@ export default function Detail({ match }) {
             <h1>{videoGame.name}</h1>
           </div>
           <div className={s.item}>
-            <img className={s.imageDetail} src={videoGame.background_image} onClick={handleChangeImage} alt="Image-Video-Game" />
+            <img className={s.imageDetail} src={videoGame.background_image} onClick={handleChangeImage} alt="Video-Game" />
           </div>
           <div className={s.item}>
             <span>{videoGame.description?.replace(/<[^>]*>/g, '')}</span>
