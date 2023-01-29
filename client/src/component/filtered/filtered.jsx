@@ -66,6 +66,7 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
             rating: e.target.value
           })
           break;
+        default:
       }
     }
     //GENRES
@@ -145,7 +146,7 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
             <div className={s.containerFilters}>
               <h1>By category:</h1>
               <div className={s.containerButtons}>
-                {generos?.map(e => <button key={e.id} id="genre" value={e.name} className={filtersActive?.genre == e.name
+                {generos?.map(e => <button key={e.id} id="genre" value={e.name} className={filtersActive?.genre === e.name
                   ? s.labelategoryActive
                   : s.labelategory} onClick={handleFilter} >{e.name}</button>)}
               </div>
@@ -169,18 +170,18 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
               </div>
             </div>
             <div className={s.socials}>
-              <a href="https://www.linkedin.com/in/fermin-solaberrieta/" target="_blank">
+              <a href="https://www.linkedin.com/in/fermin-solaberrieta/" target="_blank" rel="noreferrer">
                 <button className={s.icons}> < AiFillLinkedin /></button>
               </a>
-              <a href="https://github.com/fermin234" target="_blank">
+              <a href="https://github.com/fermin234" target="_blank" rel="noreferrer">
                 <button className={s.icons}>< AiOutlineGithub /></button>
               </a>
-              <a href="https://www.canva.com/design/DAFL8tvQGrg/WqNwT4FWhdG38MG0DnHduA/view?utm_content=DAFL8tvQGrg&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink" target="_blank">
+              <a href="https://www.canva.com/design/DAFL8tvQGrg/WqNwT4FWhdG38MG0DnHduA/view?utm_content=DAFL8tvQGrg&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink" target="_blank" rel="noreferrer">
                 <button className={s.iconsPorfolio}> <AiOutlineFilePdf /> CV </button>
               </a>
-              <a href="#">
-                <button className={s.iconsPorfolio}> <BsFillBriefcaseFill />Portfolio </button>
-              </a>
+              {/* <a href="#" rel="noreferrer"> */}
+              <button className={s.iconsPorfolio}> <BsFillBriefcaseFill />Portfolio </button>
+              {/* </a> */}
             </div>
             <Link className={s.socials} to='/about'>
               <div>
