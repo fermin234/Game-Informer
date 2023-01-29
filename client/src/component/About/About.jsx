@@ -2,6 +2,7 @@ import React from 'react'
 import NavBar from '../NavBar/NavBar'
 import s from './About.module.css'
 import * as imagesPage from '../../assets/App'
+import * as iconsSocials from '../../assets/Socials'
 import { useModal } from '../../hooks/useModal'
 import ModalImage from '../Modals/ModalImage'
 import { useState } from 'react'
@@ -12,12 +13,16 @@ export default function About({ match }) {
   let [imgValue, setImgValue] = useState(null)
 
   const images = []
+  const icons = []
+  for (const e in iconsSocials) {
+    icons.push(iconsSocials[e])
+  }
   for (const e in imagesPage) {
     images.push(imagesPage[e])
   }
 
   function handleModal(e) {
-    setImgValue(e.target.src)
+    setImgValue(e)
     openModal()
   }
 
@@ -107,13 +112,67 @@ export default function About({ match }) {
           </div>
         </div>
         <div className={s.images}>
-          {
-            images?.length && images.map(e => <img key={e} className={s.image} src={e} alt={e} onClick={e => handleModal(e)} />)
-          }
+          <div>
+            <h1>LandingPage:</h1>
+            <img className={s.image} src={images[0]} alt="LandingPage" onClick={() => handleModal(images[0])} />
+          </div>
+          <div>
+            <h1>Home:</h1>
+            <img className={s.image} src={images[1]} alt="Home" onClick={() => handleModal(images[1])} />
+          </div>
+          <div>
+            <h1>Favorites:</h1>
+            <div className={s.containerImages}>
+              <img className={s.image} src={images[2]} alt="Favorites" onClick={() => handleModal(images[2])} />
+              <img className={s.image} src={images[3]} alt="Favorites1" onClick={() => handleModal(images[3])} />
+              <img className={s.image} src={images[4]} alt="Favorites2" onClick={() => handleModal(images[4])} />
+              <img className={s.image} src={images[5]} alt="Favorites3" onClick={() => handleModal(images[5])} />
+              <img className={s.image} src={images[6]} alt="Favorites4" onClick={() => handleModal(images[6])} />
+            </div>
+          </div>
+          <div>
+            <h1>Detail Video Game:</h1>
+            <div className={s.containerImages}>
+              <img className={s.image} src={images[7]} alt="Detail" onClick={() => handleModal(images[7])} />
+              <img className={s.image} src={images[8]} alt="Detail1" onClick={() => handleModal(images[8])} />
+              <div className={s.containerImages}>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h1>Create Video Game:</h1>
+            <div className={s.containerImages}>
+              <img className={s.image} src={images[9]} alt="Create" onClick={() => handleModal(images[9])} />
+              <img className={s.image} src={images[10]} alt="Create1" onClick={() => handleModal(images[10])} />
+              <div className={s.containerImages}>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h1>Delete Video Game:</h1>
+            <img className={s.image} src={images[11]} alt="Delete" onClick={() => handleModal(images[11])} />
+          </div>
         </div>
         <ModalImage isOpen={isOpen} closeModal={closeModal}>
           <img className={s.imgModal} id="img" src={imgValue} alt={imgValue} />
         </ModalImage>
+        <footer className={s.footer}>
+          <a href="https://github.com/fermin234" target="_blank" rel="noopener noreferrer">
+            <img src={icons[0]} alt="github" />
+          </a>
+          <img src={icons[4]} alt="diagonal" />
+          <a href="https://www.linkedin.com/in/fermin-solaberrieta/" target="_blank" rel="noopener noreferrer">
+            <img src={icons[1]} alt="linkedin" />
+          </a>
+          <img src={icons[4]} alt="diagonal" />
+          <a href="http://" target="_blank" rel="noopener noreferrer">
+            <img src={icons[2]} alt="portfolio" />
+          </a>
+          <img src={icons[4]} alt="diagonal" />
+          <a href="http://" target="_blank" rel="noopener noreferrer">
+            <img src={icons[3]} alt="whatsapp" />
+          </a>
+        </footer>
       </div>
     </div >
   )
