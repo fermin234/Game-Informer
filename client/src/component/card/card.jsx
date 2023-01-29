@@ -7,14 +7,12 @@ import { deleteVideoGame } from "../../redux/actions";
 import ModalInput from "../Modals/ModalInput";
 import { useModal } from "../../hooks/useModal";
 import ModalConfimation from "../Modals/ModalConfimation";
-import ModalSuccessfully from "../Modals/ModalSuccessfully";
 
 export default function Card({ id, name, genres, image, platforms, created, match, update, setUpdate }) {
 
   const dispatch = useDispatch()
   const [isOpen, openModal, closeModal] = useModal()
   const [isOpenInput, openModalInput, closeModalInput] = useModal()
-  const [isOpenInfo, openModalInfo, closeModalInfo] = useModal()
   let butonFav = document.getElementsByName(`buttonFav${id}`)
   let favorites = JSON.parse(localStorage.getItem("favorites"))
 
@@ -55,9 +53,6 @@ export default function Card({ id, name, genres, image, platforms, created, matc
           <button className={s.cancel} onClick={closeModal}>Cancel</button>
         </div>
       </ModalConfimation>
-      <ModalSuccessfully isOpen={isOpenInfo} closeModal={closeModalInfo}>
-        <h1>Video Game deleted succes</h1>
-      </ModalSuccessfully>
       <div className={s.card} >
         {
           match.path === '/create' ?
