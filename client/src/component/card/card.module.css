@@ -71,6 +71,7 @@
   justify-content: center;
   margin-bottom: 10px;
   gap: 10px;
+  margin-top: 10px;
 }
 
 .labels label {
@@ -146,6 +147,7 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin-bottom: 10px;
 }
 
 .containerPlatforms {
