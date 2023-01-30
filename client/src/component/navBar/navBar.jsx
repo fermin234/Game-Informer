@@ -35,23 +35,26 @@ export default function NavBar({ match, setCurrentPage }) {
         {match.path === "/home" &&
           <label className={s.label}>Filters</label>
         }
-        {match.path === "/favorites" &&
-          <h1>List</h1>
-        }
       </div>
       <div className={s.containterNavBar}>
-        <Link className={s.link} to='/create'>
-          <label className={s.label}>Create</label>
-        </Link>
+        {
+          match.path !== '/about' &&
+          <Link className={s.link} to='/create'>
+            <label className={s.label}>Create</label>
+          </Link>
+        }
         {
           match.path === "/home" &&
           <form id="form" className={s.form} onSubmit={onHandelSubmit}>
             <input className={s.input} name='input' type="search" placeholder="Search Video Game" autoComplete="off" onChange={onHandleChange} />
           </form>
         }
-        <Link className={s.link} to='/favorites'>
-          <label className={s.label} >Favorites</label>
-        </Link>
+        {
+          match.path !== '/about' &&
+          <Link className={s.link} to='/favorites'>
+            <label className={s.label} >Favorites</label>
+          </Link>
+        }
       </div>
     </div>
   )
