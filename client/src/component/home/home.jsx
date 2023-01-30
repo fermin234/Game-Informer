@@ -61,6 +61,7 @@ export default function Home({ match }) {
                     setUpdate={setUpdate}
                     setInitial={setInitial}
                     setFinal={setFinal}
+                    paginado={paginado}
                   />
                 </div>
                 <div className={s.containerCards}>

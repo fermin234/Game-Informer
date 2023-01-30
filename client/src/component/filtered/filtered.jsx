@@ -85,7 +85,9 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
         })
       }
     }
+    resetPagination()
     dispatch(filter(value))
+    setCurrentPage(1)
   }
 
   function handleClearFilters() {
