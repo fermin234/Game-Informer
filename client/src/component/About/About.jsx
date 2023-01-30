@@ -1,25 +1,26 @@
 import React from 'react'
 import NavBar from '../NavBar/NavBar'
 import s from './About.module.css'
-import * as imagesPage from '../../assets/App'
+// import * as imagesPage from '../../assets/App'
 import * as iconsSocials from '../../assets/Socials'
 import { useModal } from '../../hooks/useModal'
 import ModalImage from '../Modals/ModalImage'
 import { useState } from 'react'
+import imagesPage from '../../assets/App'
 
 export default function About({ match }) {
 
   const [isOpen, openModal, closeModal] = useModal()
   let [imgValue, setImgValue] = useState(null)
 
-  const images = []
+  // const images = []
   const icons = []
   for (const e in iconsSocials) {
     icons.push(iconsSocials[e])
   }
-  for (const e in imagesPage) {
-    images.push(imagesPage[e])
-  }
+  // for (const e in imagesPage) {
+  //   images.push(imagesPage[e])
+  // }
 
   function handleModal(e) {
     setImgValue(e)
@@ -114,27 +115,27 @@ export default function About({ match }) {
         <div className={s.images}>
           <div>
             <h1>LandingPage:</h1>
-            <img className={s.image} src={images[0]} alt="LandingPage" onClick={() => handleModal(images[0])} />
+            <img className={s.image} src={imagesPage.LandingPage} alt="LandingPage" onClick={() => handleModal(imagesPage.LandingPage)} />
           </div>
           <div>
             <h1>Home:</h1>
-            <img className={s.image} src={images[1]} alt="Home" onClick={() => handleModal(images[1])} />
+            <img className={s.image} src={imagesPage.Home} alt="Home" onClick={() => handleModal(imagesPage.Home)} />
           </div>
           <div>
             <h1>Favorites:</h1>
             <div className={s.containerImages}>
-              <img className={s.image} src={images[2]} alt="Favorites" onClick={() => handleModal(images[2])} />
-              <img className={s.image} src={images[3]} alt="Favorites1" onClick={() => handleModal(images[3])} />
-              <img className={s.image} src={images[4]} alt="Favorites2" onClick={() => handleModal(images[4])} />
-              <img className={s.image} src={images[5]} alt="Favorites3" onClick={() => handleModal(images[5])} />
-              <img className={s.image} src={images[6]} alt="Favorites4" onClick={() => handleModal(images[6])} />
+              <img className={s.image} src={imagesPage.Favorites} alt="Favorites" onClick={() => handleModal(imagesPage.Favorites)} />
+              <img className={s.image} src={imagesPage.Favorites2} alt="Favorites1" onClick={() => handleModal(imagesPage.Favorites2)} />
+              <img className={s.image} src={imagesPage.Favorites3} alt="Favorites2" onClick={() => handleModal(imagesPage.Favorites3)} />
+              <img className={s.image} src={imagesPage.Favorites4} alt="Favorites3" onClick={() => handleModal(imagesPage.Favorites4)} />
+              <img className={s.image} src={imagesPage.Favorites5} alt="Favorites4" onClick={() => handleModal(imagesPage.Favorites5)} />
             </div>
           </div>
           <div>
             <h1>Detail Video Game:</h1>
             <div className={s.containerImages}>
-              <img className={s.image} src={images[7]} alt="Detail" onClick={() => handleModal(images[7])} />
-              <img className={s.image} src={images[8]} alt="Detail1" onClick={() => handleModal(images[8])} />
+              <img className={s.image} src={imagesPage.VideoGameDetail1} alt="Detail" onClick={() => handleModal(imagesPage.VideoGameDetail1)} />
+              <img className={s.image} src={imagesPage.VideoGameDetail2} alt="Detail1" onClick={() => handleModal(imagesPage.VideoGameDetail2)} />
               <div className={s.containerImages}>
               </div>
             </div>
@@ -142,15 +143,15 @@ export default function About({ match }) {
           <div>
             <h1>Create Video Game:</h1>
             <div className={s.containerImages}>
-              <img className={s.image} src={images[9]} alt="Create" onClick={() => handleModal(images[9])} />
-              <img className={s.image} src={images[10]} alt="Create1" onClick={() => handleModal(images[10])} />
+              <img className={s.image} src={imagesPage.CreateVideoGame} alt="Create" onClick={() => handleModal(imagesPage.CreateVideoGame)} />
+              <img className={s.image} src={imagesPage.CreateVideoGame2} alt="Create1" onClick={() => handleModal(imagesPage.CreateVideoGame2)} />
               <div className={s.containerImages}>
               </div>
             </div>
           </div>
           <div>
             <h1>Delete Video Game:</h1>
-            <img className={s.image} src={images[11]} alt="Delete" onClick={() => handleModal(images[11])} />
+            <img className={s.image} src={imagesPage.DeleteVideoGame} alt="Delete" onClick={() => handleModal(imagesPage.DeleteVideoGame)} />
           </div>
         </div>
         <ModalImage isOpen={isOpen} closeModal={closeModal}>
