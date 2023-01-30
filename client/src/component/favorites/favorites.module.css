@@ -31,7 +31,7 @@
   justify-content: center;
   flex-wrap: wrap;
   min-height: fit-content;
-  gap: 10px;
+  gap: 30px;
 }
 
 .item {
