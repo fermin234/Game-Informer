@@ -174,7 +174,6 @@ export default function Form(props) {
               </select>
               <button type='button' className={s.clearAllPlatforms} onClick={() => setInput({ ...input, platforms: [] })}>Clear all platforms</button>
 
-
               {/* Image */}
               <label>Image:</label>
               <input type="text" name="image" autoComplete="off" placeholder="URL" onChange={onHandleChange}
