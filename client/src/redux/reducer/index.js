@@ -9,6 +9,7 @@ import {
   FILTER,
   LOADER,
   DELETE_VIDEOGAME,
+  GET_PLATAFORMS,
 } from "../actions/index.js";
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   filtred: [],
   genres: [],
   filterValues: {},
+  plataforms: [],
   detail: {},
   loader: false,
 };
@@ -134,6 +136,12 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         videoGames: filtered,
         filtred: filtered,
+      };
+
+    case GET_PLATAFORMS:
+      return {
+        ...state,
+        plataforms: action.payload,
       };
     default:
       return { ...state };
