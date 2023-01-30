@@ -3,6 +3,7 @@ export const LOADER = "LOADER";
 export const ALL_GENRES = "ALL_GENRES";
 export const RESET_CREATE = "RESET_CREATE";
 export const RESET_FILTRES = "RESET_FILTRES";
+export const GET_PLATAFORMS = "GET_PLATAFORMS";
 export const CREATE_VIDEO_GAME = "CREATE_VIDEO_GAME";
 export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES";
 export const GET_VIDEOGAME_BY_ID = "GET_VIDEOGAME_BY_ID";
@@ -99,6 +100,16 @@ export function deleteVideoGame(payload) {
     });
     dispatch({
       type: RESET_FILTRES,
+    });
+  };
+}
+
+export function getPlataforms() {
+  return async (dispatch) => {
+    const result = await axios.get("/videogames/getPlataforms");
+    dispatch({
+      type: GET_PLATAFORMS,
+      payload: result.data,
     });
   };
 }
