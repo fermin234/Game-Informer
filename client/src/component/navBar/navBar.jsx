@@ -2,7 +2,7 @@ import React from "react";
 import s from './NavBar.module.css'
 import { Link } from 'react-router-dom'
 import { useDispatch } from "react-redux";
-import { VideoGameByName } from "../../redux/actions";
+import { ResetFilter, VideoGameByName } from "../../redux/actions";
 
 export default function NavBar({ match, setCurrentPage }) {
 
@@ -11,17 +11,25 @@ export default function NavBar({ match, setCurrentPage }) {
 
   function onHandleChange(e) {
     e.preventDefault()
-    if (!e.target.value.length)
-      dispatch(VideoGameByName(e.target.value))
-    if (e.target.value.length > 1) {
+    const value = document.getElementById('input').value
+    console.log(value);
+    if (!value.length)
+      dispatch(VideoGameByName(value))
+    if (value.length > 1) {
       setCurrentPage(1)
-      dispatch(VideoGameByName(e.target.value))
+      dispatch(VideoGameByName(value))
     }
+    // if (!e.target.value.length)
+    //   dispatch(VideoGameByName(e.target.value))
+    // if (e.target.value.length > 1) {
+    //   setCurrentPage(1)
+    //   dispatch(VideoGameByName(e.target.value))
+    // }
   }
 
-  function onHandelSubmit(e) {
-    e.preventDefault()
+  function handleReset() {
     form.reset()
+    dispatch(ResetFilter())
   }
   return (
     <div className={s.containerAll} >
@@ -45,9 +53,12 @@ export default function NavBar({ match, setCurrentPage }) {
         }
         {
           match.path === "/home" &&
-          <form id="form" className={s.form} onSubmit={onHandelSubmit}>
-            <input className={s.input} name='input' type="search" placeholder="Search Video Game" autoComplete="off" onChange={onHandleChange} />
-          </form>
+          <div className={s.containerInput}>
+            <form id="form" className={s.form} onSubmit={onHandleChange}>
+              <input className={s.input} name='input' id="input" type="text" placeholder="Search Video Game" autoComplete="off" onSubmit={onHandleChange} />
+            </form>
+            <button className={s.buttonX} onClick={handleReset}> X </button>
+          </div>
         }
         {
           match.path !== '/about' &&

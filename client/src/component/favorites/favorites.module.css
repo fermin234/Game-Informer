@@ -131,3 +131,11 @@
   color: white;
   cursor: pointer;
 }
+
+.link {
+  color: purple;
+}
+
+.error link:hover {
+  cursor: pointer;
+}

@@ -91,3 +91,17 @@
   border-radius: 20px;
   width: 300px;
 }
+
+.containerInput {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.buttonX {
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  width: fit-content !important;
+  padding: 0 !important;
+  font-size: 1rem !important;
+}

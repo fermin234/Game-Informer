@@ -6,6 +6,7 @@ import NavBar from "../NavBar/NavBar";
 import s from './Favorites.module.css'
 import { useModal } from '../../hooks/useModal.js'
 import ModalConfimation from "../Modals/ModalConfimation";
+import { Link } from "react-router-dom";
 
 export default function Favorites({ match, history }) {
 
@@ -51,10 +52,7 @@ export default function Favorites({ match, history }) {
                 <h1 className={s.error}>You have not added any games to your favourites.</h1>
                 <br />
                 <br />
-                <h1 className={s.error}>Redirecting to the main page....</h1>
-                {setTimeout(() => {
-                  history.push("/home")
-                }, 5000)}
+                <h1 className={s.error}>Click <Link className={s.link} to='/home'>here</Link> to add favourites.</h1>
               </>
               :
               <div className={s.prueba}>
