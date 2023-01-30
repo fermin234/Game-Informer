@@ -1,0 +1,30 @@
+.div {
+  background: url("./img/12.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
+.link {
+  height: fit-content;
+}
+
+.button {
+  position: relative;
+  top: 70vh;
+  font-size: 3vh;
+  border-radius: 10% 10% 10% 10%;
+  background-color: #0071e2;
+  color: black;
+  font-weight: 501;
+  border: none;
+  padding: 5px;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}

@@ -1,0 +1,86 @@
+.div {
+  background-color: #0071e2;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 200px 1fr 1fr;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  line-height: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  height: 280px;
+}
+
+.div:hover {
+  box-shadow: var(--bordes-shadow);
+}
+
+.div h3 {
+  margin: 0px 2px;
+}
+
+.div h6 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.img {
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+  height: 100%;
+  object-fit: cover;
+}
+
+.containerFav {
+  background-color: red;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fav {
+  position: absolute;
+  background-color: rgba(255, 0, 0, 0);
+  border: none;
+  font-size: 25px;
+  color: red;
+  border-radius: 50%;
+  margin: 5px;
+}
+
+.fav:hover {
+  color: rgb(58, 53, 53);
+  cursor: pointer;
+}
+
+.containerButtonsModal {
+  margin-top: 1rem;
+  display: flex;
+  gap: 10px;
+}
+
+.h1Modal {
+  color: #0071e2;
+}
+
+.accept {
+  background-color: #0071e2;
+  border-radius: 10px;
+  border: none;
+  padding: 0.4rem;
+}
+
+.accept:hover {
+  cursor: pointer;
+}
+
+.cancel {
+  background-color: #0071e2;
+  border-radius: 10px;
+  border: none;
+  padding: 0.4rem;
+}
+
+.cancel:hover {
+  cursor: pointer;
+}
