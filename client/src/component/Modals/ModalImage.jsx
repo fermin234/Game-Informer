@@ -1,15 +1,12 @@
 import './modal.css'
 
-function ModalImage({ children, isOpen }) {
+function ModalImage({ children, isOpen, closeModal }) {
+  const handleCloseModal = e => e.stopPropagation()
   return (
-    <div className={`modal ${isOpen && "is-open"}`}>
-      <div className="modal-loader-container">
-        <div className='container-icon-text'>
-          <h1>Loading!</h1>
-        </div>
-        {console.log(children)}
+    <div className={`modal ${isOpen && "is-open"}`} onClick={closeModal}>
+      <div className="modal-image-container" onClick={handleCloseModal}>
+        <button onClick={closeModal} className="closeModal">X</button>
         {children}
-        <div className="loader"></div>
       </div>
     </div>
   )
