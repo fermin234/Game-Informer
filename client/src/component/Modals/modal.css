@@ -5,7 +5,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.8);
   display: none;
   justify-content: center;
   align-items: center;
@@ -47,6 +47,28 @@
   background-color: rgb(67, 62, 67);
   border-radius: 35px;
   text-align: center;
+}
+
+.modal-image-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  border: solid 2px black;
+  border-radius: 15px;
+}
+
+.closeModal {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 2rem;
+  background-color: rgba(255, 255, 255, 0.134);
+  border: none;
+  margin: 1rem;
+  font-weight: bold;
 }
 
 .modal-loader-container {
