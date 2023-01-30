@@ -118,7 +118,7 @@
 }
 
 .divContarner {
-  background-color: #0071e2;
+  /* background-color: #0071e2; */
   background-color: #4f6a85;
   border-radius: 15px;
   width: 40%;
@@ -144,6 +144,17 @@
   font-weight: bold;
   width: 100%;
   font-size: 1rem;
+  background-color: #4f6a85;
+}
+
+.form select {
+  background-color: #4f6a85;
+  font-weight: bold;
+  color: black;
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.574);
 }
 
 .labelError {
@@ -199,6 +210,12 @@
 .clearAllPlatforms {
   margin-top: 5px;
   width: 100%;
+  background-color: black;
+  color: white;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .clearAllPlatforms:hover {
