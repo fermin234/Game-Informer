@@ -1,5 +1,15 @@
-export { default as github } from "../Socials/github.png";
-export { default as linkedin } from "../Socials/linkedin.png";
-export { default as portfolio } from "../Socials/portfolio.png";
-export { default as whatsapp } from "../Socials/whatsapp.png";
-export { default as diagonal } from "../Socials/diagonal.png";
+import github from "../Socials/github.png";
+import linkedin from "../Socials/linkedin.png";
+import portfolio from "../Socials/portfolio.png";
+import whatsapp from "../Socials/whatsapp.png";
+import diagonal from "../Socials/diagonal.png";
+
+const iconsSocials = {
+  github,
+  linkedin,
+  portfolio,
+  whatsapp,
+  diagonal,
+};
+
+export default iconsSocials;

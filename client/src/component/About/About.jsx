@@ -1,26 +1,16 @@
 import React from 'react'
 import NavBar from '../NavBar/NavBar'
 import s from './About.module.css'
-// import * as imagesPage from '../../assets/App'
-import * as iconsSocials from '../../assets/Socials'
 import { useModal } from '../../hooks/useModal'
 import ModalImage from '../Modals/ModalImage'
 import { useState } from 'react'
 import imagesPage from '../../assets/App'
+import iconsSocials from '../../assets/Socials'
 
 export default function About({ match }) {
 
   const [isOpen, openModal, closeModal] = useModal()
   let [imgValue, setImgValue] = useState(null)
-
-  // const images = []
-  const icons = []
-  for (const e in iconsSocials) {
-    icons.push(iconsSocials[e])
-  }
-  // for (const e in imagesPage) {
-  //   images.push(imagesPage[e])
-  // }
 
   function handleModal(e) {
     setImgValue(e)
@@ -159,19 +149,19 @@ export default function About({ match }) {
         </ModalImage>
         <footer className={s.footer}>
           <a href="https://github.com/fermin234" target="_blank" rel="noopener noreferrer">
-            <img src={icons[0]} alt="github" />
+            <img src={iconsSocials.github} alt="github" />
           </a>
-          <img src={icons[4]} alt="diagonal" />
+          <img src={iconsSocials.diagonal} alt="diagonal" />
           <a href="https://www.linkedin.com/in/fermin-solaberrieta/" target="_blank" rel="noopener noreferrer">
-            <img src={icons[1]} alt="linkedin" />
+            <img src={iconsSocials.linkedin} alt="linkedin" />
           </a>
-          <img src={icons[4]} alt="diagonal" />
+          <img src={iconsSocials.diagonal} alt="diagonal" />
           <a href="http://" target="_blank" rel="noopener noreferrer">
-            <img src={icons[2]} alt="portfolio" />
+            <img src={iconsSocials.portfolio} alt="portfolio" />
           </a>
-          <img src={icons[4]} alt="diagonal" />
+          <img src={iconsSocials.diagonal} alt="diagonal" />
           <a href="http://" target="_blank" rel="noopener noreferrer">
-            <img src={icons[3]} alt="whatsapp" />
+            <img src={iconsSocials.whatsapp} alt="whatsapp" />
           </a>
         </footer>
       </div>
