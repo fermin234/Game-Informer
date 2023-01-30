@@ -27,11 +27,9 @@ export default function Pagination({ videoGamePerPage, listVideoGames, paginado,
 
 
   return (
-
-    <div>
+    <>
       {pageNumber.length > 1 &&
         <div className={s.containerAll}>
-
           {/* Boton anterior */}
           <button className={s.prevNext} disabled={currentPage === 1 ? true : false} key="anterior" onClick={() => {
             window.scrollTo({ top: 0 });
@@ -116,10 +114,9 @@ export default function Pagination({ videoGamePerPage, listVideoGames, paginado,
               <path d="M5 15l4.61-7L5 1h2.39L12 8l-4.61 7z"></path>
             </svg>
           </button>
-
         </div>
       }
 
-    </div >
+    </ >
   )
 }
