@@ -160,7 +160,7 @@ export default function About({ match }) {
             <img src={iconsSocials.portfolio} alt="portfolio" />
           </a>
           <img src={iconsSocials.diagonal} alt="diagonal" />
-          <a href="http://" target="_blank" rel="noopener noreferrer">
+          <a href="https://wa.me/2473400240?text=Hola%20Fermín,%20estuve%20mirando%20tu%20perfil%20junto%20con%20tus%20proyectos%20y%20me%20interesaría%20ponerme%20en%20contacto%20con%20usted.%20¡Muchas%20gracias!" target="_blank" rel="noopener noreferrer">
             <img src={iconsSocials.whatsapp} alt="whatsapp" />
           </a>
         </footer>

@@ -35,7 +35,7 @@ export default function Card({ id, name, genres, image, platforms, created, matc
 
   async function handleDelete(e) {
     let result = false
-    result = await axios.get(`/videogames/validatePassword?password=${e.target.value}`)
+    result = await axios.get(`/validatePassword?password=${e.target.value}`)
     if (result.data === true) {
       dispatch(deleteVideoGame(id))
     }
