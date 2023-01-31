@@ -7,8 +7,6 @@ const {
   createVideoGame,
   getScreenshotsGame,
   deleteVideoGame,
-  validatePassword,
-  getPlataforms,
 } = require("./controllers.js");
 
 router.get("/", async (req, res) => {
@@ -17,22 +15,6 @@ router.get("/", async (req, res) => {
     name
       ? res.json(await getVideoGameName(name))
       : res.json(await getAllVideoGames());
-  } catch (error) {
-    res.status(404).json(error.message);
-  }
-});
-
-router.get("/validatePassword", async (req, res) => {
-  try {
-    res.json(await validatePassword(req.query));
-  } catch (error) {
-    res.status(404).json(error.message);
-  }
-});
-
-router.get("/getPlataforms", async (req, res) => {
-  try {
-    res.json(await getPlataforms());
   } catch (error) {
     res.status(404).json(error.message);
   }

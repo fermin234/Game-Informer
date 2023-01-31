@@ -1,10 +1,17 @@
 const { Router } = require("express");
-const RoutesVideoGames = require("./RoutesVideoGames.js");
-const RoutesGenres = require("./RoutesGenres.js");
+const genres = require("./genres/genres.js");
+const platforms = require("./platforms/platforms.js");
+const validatePassword = require("./helper");
+const videogames = require("./videoGames");
 
 const router = Router();
 
-router.use("/genres", RoutesGenres);
-router.use("/videogames", RoutesVideoGames);
+router.use("/genres", genres);
+
+router.use("/platforms", platforms);
+
+router.use("/validatePassword", validatePassword);
+
+router.use("/videogames", videogames);
 
 module.exports = router;

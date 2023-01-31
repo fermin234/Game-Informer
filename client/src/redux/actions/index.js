@@ -106,7 +106,7 @@ export function deleteVideoGame(payload) {
 
 export function getPlataforms() {
   return async (dispatch) => {
-    const result = await axios.get("/videogames/getPlataforms");
+    const result = await axios.get("/platforms");
     dispatch({
       type: GET_PLATAFORMS,
       payload: result.data,

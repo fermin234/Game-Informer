@@ -1,8 +1,8 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const router = Router();
-const { getGenres } = require('./controllers.js');
+const { getGenres } = require("./controller.js");
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     res.json(await getGenres());
   } catch (error) {

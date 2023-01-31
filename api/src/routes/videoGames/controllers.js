@@ -1,7 +1,7 @@
 require("dotenv").config();
 const axios = require("axios");
 const { API_KEY } = process.env;
-const { Videogame, Genre } = require("../db.js");
+const { Videogame, Genre } = require("../../db.js");
 const { Op } = require("sequelize");
 
 async function getAllVideoGames() {
@@ -163,6 +163,18 @@ async function getVideoGameId(id) {
   }
 }
 
+async function getScreenshotsGame({ idVideoGame }) {
+  try {
+    let results = await axios.get(
+      `https://api.rawg.io/api/games/${idVideoGame}/screenshots?key=${API_KEY}`
+    );
+    results = results.data.results?.map((e) => e.image);
+    return results;
+  } catch (error) {
+    return error;
+  }
+}
+
 async function createVideoGame(
   name,
   description,
@@ -197,64 +209,6 @@ async function createVideoGame(
   }
 }
 
-async function getGenres() {
-  try {
-    //Verifico si existe algo en DB.
-    let DBinfo = await Genre.findAll();
-    if (DBinfo.length) return DBinfo;
-    //Si no hay nada, traigo de la api
-    else {
-      let ApiInfo = await axios.get(
-        `https://api.rawg.io/api/genres?key=${API_KEY}`
-      );
-      ApiInfo = ApiInfo.data.results
-        .map((e) => {
-          return { id: e.id, name: e.name };
-        })
-        .sort((a, b) => a.id - b.id);
-      //creo en la DB
-      await Genre.bulkCreate(ApiInfo);
-      return ApiInfo;
-    }
-  } catch (error) {
-    return error;
-  }
-}
-
-async function getPlataforms() {
-  try {
-    let apiInfo = await axios.get(
-      `https://api.rawg.io/api/platforms?key=${API_KEY}`
-    );
-    apiInfo = apiInfo.data;
-    apiInfo = apiInfo.results
-      .map((e) => {
-        return { id: e.id, name: e.name };
-      })
-      .sort((a, b) =>
-        a.name.toLowerCase() > b.name.toLowerCase()
-          ? 1
-          : a.name.toLowerCase() < b.name.toLowerCase()
-          ? -1
-          : 0
-      )
-      .filter((e) => e.id !== 111);
-    return apiInfo;
-  } catch (error) {}
-}
-
-async function getScreenshotsGame({ idVideoGame }) {
-  try {
-    let results = await axios.get(
-      `https://api.rawg.io/api/games/${idVideoGame}/screenshots?key=${API_KEY}`
-    );
-    results = results.data.results?.map((e) => e.image);
-    return results;
-  } catch (error) {
-    return error;
-  }
-}
-
 async function deleteVideoGame({ idVideoGame }) {
   try {
     await Videogame.destroy({
@@ -267,21 +221,11 @@ async function deleteVideoGame({ idVideoGame }) {
   }
 }
 
-async function validatePassword({ password }) {
-  try {
-    return password === process.env.PASSWORD_DELETE;
-  } catch (error) {
-    return error;
-  }
-}
 module.exports = {
   getAllVideoGames,
   getVideoGameName,
   getVideoGameId,
   createVideoGame,
-  getGenres,
   getScreenshotsGame,
   deleteVideoGame,
-  validatePassword,
-  getPlataforms,
 };
