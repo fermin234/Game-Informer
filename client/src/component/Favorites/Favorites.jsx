@@ -15,7 +15,7 @@ export default function Favorites({ match, history }) {
   const [isOpen, openModal, closeModal] = useModal()
 
   function handleClearFavs() {
-    localStorage.remove('favorites')
+    localStorage.removeItem('favorites')
     setUpdate(!update)
     closeModal()
   }
