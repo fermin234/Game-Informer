@@ -40,7 +40,6 @@ export default function Form(props) {
     images.push(allImages[e])
   }
 
-
   function handleSubmit(e) {
     e.preventDefault()
     if (Object.entries(errors).length) {
