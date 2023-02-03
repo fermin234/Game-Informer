@@ -92,8 +92,8 @@ export function loader(payload) {
 }
 
 export function deleteVideoGame(payload) {
-  axios.delete(`videogames/deleteVideoGame/${payload}`);
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.delete(`videogames/deleteVideoGame/${payload}`);
     dispatch({
       type: DELETE_VIDEOGAME,
       payload,
