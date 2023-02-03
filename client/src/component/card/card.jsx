@@ -33,7 +33,7 @@ export default function Card({ id, name, genres, image, platforms, created, matc
     closeModal()
   }
 
-  async function handleDelete() {
+  async function handleDelete(e) {
     let result = false
     result = await axios.get(`/validatePassword?password=${e.target.value}`)
     if (result.data === true) {
