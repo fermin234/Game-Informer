@@ -45,7 +45,7 @@ export default function Card({ id, name, genres, image, platforms, created, matc
   return (
     <>
       <ModalInput isOpen={isOpenInput} closeModal={closeModalInput}>
-        <input className={s.inputModal} type="password" onChange={() => handleDelete()} />
+        {/* <input className={s.inputModal} type="password" onChange={() => handleDelete()} /> */}
       </ModalInput>
       <ModalConfimation isOpen={isOpen} closeModal={closeModal}>
         <h1 className={s.h1Modal}>{`Remove ${name} from your favourites?`}</h1>
@@ -113,7 +113,7 @@ export default function Card({ id, name, genres, image, platforms, created, matc
         }
         {
           match.path !== '/create' &&
-            created ? <button className={s.deletedButton} onClick={openModalInput}> Delete </button> : undefined
+            created ? <button className={s.deletedButton} onClick={handleDelete}> Delete </button> : undefined
         }
       </div>
     </>
