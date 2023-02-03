@@ -34,12 +34,11 @@ export default function Card({ id, name, genres, image, platforms, created, matc
   }
 
   async function handleDelete() {
-    window.alert("funcion en reconstruccion")
-    // let result = false
-    // result = await axios.get(`/validatePassword?password=${e.target.value}`)
-    // if (result.data === true) {
-    //   dispatch(deleteVideoGame(id))
-    // }
+    let result = false
+    result = await axios.get(`/validatePassword?password=${e.target.value}`)
+    if (result.data === true) {
+      dispatch(deleteVideoGame(id))
+    }
   }
 
   return (
