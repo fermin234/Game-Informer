@@ -40,7 +40,7 @@ export default function Card({ id, name, genres, image, platforms, created, matc
   return (
     <>
       <ModalConfimation isOpen={isOpenComfirmation} closeModal={closeModalComfirmation}>
-        <h1 className={s.h1Modal}>{`Remove ${name} from your favourites?`}</h1>
+        <h1 className={s.h1Modal}>{`Deleted ${name}?`}</h1>
         <div className={s.containerButtonsModal}>
           <button className={s.accept} onClick={handleDelete}>Accept</button>
           <button className={s.cancel} onClick={closeModalComfirmation}>Cancel</button>
