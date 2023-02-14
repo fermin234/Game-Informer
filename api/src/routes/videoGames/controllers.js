@@ -6,16 +6,6 @@ const { Op } = require("sequelize");
 
 async function getAllVideoGames() {
   try {
-    //peticion a la DB
-    const dbVideoGames = await Videogame.findAll({
-      include: {
-        model: Genre,
-        attributes: ["name"],
-        through: { attributes: [] },
-      },
-    });
-    if (dbVideoGames.length > 300) return dbVideoGames;
-
     //peticion a la api
     let NumPage = 17;
     let ApiInfo = [];
@@ -35,10 +25,6 @@ async function getAllVideoGames() {
     ApiInfo = ApiInfo?.map((e) => ({
       id: e.id,
       name: e.name,
-      // description: null,
-      // released: e.released,
-      // rating: e.rating,
-      // platforms: e.platforms.map((e) => e.platform.name),
       genres: e.genres.map((e) => e.name),
       background_image: e.background_image,
       created: false,
@@ -57,10 +43,6 @@ async function getAllVideoGames() {
     DBInfo = DBInfo.map((e) => ({
       id: e.id,
       name: e.name,
-      // description: e.description,
-      // released: e.released,
-      // rating: e.rating,
-      // platforms: e.platforms,
       genres: e.genres?.map((e) => e.name),
       background_image: e.image,
       created: e.created,
