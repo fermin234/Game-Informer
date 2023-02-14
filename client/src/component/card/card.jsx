@@ -12,7 +12,7 @@ export default function Card({ id, name, genres, image, platforms, created, matc
 
   const dispatch = useDispatch()
   const [isOpen, openModal, closeModal] = useModal()
-  const [isOpenInput, openModalInput, closeModalInput] = useModal()
+  const [isOpenComfirmation, openModalComfirmation, closeModalComfirmation] = useModal()
   let butonFav = document.getElementsByName(`buttonFav${id}`)
   let favorites = JSON.parse(localStorage.getItem("favorites"))
 
@@ -34,18 +34,18 @@ export default function Card({ id, name, genres, image, platforms, created, matc
   }
 
   async function handleDelete(e) {
-    let result = false
-    result = await axios.get(`/validatePassword?password=${e.target.value}`)
-    if (result.data === true) {
-      dispatch(deleteVideoGame(id))
-    }
+    dispatch(deleteVideoGame(id))
   }
 
   return (
     <>
-      <ModalInput isOpen={isOpenInput} closeModal={closeModalInput}>
-        <input className={s.inputModal} type="password" onChange={handleDelete} />
-      </ModalInput>
+      <ModalConfimation isOpen={isOpenComfirmation} closeModal={closeModalComfirmation}>
+        <h1 className={s.h1Modal}>{`Remove ${name} from your favourites?`}</h1>
+        <div className={s.containerButtonsModal}>
+          <button className={s.accept} onClick={handleDelete}>Accept</button>
+          <button className={s.cancel} onClick={closeModalComfirmation}>Cancel</button>
+        </div>
+      </ModalConfimation>
       <ModalConfimation isOpen={isOpen} closeModal={closeModal}>
         <h1 className={s.h1Modal}>{`Remove ${name} from your favourites?`}</h1>
         <div className={s.containerButtonsModal}>
@@ -112,7 +112,7 @@ export default function Card({ id, name, genres, image, platforms, created, matc
         }
         {
           match.path !== '/create' &&
-            created ? <button className={s.deletedButton} onClick={openModalInput}> Delete </button> : undefined
+            created ? <button className={s.deletedButton} onClick={openModalComfirmation}> Delete </button> : undefined
         }
       </div>
     </>
