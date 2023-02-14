@@ -34,17 +34,17 @@ export default function Card({ id, name, genres, image, platforms, created, matc
   }
 
   async function handleDelete(e) {
-    // let result = false
-    // result = await axios.get(`/validatePassword?password=${e.target.value}`)
-    // if (result.data === true) {
-    dispatch(deleteVideoGame(id))
-    // }
+    let result = false
+    result = await axios.get(`/validatePassword?password=${e.target.value}`)
+    if (result.data === true) {
+      dispatch(deleteVideoGame(id))
+    }
   }
 
   return (
     <>
       <ModalInput isOpen={isOpenInput} closeModal={closeModalInput}>
-        {/* <input className={s.inputModal} type="password" onChange={() => handleDelete()} /> */}
+        <input className={s.inputModal} type="password" onChange={handleDelete} />
       </ModalInput>
       <ModalConfimation isOpen={isOpen} closeModal={closeModal}>
         <h1 className={s.h1Modal}>{`Remove ${name} from your favourites?`}</h1>
@@ -112,7 +112,7 @@ export default function Card({ id, name, genres, image, platforms, created, matc
         }
         {
           match.path !== '/create' &&
-            created ? <button className={s.deletedButton} onClick={handleDelete}> Delete </button> : undefined
+            created ? <button className={s.deletedButton} onClick={openModalInput}> Delete </button> : undefined
         }
       </div>
     </>
