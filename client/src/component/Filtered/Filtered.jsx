@@ -186,12 +186,9 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
               <a href="https://github.com/fermin234" target="_blank" rel="noreferrer">
                 <button className={s.icons}>< AiOutlineGithub /></button>
               </a>
-              <a href="https://www.canva.com/design/DAFL8tvQGrg/WqNwT4FWhdG38MG0DnHduA/view?utm_content=DAFL8tvQGrg&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink" target="_blank" rel="noreferrer">
-                <button className={s.iconsPorfolio}> <AiOutlineFilePdf /> CV </button>
+              <a href="https://portfolio-fermin234s-projects.vercel.app/" target="_blank" rel="noreferrer">
+                <button className={s.iconsPorfolio}> <BsFillBriefcaseFill />Portfolio </button>
               </a>
-              {/* <a href="#" rel="noreferrer"> */}
-              <button className={s.iconsPorfolio}> <BsFillBriefcaseFill />Portfolio </button>
-              {/* </a> */}
             </div>
             <Link className={s.socials} to='/about'>
               <div>

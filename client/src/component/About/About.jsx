@@ -156,7 +156,7 @@ export default function About({ match }) {
             <img src={iconsSocials.linkedin} alt="linkedin" />
           </a>
           <img src={iconsSocials.diagonal} alt="diagonal" />
-          <a href="http://" target="_blank" rel="noopener noreferrer">
+          <a href="https://portfolio-fermin234s-projects.vercel.app/" target="_blank" rel="noopener noreferrer">
             <img src={iconsSocials.portfolio} alt="portfolio" />
           </a>
           <img src={iconsSocials.diagonal} alt="diagonal" />
