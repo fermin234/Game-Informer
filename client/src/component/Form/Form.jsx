@@ -13,7 +13,6 @@ import ModalSuccessfully from "../Modals/ModalSuccessfully.jsx";
 
 export default function Form(props) {
   const dispatch = useDispatch()
-  // LocalStorage
   !localStorage.getItem("form") && localStorage.setItem("form", "{}")
   const [form] = useState(JSON.parse(localStorage.getItem("form")))
 
@@ -91,7 +90,6 @@ export default function Form(props) {
     } else if (e.target.name === "rating") {
       setInput({
         ...input,
-        // rating: parseFloat(e.target.value),
         rating: e.target.value,
       })
     } else {

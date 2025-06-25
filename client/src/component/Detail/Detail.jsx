@@ -25,8 +25,13 @@ export default function Detail({ match }) {
 
   useEffect(() => {
     async function getImages() {
-      const result = await axios.get(`/videogames/screenShots/${id}`)
-      setImages(result.data)
+      try {
+        const result = await axios.get(`/videogames/screenShots/${id}`)
+        setImages(result.data)
+      } catch (error) {
+        console.warn("Screenshots API call failed, using fallback images:", error.message);
+        setImages([]);
+      }
     }
 
     dispatch(VideoGameById(id))
@@ -37,6 +42,12 @@ export default function Detail({ match }) {
   useEffect(() => {
     setSrcImage(videoGame?.background_image)
   }, [videoGame?.background_image])
+
+  useEffect(() => {
+    if (videoGame?.background_image && images.length === 0) {
+      setImages([videoGame.background_image]);
+    }
+  }, [videoGame?.background_image, images.length])
 
 
   return (

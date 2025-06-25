@@ -1,0 +1,53 @@
+.offlineNotification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
+  color: white;
+  z-index: 1000;
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.3s ease-out;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+.message {
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .message {
+    font-size: 0.8rem;
+  }
+  
+  .content {
+    padding: 0 0.5rem;
+  }
+} 

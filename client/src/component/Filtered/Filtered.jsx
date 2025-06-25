@@ -28,7 +28,6 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
         created: !value.created
       })
     }
-    //SORTING
     if (e.target.name === "sort") {
       switch (e.target.value) {
         case "null":
@@ -69,7 +68,6 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
         default:
       }
     }
-    //GENRES
     if (e.target.id === "genre") {
       if (e.target.value === value.genre) {
         setValue(

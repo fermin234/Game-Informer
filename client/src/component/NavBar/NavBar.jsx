@@ -19,12 +19,6 @@ export default function NavBar({ match, setCurrentPage }) {
       setCurrentPage(1)
       dispatch(VideoGameByName(value))
     }
-    // if (!e.target.value.length)
-    //   dispatch(VideoGameByName(e.target.value))
-    // if (e.target.value.length > 1) {
-    //   setCurrentPage(1)
-    //   dispatch(VideoGameByName(e.target.value))
-    // }
   }
 
   function handleReset() {

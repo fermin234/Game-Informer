@@ -1,3 +1,5 @@
+import fallbackData from "../../data/fallbackData.json";
+
 export const FILTER = "FILTER";
 export const LOADER = "LOADER";
 export const ALL_GENRES = "ALL_GENRES";
@@ -13,51 +15,100 @@ const axios = require("axios");
 
 export function allVideoGames() {
   return async (dispatch) => {
-    let data = await axios.get("/videogames");
-    return dispatch({
-      type: GET_ALL_VIDEOGAMES,
-      payload: data.data,
-    });
+    try {
+      let data = await axios.get("/videogames");
+      return dispatch({
+        type: GET_ALL_VIDEOGAMES,
+        payload: data.data,
+      });
+    } catch (error) {
+      console.warn("API call failed, using fallback data:", error.message);
+      return dispatch({
+        type: GET_ALL_VIDEOGAMES,
+        payload: fallbackData.videogames,
+      });
+    }
   };
 }
 
 export function todosLosGeneros() {
   return async (dispatch) => {
-    let data = await axios.get("/genres");
-    return dispatch({
-      type: ALL_GENRES,
-      payload: data.data,
-    });
+    try {
+      let data = await axios.get("/genres");
+      return dispatch({
+        type: ALL_GENRES,
+        payload: data.data,
+      });
+    } catch (error) {
+      console.warn("Genres API call failed, using fallback data:", error.message);
+      return dispatch({
+        type: ALL_GENRES,
+        payload: fallbackData.genres,
+      });
+    }
   };
 }
 
 export function VideoGameByName(name) {
   return async (dispatch) => {
-    let data = await axios.get(`/videogames?name=${name}`);
-    return dispatch({
-      type: GET_VIDEOGAME_BY_NAME,
-      payload: data.data,
-    });
+    try {
+      let data = await axios.get(`/videogames?name=${name}`);
+      return dispatch({
+        type: GET_VIDEOGAME_BY_NAME,
+        payload: data.data,
+      });
+    } catch (error) {
+      console.warn("Search API call failed, using fallback data:", error.message);
+      const filteredGames = fallbackData.videogames.filter(game => 
+        game.name.toLowerCase().includes(name.toLowerCase())
+      );
+      return dispatch({
+        type: GET_VIDEOGAME_BY_NAME,
+        payload: filteredGames,
+      });
+    }
   };
 }
 
 export function VideoGameById(id) {
   return async (dispatch) => {
-    let data = await axios.get(`/videogames/${id}`);
-    return dispatch({
-      type: GET_VIDEOGAME_BY_ID,
-      payload: data.data,
-    });
+    try {
+      let data = await axios.get(`/videogames/${id}`);
+      return dispatch({
+        type: GET_VIDEOGAME_BY_ID,
+        payload: data.data,
+      });
+    } catch (error) {
+      console.warn("Game detail API call failed, using fallback data:", error.message);
+      const game = fallbackData.videogames.find(game => game.id === parseInt(id));
+      return dispatch({
+        type: GET_VIDEOGAME_BY_ID,
+        payload: game || {},
+      });
+    }
   };
 }
 
 export function createVideoGame(videoGameInfo) {
   return async (dispatch) => {
-    await axios.post(`/videogames`, videoGameInfo);
-    return dispatch({
-      type: CREATE_VIDEO_GAME,
-      payload: videoGameInfo,
-    });
+    try {
+      await axios.post(`/videogames`, videoGameInfo);
+      return dispatch({
+        type: CREATE_VIDEO_GAME,
+        payload: videoGameInfo,
+      });
+    } catch (error) {
+      console.warn("Create game API call failed, simulating locally:", error.message);
+      const newGame = {
+        ...videoGameInfo,
+        id: Date.now(),
+        created: true
+      };
+      return dispatch({
+        type: CREATE_VIDEO_GAME,
+        payload: newGame,
+      });
+    }
   };
 }
 
@@ -93,23 +144,43 @@ export function loader(payload) {
 
 export function deleteVideoGame(payload) {
   return async (dispatch) => {
-    await axios.delete(`videogames/deleteVideoGame/${payload}`);
-    dispatch({
-      type: DELETE_VIDEOGAME,
-      payload,
-    });
-    dispatch({
-      type: RESET_FILTRES,
-    });
+    try {
+      await axios.delete(`videogames/deleteVideoGame/${payload}`);
+      dispatch({
+        type: DELETE_VIDEOGAME,
+        payload,
+      });
+      dispatch({
+        type: RESET_FILTRES,
+      });
+    } catch (error) {
+      console.warn("Delete game API call failed, simulating locally:", error.message);
+      dispatch({
+        type: DELETE_VIDEOGAME,
+        payload,
+      });
+      dispatch({
+        type: RESET_FILTRES,
+      });
+      alert("API no disponible. Solo se pueden eliminar juegos creados localmente.");
+    }
   };
 }
 
 export function getPlataforms() {
   return async (dispatch) => {
-    const result = await axios.get("/platforms");
-    dispatch({
-      type: GET_PLATAFORMS,
-      payload: result.data,
-    });
+    try {
+      const result = await axios.get("/platforms");
+      dispatch({
+        type: GET_PLATAFORMS,
+        payload: result.data,
+      });
+    } catch (error) {
+      console.warn("Platforms API call failed, using fallback data:", error.message);
+      dispatch({
+        type: GET_PLATAFORMS,
+        payload: fallbackData.platforms,
+      });
+    }
   };
 }
