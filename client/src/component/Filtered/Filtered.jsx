@@ -112,12 +112,22 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
   useEffect(() => {
     if (!generos.length)
       dispatch(todosLosGeneros())
+  }, [dispatch, generos.length])
+
+  useEffect(() => {
     if (filtersActive?.sort)
       document.getElementById(filtersActive.sort).selected = "selected"
+  }, [filtersActive?.sort])
+
+  useEffect(() => {
     if (filtersActive?.rating)
       document.getElementById(filtersActive.rating).selected = "selected"
+  }, [filtersActive?.rating])
+
+  useEffect(() => {
     setUpdate(!update)
-  }, [dispatch])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setUpdate])
 
   return (
     <>

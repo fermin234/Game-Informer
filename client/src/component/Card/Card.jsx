@@ -1,10 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import s from './Card.module.css'
-import axios from 'axios'
 import { useDispatch } from "react-redux";
 import { deleteVideoGame } from "../../redux/actions";
-import ModalInput from "../Modals/ModalInput";
 import { useModal } from "../../hooks/useModal";
 import ModalConfimation from "../Modals/ModalConfimation";
 

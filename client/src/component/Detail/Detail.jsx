@@ -18,22 +18,25 @@ export default function Detail({ match }) {
   const [srcImage, setSrcImage] = useState(null)
   const [isOpen, openModal, closeModal] = useModal()
 
-  async function getImages() {
-    const result = await axios.get(`/videogames/screenShots/${id}`)
-    setImages(result.data)
-  }
-
   function handleChangeImage(e) {
     document.getElementById("image").src = e.target.src
     openModal()
   }
 
   useEffect(() => {
+    async function getImages() {
+      const result = await axios.get(`/videogames/screenShots/${id}`)
+      setImages(result.data)
+    }
+
     dispatch(VideoGameById(id))
     getImages()
-    setSrcImage(videoGame?.background_image)
     return dispatch(ResetCreate())
   }, [dispatch, id])
+
+  useEffect(() => {
+    setSrcImage(videoGame?.background_image)
+  }, [videoGame?.background_image])
 
 
   return (

@@ -38,12 +38,12 @@ export default function Home({ match }) {
       dispatch(allVideoGames())
       dispatch(loader(true))
     }
-  }, [dispatch])
+  }, [dispatch, stateVideoGames.length, loaderStatus])
 
   useEffect(() => {
     if (!plataforms.length)
       dispatch(getPlataforms())
-  }, [dispatch])
+  }, [dispatch, plataforms.length])
 
 
   return (
