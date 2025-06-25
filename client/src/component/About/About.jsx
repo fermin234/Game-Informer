@@ -152,7 +152,7 @@ export default function About({ match }) {
             <img src={iconsSocials.github} alt="github" />
           </a>
           <img src={iconsSocials.diagonal} alt="diagonal" />
-          <a href="https://www.linkedin.com/in/fermin-solaberrieta/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/fermin-solaberrieta-dev/" target="_blank" rel="noopener noreferrer">
             <img src={iconsSocials.linkedin} alt="linkedin" />
           </a>
           <img src={iconsSocials.diagonal} alt="diagonal" />

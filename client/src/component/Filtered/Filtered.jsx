@@ -180,7 +180,7 @@ export default function Filtered({ setCurrentPage, setUpdate, update, setInitial
               </div>
             </div>
             <div className={s.socials}>
-              <a href="https://www.linkedin.com/in/fermin-solaberrieta/" target="_blank" rel="noreferrer">
+              <a href="https://www.linkedin.com/in/fermin-solaberrieta-dev/" target="_blank" rel="noreferrer">
                 <button className={s.icons}> < AiFillLinkedin /></button>
               </a>
               <a href="https://github.com/fermin234" target="_blank" rel="noreferrer">
